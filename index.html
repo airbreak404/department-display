@@ -126,10 +126,11 @@
             text-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.2);
             font-weight: 700;
             letter-spacing: 3px;
+            color: #ffffff;
             background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .text-slide h2 {
@@ -299,12 +300,6 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             letter-spacing: 0.5px;
-        }
-
-        .fullscreen-hint::before {
-            content: "⌘";
-            margin-right: 8px;
-            font-size: 1.3rem;
         }
     </style>
 </head>
