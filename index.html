@@ -130,9 +130,13 @@
             background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
             background-clip: text;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
+        @supports (-webkit-background-clip: text) {
+            .text-slide h1 {
+                -webkit-text-fill-color: transparent;
+            }
+        }
         .text-slide h2 {
             font-family: Georgia, 'Times New Roman', serif;
             font-size: 4rem;
