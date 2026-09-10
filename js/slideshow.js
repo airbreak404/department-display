@@ -28,8 +28,22 @@ class SlideshowEngine {
       console.error('No slide data available to render.');
       return;
     }
+    window.appSlideshow = this;
     this.renderAllSlides();
-    this.showSlide(0);
+
+    const params = new URLSearchParams(window.location.search);
+    const targetSlide = parseInt(params.get('slide'), 10);
+    const initialIndex = (!isNaN(targetSlide) && targetSlide >= 0 && targetSlide < this.slides.length) ? targetSlide : 0;
+
+    if (params.has('pause') || params.has('slide')) {
+      this.isPaused = true;
+      const statusText = document.getElementById('statusText');
+      const statusDot = document.getElementById('statusDot');
+      if (statusText) statusText.textContent = 'PAUSED';
+      if (statusDot) statusDot.classList.add('paused');
+    }
+
+    this.showSlide(initialIndex);
   }
 
   renderAllSlides() {
@@ -86,11 +100,13 @@ class SlideshowEngine {
       <div class="slide-inner">
         <div class="overview-split-grid">
           <div class="overview-info-card animate-in">
-            <div class="badge-pill">${slide.badge || 'DEPARTMENT OVERVIEW'}</div>
-            <div class="overview-college-tag">${slide.college || 'COLLEGE OF ENGINEERING & APPLIED SCIENCES'}</div>
-            <h1 class="overview-title">${slide.title}</h1>
-            <div class="overview-location">${slide.subtitle}</div>
-            <p class="overview-summary">${slide.summary}</p>
+            <div class="overview-info-top">
+              <div class="badge-pill">${slide.badge || 'DEPARTMENT OVERVIEW'}</div>
+              <div class="overview-college-tag">${slide.college || 'COLLEGE OF ENGINEERING & APPLIED SCIENCES'}</div>
+              <h1 class="overview-title">${slide.title}</h1>
+              <div class="overview-location">${slide.subtitle}</div>
+              <p class="overview-summary">${slide.summary}</p>
+            </div>
             <div class="overview-programs-grid">
               ${programsHtml}
             </div>
@@ -118,6 +134,10 @@ class SlideshowEngine {
             </div>
           </div>
           <p class="rso-card-desc">${org.desc}</p>
+          ${org.highlights ? `
+          <ul class="rso-highlights-list">
+            ${org.highlights.map(h => `<li>${h}</li>`).join('')}
+          </ul>` : ''}
         </div>
         <div class="rso-card-meta">
           <div class="rso-meta-row">
@@ -274,31 +294,41 @@ class SlideshowEngine {
     return `
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
-        <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 24px;">${slide.title}</h1>
+        <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 16px;">${slide.title}</h1>
         <div class="teams-grid">
           <div class="team-card animate-in delay-2">
             <div>
-              <div class="lab-photo-frame" style="height: 260px; margin-bottom: 18px;">
+              <div class="lab-photo-frame" style="height: clamp(170px, 22vh, 250px); margin-bottom: 14px;">
                 <img src="${slide.left.image}" alt="${slide.left.title}">
               </div>
-              <h2 class="team-name" style="margin-bottom: 6px;">${slide.left.title}</h2>
-              <div class="text-gold font-bold mb-3">${slide.left.director}</div>
-              <ul class="lab-highlights-list" style="margin-top: 14px;">
+              <h2 class="team-name" style="margin-bottom: 4px; font-size: clamp(18px, 1.4vw, 24px);">${slide.left.title}</h2>
+              <div class="text-gold font-bold mb-2" style="font-size: clamp(13px, 0.95vw, 15px);">${slide.left.director}</div>
+              <ul class="lab-highlights-list" style="margin-top: 10px; margin-bottom: 0;">
                 ${slide.left.features.map(f => `<li>${f}</li>`).join('')}
               </ul>
             </div>
+            ${slide.left.facility ? `
+            <div class="rso-meta-row" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+              <span class="rso-meta-label">FACILITY:</span>
+              <span class="rso-meta-val">${slide.left.facility}</span>
+            </div>` : ''}
           </div>
           <div class="team-card animate-in delay-3">
             <div>
-              <div class="lab-photo-frame" style="height: 260px; margin-bottom: 18px;">
+              <div class="lab-photo-frame" style="height: clamp(170px, 22vh, 250px); margin-bottom: 14px;">
                 <img src="${slide.right.image}" alt="${slide.right.title}">
               </div>
-              <h2 class="team-name" style="margin-bottom: 6px;">${slide.right.title}</h2>
-              <div class="text-gold font-bold mb-3">${slide.right.director}</div>
-              <ul class="lab-highlights-list" style="margin-top: 14px;">
+              <h2 class="team-name" style="margin-bottom: 4px; font-size: clamp(18px, 1.4vw, 24px);">${slide.right.title}</h2>
+              <div class="text-gold font-bold mb-2" style="font-size: clamp(13px, 0.95vw, 15px);">${slide.right.director}</div>
+              <ul class="lab-highlights-list" style="margin-top: 10px; margin-bottom: 0;">
                 ${slide.right.features.map(f => `<li>${f}</li>`).join('')}
               </ul>
             </div>
+            ${slide.right.facility ? `
+            <div class="rso-meta-row" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+              <span class="rso-meta-label">FACILITY:</span>
+              <span class="rso-meta-val">${slide.right.facility}</span>
+            </div>` : ''}
           </div>
         </div>
       </div>
@@ -339,8 +369,8 @@ class SlideshowEngine {
         <div class="badge-pill animate-in">${slide.badge}</div>
         <div class="countdown-split">
           <div>
-            <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 12px;">${slide.title}</h1>
-            <p class="hero-subtitle animate-in delay-2" style="text-align: left; margin-bottom: 20px;">${slide.description}</p>
+            <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 10px;">${slide.title}</h1>
+            <p class="hero-subtitle animate-in delay-2" style="text-align: left; margin-bottom: 16px;">${slide.description}</p>
             <div class="countdown-timer-box animate-in delay-3" id="countdownTimerContainer">
               <div class="countdown-block">
                 <div class="countdown-digits" id="cdDays">--</div>
@@ -364,7 +394,7 @@ class SlideshowEngine {
               <span class="text-gold font-bold">${slide.callToAction}</span>
             </div>
           </div>
-          <div class="lab-photo-frame animate-in delay-2" style="max-height: 520px;">
+          <div class="lab-photo-frame animate-in delay-2" style="max-height: clamp(260px, 42vh, 480px);">
             <img src="${slide.image}" alt="${slide.title}">
             <div class="lab-photo-overlay">
               <span class="text-gold font-bold">SENIOR CAPSTONE EXPO</span>
@@ -379,16 +409,23 @@ class SlideshowEngine {
   templateAnnouncements(slide) {
     const itemsHtml = (slide.items || []).map((item, i) => `
       <div class="announcement-card animate-in delay-${i + 2}">
-        <div class="announcement-badge ${item.badgeClass}">${item.category}</div>
-        <h2 class="announcement-title">${item.title}</h2>
-        <p class="announcement-desc">${item.desc}</p>
+        <div>
+          <div class="announcement-badge ${item.badgeClass}">${item.category}</div>
+          <h2 class="announcement-title">${item.title}</h2>
+          <p class="announcement-desc">${item.desc}</p>
+        </div>
+        ${item.contact ? `
+        <div class="rso-meta-row" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+          <span class="rso-meta-label">INFO:</span>
+          <span class="rso-meta-val">${item.contact}</span>
+        </div>` : ''}
       </div>
     `).join('');
 
     return `
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
-        <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 25px;">${slide.title}</h1>
+        <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 18px;">${slide.title}</h1>
         <div class="announcements-grid">
           ${itemsHtml}
         </div>
@@ -409,7 +446,7 @@ class SlideshowEngine {
         <div class="badge-pill animate-in">${slide.badge}</div>
         <div class="wayfinding-grid">
           <div>
-            <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 12px;">${slide.title}</h1>
+            <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 12px;">${slide.title}</h1>
             <div class="lab-director-box animate-in delay-2" style="margin-bottom: 16px;">
               <div class="lab-director-name">${slide.chair}</div>
               <div class="lab-director-title">${slide.office} • ${slide.phone}</div>
@@ -434,10 +471,7 @@ class SlideshowEngine {
   /* ---------------- ENGINE LIFECYCLE ---------------- */
 
   showSlide(index) {
-    const prevSlideEl = document.getElementById(`slide-${this.currentIndex}`);
-    if (prevSlideEl) {
-      prevSlideEl.classList.remove('active');
-    }
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
 
     this.currentIndex = (index + this.slides.length) % this.slides.length;
     const nextSlideEl = document.getElementById(`slide-${this.currentIndex}`);
