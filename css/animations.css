@@ -123,34 +123,6 @@
   100% { transform: translate3d(-20px, 20px, 0); }
 }
 
-/* Glowing Border Pulse for Badges */
-.badge-pulse {
-  position: relative;
-  overflow: hidden;
-}
-
-.badge-pulse::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    60deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.15) 50%,
-    transparent 80%
-  );
-  transform: rotate(25deg) translate3d(-100%, 0, 0);
-  animation: badgeShine 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-@keyframes badgeShine {
-  0%, 80% { transform: rotate(25deg) translate3d(-150%, 0, 0); }
-  100% { transform: rotate(25deg) translate3d(150%, 0, 0); }
-}
-
 /* Progress Bar Smooth Filling */
 .progress-bar-fill {
   height: 100%;

@@ -45,6 +45,10 @@ class SlideshowEngine {
 
   buildSlideHtml(slide) {
     switch (slide.type) {
+      case 'split-overview':
+        return this.templateSplitOverview(slide);
+      case 'rso-trio':
+        return this.templateRsoTrio(slide);
       case 'hero':
         return this.templateHero(slide);
       case 'aiaa-feature':
@@ -64,11 +68,83 @@ class SlideshowEngine {
       case 'wayfinding':
         return this.templateWayfinding(slide);
       default:
-        return this.templateHero(slide);
+        return this.templateSplitOverview(slide);
     }
   }
 
   /* ---------------- TEMPLATES ---------------- */
+
+  templateSplitOverview(slide) {
+    const programsHtml = (slide.programs || []).map((p, i) => `
+      <div class="program-chip animate-in delay-${i + 2}">
+        <span class="program-chip-name">${p.name}</span>
+        <span class="program-chip-note">${p.note}</span>
+      </div>
+    `).join('');
+
+    return `
+      <div class="slide-inner">
+        <div class="overview-split-grid">
+          <div class="overview-info-card animate-in">
+            <div class="badge-pill">${slide.badge || 'DEPARTMENT OVERVIEW'}</div>
+            <div class="overview-college-tag">${slide.college || 'COLLEGE OF ENGINEERING & APPLIED SCIENCES'}</div>
+            <h1 class="overview-title">${slide.title}</h1>
+            <div class="overview-location">${slide.subtitle}</div>
+            <p class="overview-summary">${slide.summary}</p>
+            <div class="overview-programs-grid">
+              ${programsHtml}
+            </div>
+          </div>
+          <div class="overview-photo-card animate-in delay-2">
+            <div class="overview-photo-wrapper">
+              <img src="${slide.image}" alt="WMU MAE Students and Engineering Labs">
+            </div>
+            ${slide.caption ? `<div class="overview-photo-caption">${slide.caption}</div>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  templateRsoTrio(slide) {
+    const orgsHtml = (slide.orgs || []).map((org, i) => `
+      <div class="rso-card animate-in delay-${i + 2}">
+        <div>
+          <div class="rso-card-header">
+            <img src="${org.logo}" alt="${org.name}" class="rso-card-logo">
+            <div class="rso-card-name-block">
+              <div class="rso-card-subtitle">${org.subtitle}</div>
+              <h2 class="rso-card-name">${org.name}</h2>
+            </div>
+          </div>
+          <p class="rso-card-desc">${org.desc}</p>
+        </div>
+        <div class="rso-card-meta">
+          <div class="rso-meta-row">
+            <span class="rso-meta-label">LOCATION:</span>
+            <span class="rso-meta-val">${org.location}</span>
+          </div>
+          <div class="rso-meta-row">
+            <span class="rso-meta-label">CONNECT:</span>
+            <span class="rso-meta-val">${org.contact}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="slide-inner">
+        <div class="rso-header-block animate-in">
+          <div class="badge-pill">${slide.badge || 'STUDENT ORGANIZATIONS'}</div>
+          <h1 class="rso-title">${slide.title}</h1>
+          <div class="rso-subtitle">${slide.subtitle}</div>
+        </div>
+        <div class="rso-trio-grid">
+          ${orgsHtml}
+        </div>
+      </div>
+    `;
+  }
 
   templateHero(slide) {
     const statsHtml = (slide.stats || []).map((s, i) => `
@@ -82,7 +158,7 @@ class SlideshowEngine {
       ${slide.backgroundImage ? `<div class="ken-burns-bg" style="background-image: url('${slide.backgroundImage}');"></div>` : ''}
       <div class="slide-inner">
         <div class="hero-content">
-          <div class="badge-pill badge-pulse animate-in">${slide.tagline || 'WESTERN MICHIGAN UNIVERSITY'}</div>
+          <div class="badge-pill animate-in">${slide.tagline || 'WESTERN MICHIGAN UNIVERSITY'}</div>
           <h1 class="hero-title animate-in delay-1">${slide.title}</h1>
           <p class="hero-subtitle animate-in delay-2">${slide.subtitle}</p>
           <div class="hero-stats-row">
@@ -104,14 +180,14 @@ class SlideshowEngine {
 
     return `
       <div class="slide-inner">
-        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="badge-pill animate-in">${slide.badge}</div>
         <div class="aiaa-header-row animate-in delay-1">
           <div class="aiaa-title-block">
             <h1 class="aiaa-main-title">${slide.title}</h1>
             <div class="aiaa-sub">${slide.subtitle}</div>
           </div>
           <div class="aiaa-meta-block">
-            <div class="aiaa-hub-badge">📍 ${slide.hub}</div>
+            <div class="aiaa-hub-badge">${slide.hub}</div>
             <img src="${slide.logo}" alt="AIAA Pegasus Logo" class="aiaa-logo-img">
           </div>
         </div>
@@ -119,7 +195,7 @@ class SlideshowEngine {
           ${projectsHtml}
         </div>
         <div class="aiaa-footer-bar animate-in delay-5">
-          <span>🚀 <strong>Flagship Student Aerospace Branch</strong> • Department of Mechanical & Aerospace Engineering</span>
+          <span><strong>Flagship Student Aerospace Branch</strong> • Department of Mechanical & Aerospace Engineering</span>
           <span>Connect: <strong class="text-gold">${slide.social}</strong> • <strong class="text-gold">${slide.website}</strong></span>
         </div>
       </div>
@@ -132,12 +208,12 @@ class SlideshowEngine {
 
     return `
       <div class="slide-inner">
-        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="badge-pill animate-in">${slide.badge}</div>
         <div class="lab-split-layout">
           <div class="lab-photo-frame animate-in delay-1">
             <img src="${slide.image}" alt="${slide.labName}">
             <div class="lab-photo-overlay">
-              <span class="text-gold mono-telemetry font-bold">📍 ${slide.room}</span>
+              <span class="text-gold mono-telemetry font-bold">${slide.room}</span>
               <span class="text-sand text-sm">FACILITY SPOTLIGHT</span>
             </div>
           </div>
@@ -176,7 +252,7 @@ class SlideshowEngine {
           </div>
         </div>
         <div class="team-footer">
-          <span>📍 ${t.meeting}</span>
+          <span>${t.meeting}</span>
           <span>${t.social}</span>
         </div>
       </div>
@@ -184,7 +260,7 @@ class SlideshowEngine {
 
     return `
       <div class="slide-inner">
-        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="badge-pill animate-in">${slide.badge}</div>
         <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 6px;">${slide.title}</h1>
         <p class="hero-subtitle animate-in delay-1" style="text-align: left; margin-bottom: 20px;">${slide.subtitle}</p>
         <div class="teams-grid">
@@ -197,7 +273,7 @@ class SlideshowEngine {
   templateDualLab(slide) {
     return `
       <div class="slide-inner">
-        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="badge-pill animate-in">${slide.badge}</div>
         <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 24px;">${slide.title}</h1>
         <div class="teams-grid">
           <div class="team-card animate-in delay-2">
@@ -244,7 +320,7 @@ class SlideshowEngine {
 
     return `
       <div class="slide-inner">
-        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="badge-pill animate-in">${slide.badge}</div>
         <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 6px;">${slide.title}</h1>
         <p class="hero-subtitle animate-in delay-1" style="text-align: left; margin-bottom: 10px;">${slide.subtitle}</p>
         <div class="social-grid-layout">
@@ -260,7 +336,7 @@ class SlideshowEngine {
   templateCountdown(slide) {
     return `
       <div class="slide-inner">
-        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="badge-pill animate-in">${slide.badge}</div>
         <div class="countdown-split">
           <div>
             <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 12px;">${slide.title}</h1>
@@ -284,7 +360,7 @@ class SlideshowEngine {
               </div>
             </div>
             <div class="aiaa-footer-bar animate-in delay-4" style="margin-top: 10px;">
-              <span>📍 <strong>Location:</strong> ${slide.location}</span>
+              <span><strong>Location:</strong> ${slide.location}</span>
               <span class="text-gold font-bold">${slide.callToAction}</span>
             </div>
           </div>
@@ -311,7 +387,7 @@ class SlideshowEngine {
 
     return `
       <div class="slide-inner">
-        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="badge-pill animate-in">${slide.badge}</div>
         <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 25px;">${slide.title}</h1>
         <div class="announcements-grid">
           ${itemsHtml}
@@ -330,7 +406,7 @@ class SlideshowEngine {
 
     return `
       <div class="slide-inner">
-        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="badge-pill animate-in">${slide.badge}</div>
         <div class="wayfinding-grid">
           <div>
             <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 12px;">${slide.title}</h1>
