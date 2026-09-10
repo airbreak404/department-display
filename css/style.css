@@ -1,0 +1,926 @@
+/* WMU Department of Mechanical & Aerospace Engineering Digital Display */
+/* Designed for 55" 2048x1152 Commercial Display on Ubuntu 24.04 Wayland */
+
+@import url('typography.css');
+@import url('animations.css');
+
+:root {
+  /* Official Western Michigan University Colors */
+  --wmu-gold: #F1C500;
+  --wmu-gold-light: #FFDF40;
+  --wmu-gold-dark: #C69200;
+  --wmu-gold-glow: rgba(241, 197, 0, 0.35);
+  
+  --wmu-brown: #532E1F;
+  --wmu-brown-dark: #2F170E;
+  --wmu-brown-light: #73432F;
+  
+  --wmu-sand: #B4AEA7;
+  --wmu-slate: #819595;
+  --wmu-charcoal: #1E1612;
+  --bg-deep: #0D0A08;
+
+  /* Glassmorphism System */
+  --glass-bg: rgba(26, 19, 15, 0.78);
+  --glass-border: rgba(241, 197, 0, 0.22);
+  --glass-border-subtle: rgba(255, 255, 255, 0.12);
+  --glass-blur: blur(14px);
+  --glass-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
+
+  /* Layout Constants */
+  --hud-header-height: 90px;
+  --hud-footer-height: 70px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-deep);
+  color: #FFFFFF;
+}
+
+/* Kiosk Root Shell */
+.kiosk-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------- */
+/* TOP HUD HEADER                                                */
+/* ------------------------------------------------------------- */
+.hud-header {
+  position: relative;
+  height: var(--hud-header-height);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background: linear-gradient(180deg, rgba(13, 10, 8, 0.95) 0%, rgba(13, 10, 8, 0.6) 80%, transparent 100%);
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.wmu-logo-img {
+  height: 54px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+}
+
+.hud-divider {
+  width: 2px;
+  height: 42px;
+  background: linear-gradient(to bottom, transparent, var(--wmu-gold), transparent);
+}
+
+.hud-dept-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-college-label {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--wmu-gold);
+  text-transform: uppercase;
+}
+
+.hud-dept-title {
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+}
+
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Kalamazoo Weather Widget */
+.weather-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 40px;
+  padding: 8px 22px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.weather-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.weather-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-temp {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--wmu-gold);
+  line-height: 1.1;
+}
+
+.weather-desc {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wmu-sand);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.kiosk-status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--wmu-sand);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2ECC71;
+  box-shadow: 0 0 8px #2ECC71;
+}
+
+.status-dot.paused {
+  background: #E74C3C;
+  box-shadow: 0 0 8px #E74C3C;
+}
+
+/* ------------------------------------------------------------- */
+/* MAIN VIEWPORT (SLIDES CONTAINER)                              */
+/* ------------------------------------------------------------- */
+.slides-viewport {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - var(--hud-header-height) - var(--hud-footer-height));
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Common Slide Frame */
+.slide-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 35px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* Category Badges */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(241, 197, 0, 0.15);
+  border: 1px solid var(--wmu-gold);
+  color: var(--wmu-gold);
+  border-radius: 30px;
+  padding: 6px 18px;
+  font-size: var(--text-caption);
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  width: fit-content;
+}
+
+/* Glass Card Component */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  padding: 30px;
+}
+
+/* ------------------------------------------------------------- */
+/* TEMPLATE 1: HERO SPOTLIGHT                                    */
+/* ------------------------------------------------------------- */
+.slide-hero {
+  position: relative;
+}
+
+.hero-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-tagline {
+  font-size: var(--text-caption);
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: var(--wmu-gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hero-title {
+  font-size: var(--text-hero);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+  line-height: 1.1;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+}
+
+.hero-subtitle {
+  font-size: var(--text-h3);
+  font-weight: 400;
+  color: var(--wmu-sand);
+  margin-bottom: 40px;
+}
+
+.hero-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  width: 100%;
+}
+
+.stat-card {
+  background: rgba(26, 19, 15, 0.85);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 25px 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-num {
+  font-size: var(--text-stat-number);
+  font-weight: 900;
+  color: var(--wmu-gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-lbl {
+  font-size: var(--text-stat-label);
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+}
+
+/* ------------------------------------------------------------- */
+/* TEMPLATE 2: AIAA PEGASUS CHAPTER FEATURE                      */
+/* ------------------------------------------------------------- */
+.slide-aiaa {
+  position: relative;
+}
+
+.aiaa-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.aiaa-title-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.aiaa-main-title {
+  font-size: var(--text-h1);
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.aiaa-sub {
+  font-size: var(--text-h3);
+  color: var(--wmu-sand);
+  margin-top: 4px;
+}
+
+.aiaa-meta-block {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.aiaa-hub-badge {
+  background: rgba(241, 197, 0, 0.15);
+  border: 1px solid var(--wmu-gold);
+  color: var(--wmu-gold);
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.aiaa-logo-img {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2px solid var(--wmu-gold);
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(241, 197, 0, 0.4);
+}
+
+.aiaa-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  flex: 1;
+}
+
+.aiaa-project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-tag {
+  display: inline-block;
+  background: var(--wmu-gold);
+  color: var(--wmu-brown-dark);
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  padding: 4px 14px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  width: fit-content;
+}
+
+.project-title {
+  font-size: var(--text-h2);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.project-desc {
+  font-size: var(--text-body);
+  color: var(--wmu-sand);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.aiaa-footer-bar {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: rgba(83, 46, 31, 0.35);
+  border: 1px solid rgba(241, 197, 0, 0.2);
+  border-radius: 12px;
+  font-size: var(--text-body);
+}
+
+/* ------------------------------------------------------------- */
+/* TEMPLATE 3: LAB SPOTLIGHT (ALPE)                               */
+/* ------------------------------------------------------------- */
+.slide-lab {
+  position: relative;
+}
+
+.lab-split-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 35px;
+  height: 100%;
+  align-items: center;
+}
+
+.lab-photo-frame {
+  position: relative;
+  height: 100%;
+  max-height: 640px;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 2px solid var(--glass-border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.lab-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lab-photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 30px;
+  background: linear-gradient(0deg, rgba(13, 10, 8, 0.95) 0%, transparent 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.lab-details-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.lab-title-text {
+  font-size: var(--text-h1);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+
+.lab-director-box {
+  background: rgba(83, 46, 31, 0.4);
+  border-left: 4px solid var(--wmu-gold);
+  padding: 14px 20px;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 24px;
+}
+
+.lab-director-name {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--wmu-gold);
+}
+
+.lab-director-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--wmu-sand);
+}
+
+.lab-highlights-list {
+  list-style: none;
+  margin-bottom: 28px;
+}
+
+.lab-highlights-list li {
+  position: relative;
+  padding-left: 32px;
+  font-size: var(--text-body);
+  color: #FFFFFF;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.lab-highlights-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--wmu-gold);
+  font-size: 22px;
+}
+
+.lab-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--wmu-sand);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ------------------------------------------------------------- */
+/* TEMPLATE 4: FLAGSHIP STUDENT TEAMS (BRONCO RACING & SUNSEEKER)*/
+/* ------------------------------------------------------------- */
+.teams-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  flex: 1;
+  margin-top: 15px;
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  padding: 35px;
+  box-shadow: var(--glass-shadow);
+}
+
+.team-card-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.team-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 2px solid var(--wmu-gold);
+  background: #FFFFFF;
+}
+
+.team-name {
+  font-size: var(--text-h2);
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.team-desc {
+  font-size: var(--text-body);
+  color: var(--wmu-sand);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.team-focus-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 16px;
+  color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+.team-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--wmu-gold);
+}
+
+/* ------------------------------------------------------------- */
+/* TEMPLATE 5: SOCIAL GRID (4 CARDS)                             */
+/* ------------------------------------------------------------- */
+.social-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  flex: 1;
+  margin-top: 15px;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: var(--glass-shadow);
+}
+
+.social-card-logo {
+  width: 75px;
+  height: 75px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 2px solid var(--wmu-gold);
+  background: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.social-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.social-card-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.social-card-handle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--wmu-gold);
+}
+
+.social-card-desc {
+  font-size: 16px;
+  color: var(--wmu-sand);
+  line-height: 1.4;
+}
+
+.social-hashtag-bar {
+  margin-top: 18px;
+  text-align: center;
+  padding: 12px;
+  background: rgba(241, 197, 0, 0.12);
+  border: 1px dashed var(--wmu-gold);
+  border-radius: 12px;
+  color: var(--wmu-gold);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------- */
+/* TEMPLATE 6: SENIOR DESIGN COUNTDOWN                           */
+/* ------------------------------------------------------------- */
+.countdown-split {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  height: 100%;
+}
+
+.countdown-timer-box {
+  display: flex;
+  gap: 20px;
+  margin: 28px 0;
+}
+
+.countdown-block {
+  background: rgba(83, 46, 31, 0.45);
+  border: 2px solid var(--wmu-gold);
+  border-radius: 16px;
+  padding: 20px 24px;
+  text-align: center;
+  min-width: 120px;
+}
+
+.countdown-digits {
+  font-size: 54px;
+  font-weight: 900;
+  color: var(--wmu-gold);
+  line-height: 1;
+  font-family: var(--font-mono);
+}
+
+.countdown-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--wmu-sand);
+  margin-top: 6px;
+}
+
+/* ------------------------------------------------------------- */
+/* TEMPLATE 7: ANNOUNCEMENTS BOARD                               */
+/* ------------------------------------------------------------- */
+.announcements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  flex: 1;
+  margin-top: 15px;
+}
+
+.announcement-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.announcement-badge {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 6px;
+  width: fit-content;
+  margin-bottom: 16px;
+}
+
+.badge-gold { background: rgba(241, 197, 0, 0.2); color: var(--wmu-gold); border: 1px solid var(--wmu-gold); }
+.badge-slate { background: rgba(129, 149, 149, 0.2); color: var(--wmu-slate); border: 1px solid var(--wmu-slate); }
+.badge-brown { background: rgba(83, 46, 31, 0.5); color: #FFF; border: 1px solid var(--wmu-sand); }
+
+.announcement-title {
+  font-size: var(--text-h3);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+  line-height: 1.3;
+}
+
+.announcement-desc {
+  font-size: var(--text-body);
+  color: var(--wmu-sand);
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------- */
+/* TEMPLATE 8: WAYFINDING & DIRECTORY                            */
+/* ------------------------------------------------------------- */
+.wayfinding-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 35px;
+  height: 100%;
+  align-items: center;
+}
+
+.room-chips-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 25px;
+}
+
+.room-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(241, 197, 0, 0.25);
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.room-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.room-number {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--wmu-gold);
+  font-family: var(--font-mono);
+}
+
+.qr-panel {
+  background: var(--glass-bg);
+  border: 2px solid var(--wmu-gold);
+  border-radius: 22px;
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr-box {
+  width: 180px;
+  height: 180px;
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.qr-box img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------------------------------------------------- */
+/* BOTTOM HUD FOOTER                                             */
+/* ------------------------------------------------------------- */
+.hud-footer {
+  position: relative;
+  height: var(--hud-footer-height);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  background: linear-gradient(0deg, rgba(13, 10, 8, 0.95) 0%, rgba(13, 10, 8, 0.7) 80%, transparent 100%);
+  border-top: 1px solid var(--glass-border);
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--wmu-sand);
+}
+
+.footer-pin {
+  color: var(--wmu-gold);
+  font-size: 18px;
+}
+
+.progress-container {
+  flex: 1;
+  max-width: 700px;
+  margin: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--wmu-sand);
+  letter-spacing: 1px;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.footer-clock-time {
+  color: var(--wmu-gold);
+}
+
+/* Idle Cursor Hide (Kiosk Mode) */
+body.idle-cursor {
+  cursor: none !important;
+}
+body.idle-cursor * {
+  cursor: none !important;
+}

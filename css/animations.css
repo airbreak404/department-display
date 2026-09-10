@@ -1,0 +1,162 @@
+/* GPU-Accelerated Animations for Kiosk Display (Wayland & Firefox Optimized) */
+
+/* Slide Fade & Scale Transitions */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 0, 0) scale(0.98);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.8s;
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0, 0, 0) scale(1);
+  pointer-events: auto;
+}
+
+/* Staggered Content Ingress */
+.slide.active .animate-in {
+  animation: slideElementIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.slide.active .delay-1 { animation-delay: 0.10s; }
+.slide.active .delay-2 { animation-delay: 0.20s; }
+.slide.active .delay-3 { animation-delay: 0.30s; }
+.slide.active .delay-4 { animation-delay: 0.40s; }
+.slide.active .delay-5 { animation-delay: 0.50s; }
+
+@keyframes slideElementIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Ken Burns Subtle Background Pan & Zoom */
+.ken-burns-bg {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  background-size: cover;
+  background-position: center;
+  transform: translate3d(0, 0, 0) scale(1);
+  animation: kenBurnsZoom 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes kenBurnsZoom {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-1%, -1.5%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(1.5%, 1%, 0) scale(1.03);
+  }
+}
+
+/* Ambient Aerospace Streamline / Grid Canvas */
+.ambient-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(241, 197, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(241, 197, 0, 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.1) 85%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.1) 85%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ambient Gold Glow Orbs */
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 1;
+  animation: floatOrb 20s ease-in-out infinite alternate;
+}
+
+.ambient-orb.orb-1 {
+  top: 10%;
+  right: 15%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, #F1C500 0%, rgba(241, 197, 0, 0) 70%);
+}
+
+.ambient-orb.orb-2 {
+  bottom: 12%;
+  left: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #532E1F 0%, rgba(83, 46, 31, 0) 70%);
+  animation-duration: 25s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(30px, -25px, 0); }
+  100% { transform: translate3d(-20px, 20px, 0); }
+}
+
+/* Glowing Border Pulse for Badges */
+.badge-pulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-pulse::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 80%
+  );
+  transform: rotate(25deg) translate3d(-100%, 0, 0);
+  animation: badgeShine 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes badgeShine {
+  0%, 80% { transform: rotate(25deg) translate3d(-150%, 0, 0); }
+  100% { transform: rotate(25deg) translate3d(150%, 0, 0); }
+}
+
+/* Progress Bar Smooth Filling */
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #532E1F 0%, #C69200 40%, #F1C500 100%);
+  box-shadow: 0 0 16px rgba(241, 197, 0, 0.5);
+  border-radius: 4px;
+  will-change: width;
+}

@@ -1,536 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Department Display Board</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-            position: relative;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Animated background particles */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.06) 0%, transparent 50%);
-            animation: particleFloat 20s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0px); opacity: 0.5; }
-            50% { transform: translateY(-20px); opacity: 0.8; }
-        }
-
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slide {
-            display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .slide.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: scale(0.95);
-            }
-            to { 
-                opacity: 1; 
-                transform: scale(1);
-            }
-        }
-
-        /* Text slide styling with glassmorphism */
-        .text-slide {
-            flex-direction: column;
-            padding: 80px;
-            text-align: center;
-            color: white;
-        }
-
-        .text-slide > * {
-            animation: slideContentIn 0.6s ease-out backwards;
-        }
-
-        .text-slide h1 {
-            animation-delay: 0.1s;
-        }
-
-        .text-slide h2 {
-            animation-delay: 0.2s;
-        }
-
-        .text-slide p,
-        .text-slide ul {
-            animation-delay: 0.3s;
-        }
-
-        @keyframes slideContentIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .text-slide h1 {
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: 6rem;
-            margin-bottom: 40px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 40px rgba(255,255,255,0.2);
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: #ffffff;
-            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-        }
-
-        @supports (-webkit-background-clip: text) {
-            .text-slide h1 {
-                -webkit-text-fill-color: transparent;
-            }
-        }
-        .text-slide h2 {
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: 4rem;
-            margin-bottom: 50px;
-            color: #ffd700;
-            text-shadow: 0 4px 15px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px 60px;
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            display: inline-block;
-        }
-
-        .text-slide p {
-            font-size: 2.2rem;
-            line-height: 1.8;
-            max-width: 1200px;
-            margin: 25px auto;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            font-weight: 400;
-        }
-
-        .text-slide .subtitle {
-            font-size: 2.8rem;
-            color: #fff;
-            margin-top: 15px;
-            font-weight: 300;
-            text-shadow: 0 2px 15px rgba(0,0,0,0.4);
-        }
-
-        .text-slide ul {
-            list-style: none;
-            font-size: 2.4rem;
-            text-align: left;
-            max-width: 1100px;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            padding: 50px 60px;
-            border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .text-slide li {
-            margin: 30px 0;
-            padding-left: 60px;
-            position: relative;
-            font-weight: 400;
-            line-height: 1.6;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        .text-slide li:before {
-            content: "✦";
-            position: absolute;
-            left: 0;
-            color: #ffd700;
-            font-size: 2.5rem;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-        }
-
-        /* Image slide styling */
-        .image-slide {
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: #1e3c72;
-        }
-
-        /* Footer with current time and date */
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(20px);
-            color: white;
-            padding: 20px 30px;
-            text-align: center;
-            font-size: 1.4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .footer .left {
-            flex: 1;
-            text-align: left;
-            padding-left: 30px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer .left::before {
-            content: "🎓";
-            font-size: 1.6rem;
-        }
-
-        .footer .center {
-            flex: 1;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.5rem;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        .footer .right {
-            flex: 1;
-            text-align: right;
-            padding-right: 30px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .footer .right::after {
-            content: "⚡";
-            font-size: 1.4rem;
-        }
-
-        /* Progress indicator */
-        .progress-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            height: 6px;
-            background: linear-gradient(90deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
-            background-size: 200% 100%;
-            animation: shimmer 2s linear infinite;
-            width: 0%;
-            transition: width 0.1s linear;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
-            z-index: 1000;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% 0; }
-            100% { background-position: 100% 0; }
-        }
-
-        /* Fullscreen hint */
-        .fullscreen-hint {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.15);
-            -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 15px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department of Mechanical &amp; Aerospace Engineering | Western Michigan University</title>
+  
+  <!-- Preconnect & Google Fonts: Montserrat & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="slideshow-container">
-        <!-- Slide 1: Welcome -->
-        <div class="slide text-slide active">
-            <h1>Welcome</h1>
-            <h2>Department of Mechanical and Aerospace Engineering</h2>
-            <p class="subtitle">College of Engineering and Applied Sciences</p>
-            <p class="subtitle">Western Michigan University</p>
+  <!-- Ambient Graphic Canvas Layer -->
+  <div class="ambient-grid"></div>
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+
+  <!-- Kiosk Root Display -->
+  <div class="kiosk-root">
+    
+    <!-- Top HUD Header -->
+    <header class="hud-header">
+      <div class="hud-left">
+        <img src="images/wmu-logo-gold.svg" alt="Western Michigan University" class="wmu-logo-img">
+        <div class="hud-divider"></div>
+        <div class="hud-dept-info">
+          <span class="hud-college-label">College of Engineering &amp; Applied Sciences</span>
+          <span class="hud-dept-title">Mechanical &amp; Aerospace Engineering</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Live Kalamazoo Weather Widget -->
+        <div class="weather-badge" id="weatherWidget" title="Live Weather at Parkview Campus">
+          <span class="weather-icon" id="weatherIcon">🌤️</span>
+          <div class="weather-text">
+            <span class="weather-temp" id="weatherTemp">--°F</span>
+            <span class="weather-desc" id="weatherDesc">Kalamazoo, MI</span>
+          </div>
         </div>
 
-        <!-- Slide 2: Department Announcements -->
-        <div class="slide text-slide">
-            <h2>Department Announcements</h2>
-            <ul>
-                <li>Faculty meeting scheduled for next Tuesday at 2:00 PM</li>
-                <li>New course proposals due by end of month</li>
-                <li>Research grant applications now open</li>
-                <li>Student advising week begins Monday</li>
-            </ul>
+        <!-- Kiosk Status Pill -->
+        <div class="kiosk-status-pill" title="Press SPACE to pause/resume, F for fullscreen">
+          <div class="status-dot" id="statusDot"></div>
+          <span id="statusText">LIVE</span>
         </div>
+      </div>
+    </header>
 
-        <!-- Slide 3: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original1.jpg');"></div>
+    <!-- Main Dynamic Slides Viewport -->
+    <main class="slides-viewport" id="slidesViewport">
+      <!-- Dynamically populated by js/slideshow.js from data/slides.json -->
+    </main>
 
-        <!-- Slide 4: Upcoming Events -->
-        <div class="slide text-slide">
-            <h2>Upcoming Events</h2>
-            <ul>
-                <li>Guest Speaker Series - Dr. Smith (Feb 5th)</li>
-                <li>Department Open House - February 15th</li>
-                <li>Research Symposium - March 1st</li>
-                <li>Spring Career Fair - March 20th</li>
-            </ul>
+    <!-- Bottom HUD Footer -->
+    <footer class="hud-footer">
+      <div class="footer-left">
+        <span class="footer-pin">📍</span>
+        <span>Elson S. Floyd Hall • Parkview Campus • Room F-234</span>
+      </div>
+
+      <!-- Golden Progress Bar & Slide Counter -->
+      <div class="progress-container">
+        <div class="progress-meta">
+          <span>DISPLAY CYCLE</span>
+          <span id="progressCounter">SLIDE 1 OF 9</span>
         </div>
-
-        <!-- Slide 5: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original2.webp');"></div>
-
-        <!-- Slide 6: Student Resources -->
-        <div class="slide text-slide">
-            <h2>Student Resources</h2>
-            <ul>
-                <li>Tutoring Center: Monday-Friday, 9 AM - 5 PM</li>
-                <li>Office Hours: Check department website</li>
-                <li>Academic Advising: By appointment</li>
-                <li>Career Services: Room 201</li>
-            </ul>
+        <div class="progress-track">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
         </div>
+      </div>
 
-        <!-- Slide 7: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original3.jpg');"></div>
+      <!-- Live Clock -->
+      <div class="footer-right">
+        <span class="footer-clock-time" id="clockTime">--:--:-- --</span>
+        <span>•</span>
+        <span class="footer-clock-date" id="clockDate">--------</span>
+      </div>
+    </footer>
 
-        <!-- Slide 8: Contact Information -->
-        <div class="slide text-slide">
-            <h2>Contact Information</h2>
-            <p>Department of Mechanical and Aerospace Engineering</p>
-            <p>College of Engineering and Applied Sciences</p>
-            <p>Western Michigan University</p>
-            <p style="margin-top: 40px;">Phone: (269) 276-3420</p>
-            <p>Fax: (269) 276-3421</p>
-            <p style="margin-top: 40px;">Office Hours: 9:00 AM - 5:00 PM</p>
-        </div>
+  </div>
 
-        <!-- Slide 9: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original4.jpg');"></div>
-
-        <!-- Slide 10: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original5.jpg');"></div>
-
-        <!-- Slide 11: Research Highlights -->
-        <div class="slide text-slide">
-            <h2>Recent Achievements</h2>
-            <ul>
-                <li>3 faculty members received prestigious awards</li>
-                <li>Students published 15 research papers</li>
-                <li>Department ranked in top 20 nationally</li>
-                <li>$2M in new research grants secured</li>
-            </ul>
-        </div>
-
-        <!-- Slide 12: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original6.jpg');"></div>
-
-        <!-- Slide 13: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original7.jpg');"></div>
-
-        <!-- Slide 14: Important Dates -->
-        <div class="slide text-slide">
-            <h2>Important Dates</h2>
-            <ul>
-                <li>Spring Break: March 18-25</li>
-                <li>Final Exams: May 1-8</li>
-                <li>Graduation: May 15th</li>
-                <li>Summer Session Begins: June 1st</li>
-            </ul>
-        </div>
-
-        <!-- Slide 15: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original8.jpg');"></div>
-
-        <!-- Slide 16: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original9.jpg');"></div>
-
-        <!-- Slide 17: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original10.jpg');"></div>
-
-        <!-- Slide 18: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original11.jpg');"></div>
-
-        <!-- Slide 19: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original12.jpg');"></div>
-
-        <!-- Slide 20: Image -->
-        <div class="slide image-slide" style="background-image: url('images/original.jpg');"></div>
-    </div>
-
-    <!-- Footer with time and info -->
-    <div class="footer">
-        <div class="left">MAE Department - Western Michigan University</div>
-        <div class="center" id="datetime"></div>
-        <div class="right">GitHub Pages Powered</div>
-    </div>
-
-    <!-- Progress bar -->
-    <div class="progress-bar" id="progressBar"></div>
-
-    <!-- Fullscreen hint -->
-    <div class="fullscreen-hint">Press F11 for fullscreen</div>
-
-    <script>
-        // Configuration
-        const SLIDE_DURATION = 7000; // 7 seconds per slide
-
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        let slideInterval;
-        let progressInterval;
-
-        // Update date and time
-        function updateDateTime() {
-            const now = new Date();
-            const options = {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            };
-            document.getElementById('datetime').textContent = now.toLocaleString('en-US', options);
-        }
-
-        // Show specific slide
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            currentSlide = (n + totalSlides) % totalSlides;
-            slides[currentSlide].classList.add('active');
-            resetProgressBar();
-        }
-
-        // Next slide
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
-
-        // Progress bar animation
-        function resetProgressBar() {
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.width = '0%';
-
-            let progress = 0;
-            clearInterval(progressInterval);
-
-            progressInterval = setInterval(() => {
-                progress += (100 / (SLIDE_DURATION / 100));
-                if (progress >= 100) {
-                    progress = 100;
-                    clearInterval(progressInterval);
-                }
-                progressBar.style.width = progress + '%';
-            }, 100);
-        }
-
-        // Initialize slideshow
-        function initSlideshow() {
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
-
-            resetProgressBar();
-            slideInterval = setInterval(nextSlide, SLIDE_DURATION);
-
-            // Hide fullscreen hint after 5 seconds
-            setTimeout(() => {
-                document.querySelector('.fullscreen-hint').style.opacity = '0';
-                setTimeout(() => {
-                    document.querySelector('.fullscreen-hint').style.display = 'none';
-                }, 1000);
-            }, 5000);
-        }
-
-        // Keyboard controls
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') {
-                clearInterval(slideInterval);
-                nextSlide();
-                slideInterval = setInterval(nextSlide, SLIDE_DURATION);
-            } else if (e.key === 'ArrowLeft') {
-                clearInterval(slideInterval);
-                showSlide(currentSlide - 1);
-                slideInterval = setInterval(nextSlide, SLIDE_DURATION);
-            } else if (e.key === 'f' || e.key === 'F') {
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen();
-                } else {
-                    document.exitFullscreen();
-                }
-            }
-        });
-
-        // Start slideshow when page loads
-        window.addEventListener('load', initSlideshow);
-    </script>
+  <!-- Client-side Logic & Data -->
+  <script src="data/fallback.js"></script>
+  <script src="js/weather.js"></script>
+  <script src="js/slideshow.js"></script>
+  <script src="js/controls.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

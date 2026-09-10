@@ -1,0 +1,484 @@
+/**
+ * WMU MAE Slideshow Engine
+ * Supports 8 diverse broadcast templates with smooth GPU-accelerated transitions
+ * and distance-tuned typography for 55" 2048x1152 display.
+ */
+
+class SlideshowEngine {
+  constructor(data) {
+    this.config = data.config || {};
+    this.slides = data.slides || [];
+    this.currentIndex = 0;
+    this.isPaused = false;
+    this.testMode = false;
+    this.container = document.getElementById('slidesViewport');
+    this.progressBar = document.getElementById('progressBarFill');
+    this.counterEl = document.getElementById('progressCounter');
+    
+    this.slideTimer = null;
+    this.progressStartTime = 0;
+    this.progressElapsed = 0;
+    this.currentDuration = 8500;
+    this.rafId = null;
+    this.countdownTimer = null;
+  }
+
+  init() {
+    if (!this.slides.length) {
+      console.error('No slide data available to render.');
+      return;
+    }
+    this.renderAllSlides();
+    this.showSlide(0);
+  }
+
+  renderAllSlides() {
+    this.container.innerHTML = '';
+    this.slides.forEach((slide, idx) => {
+      const slideEl = document.createElement('div');
+      slideEl.className = `slide slide-${slide.type}`;
+      slideEl.id = `slide-${idx}`;
+      slideEl.innerHTML = this.buildSlideHtml(slide);
+      this.container.appendChild(slideEl);
+    });
+  }
+
+  buildSlideHtml(slide) {
+    switch (slide.type) {
+      case 'hero':
+        return this.templateHero(slide);
+      case 'aiaa-feature':
+        return this.templateAIAA(slide);
+      case 'lab-spotlight':
+        return this.templateLabSpotlight(slide);
+      case 'student-teams':
+        return this.templateStudentTeams(slide);
+      case 'dual-lab':
+        return this.templateDualLab(slide);
+      case 'social-grid':
+        return this.templateSocialGrid(slide);
+      case 'event-countdown':
+        return this.templateCountdown(slide);
+      case 'announcements':
+        return this.templateAnnouncements(slide);
+      case 'wayfinding':
+        return this.templateWayfinding(slide);
+      default:
+        return this.templateHero(slide);
+    }
+  }
+
+  /* ---------------- TEMPLATES ---------------- */
+
+  templateHero(slide) {
+    const statsHtml = (slide.stats || []).map((s, i) => `
+      <div class="stat-card animate-in delay-${i + 2}">
+        <div class="stat-num">${s.value}</div>
+        <div class="stat-lbl">${s.label}</div>
+      </div>
+    `).join('');
+
+    return `
+      ${slide.backgroundImage ? `<div class="ken-burns-bg" style="background-image: url('${slide.backgroundImage}');"></div>` : ''}
+      <div class="slide-inner">
+        <div class="hero-content">
+          <div class="badge-pill badge-pulse animate-in">${slide.tagline || 'WESTERN MICHIGAN UNIVERSITY'}</div>
+          <h1 class="hero-title animate-in delay-1">${slide.title}</h1>
+          <p class="hero-subtitle animate-in delay-2">${slide.subtitle}</p>
+          <div class="hero-stats-row">
+            ${statsHtml}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  templateAIAA(slide) {
+    const projectsHtml = (slide.projects || []).map((p, i) => `
+      <div class="aiaa-project-card animate-in delay-${i + 2}">
+        <div class="project-tag">${p.tag}</div>
+        <h2 class="project-title">${p.title}</h2>
+        <p class="project-desc">${p.desc}</p>
+      </div>
+    `).join('');
+
+    return `
+      <div class="slide-inner">
+        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="aiaa-header-row animate-in delay-1">
+          <div class="aiaa-title-block">
+            <h1 class="aiaa-main-title">${slide.title}</h1>
+            <div class="aiaa-sub">${slide.subtitle}</div>
+          </div>
+          <div class="aiaa-meta-block">
+            <div class="aiaa-hub-badge">📍 ${slide.hub}</div>
+            <img src="${slide.logo}" alt="AIAA Pegasus Logo" class="aiaa-logo-img">
+          </div>
+        </div>
+        <div class="aiaa-projects-grid">
+          ${projectsHtml}
+        </div>
+        <div class="aiaa-footer-bar animate-in delay-5">
+          <span>🚀 <strong>Flagship Student Aerospace Branch</strong> • Department of Mechanical & Aerospace Engineering</span>
+          <span>Connect: <strong class="text-gold">${slide.social}</strong> • <strong class="text-gold">${slide.website}</strong></span>
+        </div>
+      </div>
+    `;
+  }
+
+  templateLabSpotlight(slide) {
+    const highlightsHtml = (slide.highlights || []).map(h => `<li>${h}</li>`).join('');
+    const tagsHtml = (slide.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join('');
+
+    return `
+      <div class="slide-inner">
+        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="lab-split-layout">
+          <div class="lab-photo-frame animate-in delay-1">
+            <img src="${slide.image}" alt="${slide.labName}">
+            <div class="lab-photo-overlay">
+              <span class="text-gold mono-telemetry font-bold">📍 ${slide.room}</span>
+              <span class="text-sand text-sm">FACILITY SPOTLIGHT</span>
+            </div>
+          </div>
+          <div class="lab-details-panel">
+            <h1 class="lab-title-text animate-in delay-2">${slide.labName}</h1>
+            <div class="lab-director-box animate-in delay-3">
+              <div class="lab-director-name">${slide.director}</div>
+              <div class="lab-director-title">${slide.directorTitle}</div>
+            </div>
+            <ul class="lab-highlights-list animate-in delay-4">
+              ${highlightsHtml}
+            </ul>
+            <div class="lab-tags-row animate-in delay-5">
+              ${tagsHtml}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  templateStudentTeams(slide) {
+    const teamsHtml = (slide.teams || []).map((t, i) => `
+      <div class="team-card animate-in delay-${i + 2}">
+        <div>
+          <div class="team-card-header">
+            <img src="${t.logo}" alt="${t.name}" class="team-logo">
+            <div>
+              <div class="project-tag">${t.badge}</div>
+              <h2 class="team-name">${t.name}</h2>
+            </div>
+          </div>
+          <p class="team-desc">${t.desc}</p>
+          <div class="team-focus-box">
+            <strong class="text-gold">Focus Areas:</strong> ${t.highlights}
+          </div>
+        </div>
+        <div class="team-footer">
+          <span>📍 ${t.meeting}</span>
+          <span>${t.social}</span>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="slide-inner">
+        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 6px;">${slide.title}</h1>
+        <p class="hero-subtitle animate-in delay-1" style="text-align: left; margin-bottom: 20px;">${slide.subtitle}</p>
+        <div class="teams-grid">
+          ${teamsHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  templateDualLab(slide) {
+    return `
+      <div class="slide-inner">
+        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 24px;">${slide.title}</h1>
+        <div class="teams-grid">
+          <div class="team-card animate-in delay-2">
+            <div>
+              <div class="lab-photo-frame" style="height: 260px; margin-bottom: 18px;">
+                <img src="${slide.left.image}" alt="${slide.left.title}">
+              </div>
+              <h2 class="team-name" style="margin-bottom: 6px;">${slide.left.title}</h2>
+              <div class="text-gold font-bold mb-3">${slide.left.director}</div>
+              <ul class="lab-highlights-list" style="margin-top: 14px;">
+                ${slide.left.features.map(f => `<li>${f}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+          <div class="team-card animate-in delay-3">
+            <div>
+              <div class="lab-photo-frame" style="height: 260px; margin-bottom: 18px;">
+                <img src="${slide.right.image}" alt="${slide.right.title}">
+              </div>
+              <h2 class="team-name" style="margin-bottom: 6px;">${slide.right.title}</h2>
+              <div class="text-gold font-bold mb-3">${slide.right.director}</div>
+              <ul class="lab-highlights-list" style="margin-top: 14px;">
+                ${slide.right.features.map(f => `<li>${f}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  templateSocialGrid(slide) {
+    const cardsHtml = (slide.channels || []).map((c, i) => `
+      <div class="social-card animate-in delay-${i + 2}">
+        <img src="${c.logo}" alt="${c.name}" class="social-card-logo">
+        <div class="social-card-info">
+          <div class="project-tag" style="font-size: 12px; padding: 2px 10px;">${c.badge}</div>
+          <h2 class="social-card-title">${c.name}</h2>
+          <div class="social-card-handle">${c.handle}</div>
+          <p class="social-card-desc">${c.desc}</p>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="slide-inner">
+        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 6px;">${slide.title}</h1>
+        <p class="hero-subtitle animate-in delay-1" style="text-align: left; margin-bottom: 10px;">${slide.subtitle}</p>
+        <div class="social-grid-layout">
+          ${cardsHtml}
+        </div>
+        <div class="social-hashtag-bar animate-in delay-5">
+          ${slide.hashtag}
+        </div>
+      </div>
+    `;
+  }
+
+  templateCountdown(slide) {
+    return `
+      <div class="slide-inner">
+        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="countdown-split">
+          <div>
+            <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 12px;">${slide.title}</h1>
+            <p class="hero-subtitle animate-in delay-2" style="text-align: left; margin-bottom: 20px;">${slide.description}</p>
+            <div class="countdown-timer-box animate-in delay-3" id="countdownTimerContainer">
+              <div class="countdown-block">
+                <div class="countdown-digits" id="cdDays">--</div>
+                <div class="countdown-label">DAYS</div>
+              </div>
+              <div class="countdown-block">
+                <div class="countdown-digits" id="cdHours">--</div>
+                <div class="countdown-label">HOURS</div>
+              </div>
+              <div class="countdown-block">
+                <div class="countdown-digits" id="cdMinutes">--</div>
+                <div class="countdown-label">MINUTES</div>
+              </div>
+              <div class="countdown-block">
+                <div class="countdown-digits" id="cdSeconds">--</div>
+                <div class="countdown-label">SECONDS</div>
+              </div>
+            </div>
+            <div class="aiaa-footer-bar animate-in delay-4" style="margin-top: 10px;">
+              <span>📍 <strong>Location:</strong> ${slide.location}</span>
+              <span class="text-gold font-bold">${slide.callToAction}</span>
+            </div>
+          </div>
+          <div class="lab-photo-frame animate-in delay-2" style="max-height: 520px;">
+            <img src="${slide.image}" alt="${slide.title}">
+            <div class="lab-photo-overlay">
+              <span class="text-gold font-bold">SENIOR CAPSTONE EXPO</span>
+              <span class="text-sand">FLOYD HALL ATRIUM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  templateAnnouncements(slide) {
+    const itemsHtml = (slide.items || []).map((item, i) => `
+      <div class="announcement-card animate-in delay-${i + 2}">
+        <div class="announcement-badge ${item.badgeClass}">${item.category}</div>
+        <h2 class="announcement-title">${item.title}</h2>
+        <p class="announcement-desc">${item.desc}</p>
+      </div>
+    `).join('');
+
+    return `
+      <div class="slide-inner">
+        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 25px;">${slide.title}</h1>
+        <div class="announcements-grid">
+          ${itemsHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  templateWayfinding(slide) {
+    const roomsHtml = (slide.rooms || []).map(r => `
+      <div class="room-chip">
+        <span class="room-label">${r.label}</span>
+        <span class="room-number">${r.room}</span>
+      </div>
+    `).join('');
+
+    return `
+      <div class="slide-inner">
+        <div class="badge-pill badge-pulse animate-in">${slide.badge}</div>
+        <div class="wayfinding-grid">
+          <div>
+            <h1 class="hero-title animate-in delay-1" style="text-align: left; margin-bottom: 12px;">${slide.title}</h1>
+            <div class="lab-director-box animate-in delay-2" style="margin-bottom: 16px;">
+              <div class="lab-director-name">${slide.chair}</div>
+              <div class="lab-director-title">${slide.office} • ${slide.phone}</div>
+              <div class="lab-director-title" style="margin-top: 4px;">Office Hours: ${slide.hours}</div>
+            </div>
+            <div class="room-chips-row animate-in delay-3">
+              ${roomsHtml}
+            </div>
+          </div>
+          <div class="qr-panel animate-in delay-3">
+            <div class="qr-box">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(slide.qrUrl)}" alt="Department Website QR">
+            </div>
+            <div class="text-gold font-bold text-lg mb-1">${slide.qrLabel}</div>
+            <div class="text-sand text-sm">${slide.qrUrl.replace('https://', '')}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  /* ---------------- ENGINE LIFECYCLE ---------------- */
+
+  showSlide(index) {
+    const prevSlideEl = document.getElementById(`slide-${this.currentIndex}`);
+    if (prevSlideEl) {
+      prevSlideEl.classList.remove('active');
+    }
+
+    this.currentIndex = (index + this.slides.length) % this.slides.length;
+    const nextSlideEl = document.getElementById(`slide-${this.currentIndex}`);
+    if (nextSlideEl) {
+      nextSlideEl.classList.add('active');
+    }
+
+    const currentSlideData = this.slides[this.currentIndex];
+    this.currentDuration = this.testMode ? 2000 : (currentSlideData.duration || this.config.defaultSlideDuration || 8500);
+
+    // Setup Countdown if on countdown slide
+    this.clearIntervals();
+    if (currentSlideData.type === 'event-countdown') {
+      this.initCountdown(currentSlideData.targetDate);
+    }
+
+    // Update Counter
+    if (this.counterEl) {
+      this.counterEl.textContent = `SLIDE ${this.currentIndex + 1} OF ${this.slides.length}`;
+    }
+
+    this.startProgressBar();
+  }
+
+  nextSlide() {
+    this.showSlide(this.currentIndex + 1);
+  }
+
+  prevSlide() {
+    this.showSlide(this.currentIndex - 1);
+  }
+
+  startProgressBar() {
+    cancelAnimationFrame(this.rafId);
+    clearTimeout(this.slideTimer);
+
+    if (this.isPaused) return;
+
+    this.progressStartTime = performance.now();
+    this.progressElapsed = 0;
+
+    const tick = (now) => {
+      if (this.isPaused) return;
+
+      this.progressElapsed = now - this.progressStartTime;
+      const pct = Math.min(100, (this.progressElapsed / this.currentDuration) * 100);
+
+      if (this.progressBar) {
+        this.progressBar.style.width = `${pct}%`;
+      }
+
+      if (this.progressElapsed >= this.currentDuration) {
+        this.nextSlide();
+      } else {
+        this.rafId = requestAnimationFrame(tick);
+      }
+    };
+
+    this.rafId = requestAnimationFrame(tick);
+  }
+
+  togglePause() {
+    this.isPaused = !this.isPaused;
+    if (this.isPaused) {
+      cancelAnimationFrame(this.rafId);
+      clearTimeout(this.slideTimer);
+    } else {
+      this.startProgressBar();
+    }
+    return this.isPaused;
+  }
+
+  toggleTestMode() {
+    this.testMode = !this.testMode;
+    this.nextSlide();
+    return this.testMode;
+  }
+
+  initCountdown(targetDateStr) {
+    const target = new Date(targetDateStr).getTime();
+
+    const updateTimer = () => {
+      const now = Date.now();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        const dEl = document.getElementById('cdDays');
+        if (dEl) dEl.textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const dEl = document.getElementById('cdDays');
+      const hEl = document.getElementById('cdHours');
+      const mEl = document.getElementById('cdMinutes');
+      const sEl = document.getElementById('cdSeconds');
+
+      if (dEl) dEl.textContent = String(days).padStart(2, '0');
+      if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+      if (mEl) mEl.textContent = String(minutes).padStart(2, '0');
+      if (sEl) sEl.textContent = String(seconds).padStart(2, '0');
+    };
+
+    updateTimer();
+    this.countdownTimer = setInterval(updateTimer, 1000);
+  }
+
+  clearIntervals() {
+    if (this.countdownTimer) {
+      clearInterval(this.countdownTimer);
+      this.countdownTimer = null;
+    }
+  }
+}
+
+window.SlideshowEngine = SlideshowEngine;
