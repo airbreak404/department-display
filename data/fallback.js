@@ -288,7 +288,7 @@ window.DEFAULT_SLIDES_DATA = {
       "duration": 15000,
       "badge": "DEPARTMENT DIRECTORY",
       "title": "Department of Mechanical & Aerospace Engineering",
-      "chair": "Dr. Peter Gustafson, Department Chair (Office: Floyd Hall G-215)",
+      "chair": "Dr. Peter Gustafson, Department Chair (Office: Inside F-234)",
       "office": "Main Department Office: Floyd Hall, Room F-234",
       "phone": "(269) 276-3420",
       "email": "mae-info@wmich.edu",
@@ -296,7 +296,7 @@ window.DEFAULT_SLIDES_DATA = {
       "rooms": [
         {
           "label": "Chair's Office",
-          "room": "G-215"
+          "room": "Inside F-234"
         },
         {
           "label": "Department Office",
