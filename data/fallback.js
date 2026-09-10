@@ -253,6 +253,36 @@ window.DEFAULT_SLIDES_DATA = {
       "callToAction": "Free and Open to the Public \u2022 Industry Evaluators & Alumni Welcome"
     },
     {
+      "id": "careers-partnerships",
+      "type": "split-overview",
+      "duration": 15000,
+      "badge": "CAREER PATHWAYS & CO-OPS",
+      "college": "COLLEGE OF ENGINEERING & APPLIED SCIENCES",
+      "title": "Engineering Careers & Industry Co-ops",
+      "subtitle": "Elson S. Floyd Hall \u2022 Engineering Career Network",
+      "summary": "WMU Mechanical & Aerospace Engineering graduates are recruited by premier aerospace, automotive, defense, and automation companies nationwide. Students gain hands-on experience through paid co-ops, internships, and corporate-sponsored capstones.",
+      "programs": [
+        {
+          "name": "Aerospace & Defense",
+          "note": "Boeing \u2022 Lockheed Martin \u2022 Pratt & Whitney"
+        },
+        {
+          "name": "Automotive & E-Mobility",
+          "note": "General Motors \u2022 Ford \u2022 Stellantis \u2022 Denso"
+        },
+        {
+          "name": "Space Exploration & Tech",
+          "note": "NASA Centers \u2022 SpaceX \u2022 AFRL \u2022 Northrop"
+        },
+        {
+          "name": "Advanced Manufacturing",
+          "note": "Stryker \u2022 Eaton \u2022 Parker Hannifin \u2022 Whirlpool"
+        }
+      ],
+      "image": "images/original7.jpg",
+      "caption": "WMU engineering students connecting with aerospace and automotive recruiters at Floyd Hall"
+    },
+    {
       "id": "announcements-board",
       "type": "announcements",
       "duration": 15000,
@@ -288,7 +318,7 @@ window.DEFAULT_SLIDES_DATA = {
       "duration": 15000,
       "badge": "DEPARTMENT DIRECTORY",
       "title": "Department of Mechanical & Aerospace Engineering",
-      "chair": "Dr. Peter Gustafson, Department Chair (Office: Inside F-234)",
+      "chair": "Dr. Peter Gustafson, Department Chair (Office: F-234)",
       "office": "Main Department Office: Floyd Hall, Room F-234",
       "phone": "(269) 276-3420",
       "email": "mae-info@wmich.edu",
@@ -296,7 +326,7 @@ window.DEFAULT_SLIDES_DATA = {
       "rooms": [
         {
           "label": "Chair's Office",
-          "room": "Inside F-234"
+          "room": "F-234"
         },
         {
           "label": "Department Office",

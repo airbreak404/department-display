@@ -249,7 +249,37 @@
       "location": "Floyd Hall Atrium & Presentation Auditoriums",
       "image": "images/labs/senior-design.jpg",
       "description": "Graduating senior engineering teams present capstone design solutions to real-world technical challenges sponsored by aerospace, automotive, and industrial corporate partners.",
-      "callToAction": "Free and Open to the Public \u2022 Industry Evaluators & Alumni Welcome"
+      "callToAction": "Free and Open to the Public • Industry Evaluators & Alumni Welcome"
+    },
+    {
+      "id": "careers-partnerships",
+      "type": "split-overview",
+      "duration": 15000,
+      "badge": "CAREER PATHWAYS & CO-OPS",
+      "college": "COLLEGE OF ENGINEERING & APPLIED SCIENCES",
+      "title": "Engineering Careers & Industry Co-ops",
+      "subtitle": "Elson S. Floyd Hall • Engineering Career Network",
+      "summary": "WMU Mechanical & Aerospace Engineering graduates are recruited by premier aerospace, automotive, defense, and automation companies nationwide. Students gain hands-on experience through paid co-ops, internships, and corporate-sponsored capstones.",
+      "programs": [
+        {
+          "name": "Aerospace & Defense",
+          "note": "Boeing • Lockheed Martin • Pratt & Whitney"
+        },
+        {
+          "name": "Automotive & E-Mobility",
+          "note": "General Motors • Ford • Stellantis • Denso"
+        },
+        {
+          "name": "Space Exploration & Tech",
+          "note": "NASA Centers • SpaceX • AFRL • Northrop"
+        },
+        {
+          "name": "Advanced Manufacturing",
+          "note": "Stryker • Eaton • Parker Hannifin • Whirlpool"
+        }
+      ],
+      "image": "images/original7.jpg",
+      "caption": "WMU engineering students connecting with aerospace and automotive recruiters at Floyd Hall"
     },
     {
       "id": "announcements-board",
@@ -287,15 +317,15 @@
       "duration": 15000,
       "badge": "DEPARTMENT DIRECTORY",
       "title": "Department of Mechanical & Aerospace Engineering",
-      "chair": "Dr. Peter Gustafson, Department Chair (Office: Inside F-234)",
+      "chair": "Dr. Peter Gustafson, Department Chair (Office: F-234)",
       "office": "Main Department Office: Floyd Hall, Room F-234",
       "phone": "(269) 276-3420",
       "email": "mae-info@wmich.edu",
-      "hours": "Monday \u2013 Friday: 8:00 AM \u2013 5:00 PM",
+      "hours": "Monday – Friday: 8:00 AM – 5:00 PM",
       "rooms": [
         {
           "label": "Chair's Office",
-          "room": "Inside F-234"
+          "room": "F-234"
         },
         {
           "label": "Department Office",
