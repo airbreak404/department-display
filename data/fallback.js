@@ -324,7 +324,9 @@ window.DEFAULT_SLIDES_DATA = {
       "highlights": [
         "Advanced space electric propulsion research and plasma diagnostics",
         "Vacuum chamber space simulation testing spacecraft-thruster interactions",
-        "Sponsored by NASA, Air Force Office of Scientific Research, and AFRL"
+        "High-power Hall thruster plume measurements and optical laser diagnostics",
+        "Cathode erosion analysis, propellant efficiency & magnetic shielding studies",
+        "Funded by NASA Glenn, AFOSR, Air Force Research Lab & Hallquist Endowment"
       ],
       "tags": [
         "ELECTRIC PROPULSION",
@@ -359,9 +361,11 @@ window.DEFAULT_SLIDES_DATA = {
         "title": "Applied Aerodynamics Laboratory",
         "director": "Dr. Tianshu Liu, Director",
         "features": [
-          "Advanced Design Subsonic and Supersonic Wind Tunnels",
-          "Small turbine engine test cell and flow diagnostic systems",
-          "Pressure- and temperature-sensitive optical paint measurement"
+          "Advanced design Mach 1.5\u20133.0 supersonic and subsonic wind tunnels",
+          "Small gas turbine engine test cell and acoustic flow diagnostic systems",
+          "Molecular pressure- and temperature-sensitive optical paint measurement",
+          "Particle Image Velocimetry (PIV) and boundary layer transition diagnostics",
+          "Aerodynamic drag reduction research for commercial & defense aircraft"
         ],
         "image": "images/original10.jpg",
         "facility": "Floyd Hall Wind Tunnel Wing",
@@ -375,9 +379,11 @@ window.DEFAULT_SLIDES_DATA = {
         "title": "Automotive Lab & CAViDS",
         "director": "Dr. Claudia Fajardo, Director",
         "features": [
-          "Center for Advanced Vehicle Design and Simulation",
-          "Single-cylinder optical research engine with pulsed Nd:YAG laser",
-          "EcoCAR Innovation Challenge in collaboration with General Motors"
+          "Center for Advanced Vehicle Design and Simulation (CAViDS)",
+          "Single-cylinder optical research engine with pulsed Nd:YAG laser imaging",
+          "EcoCAR EV Innovation Challenge in direct collaboration with General Motors",
+          "Advanced chassis dynamometer testing and battery pack thermal profiling",
+          "Autonomous vehicle perception benchmarking with LiDAR & radar sensor suites"
         ],
         "image": "images/labs/ecocar-team.jpg",
         "facility": "Floyd Hall Automotive Research Wing",
