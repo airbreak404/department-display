@@ -151,7 +151,20 @@ class SlideshowEngine {
         </div>
       `).join('');
 
+      const isSingle = (slide.orgs || []).length === 1;
+      const metaChips = `
+        <div class="rso-photo-meta">
+          <div class="rso-photo-meta-row"><span class="rso-meta-label">📍</span> ${org.location}</div>
+          <div class="rso-photo-meta-row"><span class="rso-meta-label">🔗</span> ${org.contact}</div>
+        </div>`;
+      const photoHtml = (isSingle && org.image) ? `
+        <div class="rso-photo-frame animate-in delay-${i + 2}">
+          <img src="${org.image}" alt="${org.name}">
+          ${metaChips}
+        </div>` : '';
+
       return `
+        ${photoHtml}
         <div class="rso-card animate-in delay-${i + 2}">
           <div>
             <div class="rso-card-header">
@@ -161,6 +174,7 @@ class SlideshowEngine {
                 <h2 class="rso-card-name">${org.name}</h2>
               </div>
             </div>
+            ${!photoHtml ? `<div class="rso-inline-meta">${metaChips}</div>` : ''}
             <p class="rso-card-desc">${org.desc}</p>
             ${statsHtml ? `<div class="rso-stats-strip">${statsHtml}</div>` : ''}
             ${org.highlights ? `
@@ -170,16 +184,6 @@ class SlideshowEngine {
                 ${org.highlights.map(h => `<li><span class="hl-bullet">✦</span> <span>${h}</span></li>`).join('')}
               </ul>
             </div>` : ''}
-          </div>
-          <div class="rso-card-meta">
-            <div class="rso-meta-row">
-              <span class="rso-meta-label">📍 LOCATION:</span>
-              <span class="rso-meta-val">${org.location}</span>
-            </div>
-            <div class="rso-meta-row">
-              <span class="rso-meta-label">🔗 CONNECT:</span>
-              <span class="rso-meta-val text-gold font-bold">${org.contact}</span>
-            </div>
           </div>
         </div>
       `;
@@ -192,7 +196,7 @@ class SlideshowEngine {
           <h1 class="rso-title">${slide.title}</h1>
           <div class="rso-subtitle">${slide.subtitle}</div>
         </div>
-        <div class="rso-trio-grid">
+        <div class="rso-trio-grid rso-count-${(slide.orgs || []).length}">
           ${orgsHtml}
         </div>
       </div>
@@ -282,7 +286,7 @@ class SlideshowEngine {
             <div class="lab-photo-badge">✦ RESEARCH FACILITY SPOTLIGHT</div>
             <div class="lab-photo-overlay">
               <span class="text-gold mono-telemetry font-bold">📍 ${slide.room}</span>
-              <span class="text-sand text-sm font-bold">HIGH-VACUUM SPACE SIMULATION</span>
+              <span class="text-sand text-sm font-bold">${slide.overlayTag || (slide.tags && slide.tags[0]) || 'RESEARCH FACILITY'}</span>
             </div>
           </div>
           <div class="lab-details-panel">
@@ -362,19 +366,14 @@ class SlideshowEngine {
               <img src="${lab.image}" alt="${lab.title}">
               <div class="lab-card-tag">📍 ${lab.facility || 'Floyd Hall'}</div>
             </div>
-            <h2 class="team-name" style="margin-bottom: 4px; font-size: clamp(20px, 1.5vw, 26px);">${lab.title}</h2>
-            <div class="text-gold font-bold mb-2" style="font-size: clamp(14px, 1.05vw, 17px);">${lab.director}</div>
+            <h2 class="team-name" style="margin-bottom: 4px; font-size: 34.5px;">${lab.title}</h2>
+            <div class="text-gold font-bold mb-2" style="font-size: 22.5px;">${lab.director}</div>
             <ul class="lab-highlights-list" style="margin-top: 10px; margin-bottom: 0;">
               ${lab.features.map(f => `<li><span class="hl-bullet">✦</span> <span>${f}</span></li>`).join('')}
             </ul>
           </div>
           <div>
             ${badgesHtml ? `<div class="lab-badges-strip">${badgesHtml}</div>` : ''}
-            ${lab.facility ? `
-            <div class="rso-meta-row" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-              <span class="rso-meta-label">FACILITY:</span>
-              <span class="rso-meta-val">${lab.facility}</span>
-            </div>` : ''}
           </div>
         </div>
       `;
@@ -397,7 +396,7 @@ class SlideshowEngine {
       <div class="social-card animate-in delay-${i + 2}">
         <img src="${c.logo}" alt="${c.name}" class="social-card-logo">
         <div class="social-card-info">
-          <div class="project-tag" style="font-size: 12px; padding: 2px 10px;">${c.badge}</div>
+          <div class="project-tag" style="font-size: 16px; padding: 2px 10px;">${c.badge}</div>
           <h2 class="social-card-title">${c.name}</h2>
           <div class="social-card-handle">${c.handle}</div>
           <p class="social-card-desc">${c.desc}</p>
@@ -447,7 +446,7 @@ class SlideshowEngine {
           <div class="countdown-left-panel">
             <div>
               <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 8px;">${slide.title}</h1>
-              <p class="hero-subtitle animate-in delay-2" style="text-align: left; margin-bottom: 12px; font-size: clamp(15px, 1.1vw, 19px);">${slide.description}</p>
+              <p class="hero-subtitle animate-in delay-2" style="text-align: left; margin-bottom: 12px; font-size: 25.5px;">${slide.description}</p>
               ${statsHtml ? `<div class="countdown-stats-strip animate-in delay-2">${statsHtml}</div>` : ''}
               <div class="countdown-timer-box animate-in delay-3" id="countdownTimerContainer">
                 <div class="countdown-block">
@@ -501,15 +500,11 @@ class SlideshowEngine {
           <div>
             <div class="announcement-badge ${item.badgeClass}">${item.category}</div>
             <h2 class="announcement-title">${item.title}</h2>
+            ${item.contact ? `<div class="announcement-contact">📍 ${item.contact}</div>` : ''}
             <p class="announcement-desc">${item.desc}</p>
             ${item.metaHighlight ? `<div class="announcement-highlight-pill"><span class="text-gold font-bold">✦</span> ${item.metaHighlight}</div>` : ''}
             ${bulletsHtml ? `<ul class="announcement-bullets-list">${bulletsHtml}</ul>` : ''}
           </div>
-          ${item.contact ? `
-          <div class="rso-meta-row" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-            <span class="rso-meta-label">📍 CONTACT:</span>
-            <span class="rso-meta-val text-gold font-bold">${item.contact}</span>
-          </div>` : ''}
         </div>
       `;
     }).join('');
@@ -518,7 +513,7 @@ class SlideshowEngine {
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
         <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 14px;">${slide.title}</h1>
-        <div class="announcements-grid">
+        <div class="announcements-grid ann-count-${(slide.items || []).length}">
           ${itemsHtml}
         </div>
       </div>
@@ -549,7 +544,7 @@ class SlideshowEngine {
     return `
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
-        <div class="wayfinding-grid">
+        <div class="wayfinding-grid${slide.qrUrl ? '' : ' wayfinding-solo'}">
           <div class="wayfinding-left-panel">
             <div>
               <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 10px;">${slide.title}</h1>
@@ -560,13 +555,15 @@ class SlideshowEngine {
               </div>
               ${contactsHtml ? `<div class="quick-contacts-grid animate-in delay-2">${contactsHtml}</div>` : ''}
             </div>
+            ${roomsHtml ? `
             <div>
               <div class="rso-highlights-title" style="margin-bottom: 8px;">DEPARTMENT FACILITIES & RESEARCH LABS</div>
               <div class="room-chips-row animate-in delay-3">
                 ${roomsHtml}
               </div>
-            </div>
+            </div>` : ''}
           </div>
+          ${slide.qrUrl ? `
           <div class="qr-panel animate-in delay-3">
             <div class="qr-top-tag">✦ DEPARTMENT DIGITAL GATEWAY</div>
             <div class="qr-box">
@@ -576,7 +573,7 @@ class SlideshowEngine {
             <div class="text-sand text-base font-mono mb-3">${slide.qrUrl.replace('https://', '')}</div>
             ${portalFeaturesHtml ? `<div class="qr-features-list">${portalFeaturesHtml}</div>` : ''}
             <div class="badge-pill" style="margin-top: 10px; margin-bottom: 0;">✦ SCAN WITH MOBILE CAMERA ✦</div>
-          </div>
+          </div>` : ''}
         </div>
       </div>
     `;

@@ -17,7 +17,7 @@
       "badge": "DEPARTMENT OVERVIEW",
       "college": "COLLEGE OF ENGINEERING & APPLIED SCIENCES",
       "title": "Mechanical & Aerospace Engineering",
-      "subtitle": "Elson S. Floyd Hall \u2022 Parkview Campus \u2022 Kalamazoo, MI",
+      "subtitle": "Elson S. Floyd Hall • Parkview Campus • Kalamazoo, MI",
       "summary": "The Department of Mechanical and Aerospace Engineering prepares students for leadership across aeronautics, space exploration, automotive engineering, robotics, and advanced manufacturing. Our programs combine rigorous analytical foundations with immersive laboratory practice.",
       "programs": [
         {
@@ -65,12 +65,12 @@
       ]
     },
     {
-      "id": "rso-motorsports",
+      "id": "rso-motorsports-bronco-racing",
       "type": "rso-trio",
-      "duration": 18000,
+      "duration": 12000,
       "badge": "STUDENT ORGANIZATIONS",
-      "title": "MAE Motorsports & Solar Vehicle Teams",
-      "subtitle": "Hands-on vehicle engineering, fabrication, and national collegiate competitions",
+      "title": "Bronco Racing (Formula SAE)",
+      "subtitle": "Collegiate Design Series  •  Hands-on vehicle engineering, fabrication, and national collegiate competitions",
       "orgs": [
         {
           "name": "Bronco Racing (Formula SAE)",
@@ -78,7 +78,7 @@
           "logo": "images/teams/bronco-racing-logo.png",
           "desc": "Students design, build, and race formula-style competition cars from scratch. The team develops both combustion and electric vehicle powertrains, competing annually at Michigan International Speedway.",
           "location": "Floyd Hall Student Projects Bay",
-          "contact": "@broncoracing \u2022 broncoracing.org",
+          "contact": "@broncoracing • broncoracing.org",
           "highlights": [
             "Combustion & EV Formula SAE race vehicle divisions",
             "Annual Formula SAE competition at Michigan Int'l Speedway",
@@ -94,15 +94,26 @@
               "value": "2 Div",
               "label": "Combustion & EV"
             }
-          ]
-        },
+          ],
+          "image": "images/original5.jpg"
+        }
+      ]
+    },
+    {
+      "id": "rso-motorsports-bronco-baja-sae",
+      "type": "rso-trio",
+      "duration": 12000,
+      "badge": "STUDENT ORGANIZATIONS",
+      "title": "Bronco Baja SAE",
+      "subtitle": "Off-Road Vehicle Engineering  •  Hands-on vehicle engineering, fabrication, and national collegiate competitions",
+      "orgs": [
         {
           "name": "Bronco Baja SAE",
           "subtitle": "Off-Road Vehicle Engineering",
           "logo": "images/teams/baja-logo.png",
           "desc": "Challenges engineering students to design and fabricate a rugged single-seat off-road vehicle built to withstand severe punishing terrain, rock crawls, and endurance courses across national SAE events.",
           "location": "Floyd Hall Student Projects Bay",
-          "contact": "@broncobaja \u2022 rso-broncobaja@wmich.edu",
+          "contact": "@broncobaja • rso-broncobaja@wmich.edu",
           "highlights": [
             "Single-seat rugged all-terrain off-road competition vehicle",
             "Custom student-designed 4WD drivetrain & long-travel suspension",
@@ -118,15 +129,26 @@
               "value": "100%",
               "label": "Student Built"
             }
-          ]
-        },
+          ],
+          "image": "images/original6.jpg"
+        }
+      ]
+    },
+    {
+      "id": "rso-motorsports-sunseeker-solar-car-project",
+      "type": "rso-trio",
+      "duration": 12000,
+      "badge": "STUDENT ORGANIZATIONS",
+      "title": "Sunseeker Solar Car Project",
+      "subtitle": "Renewable Energy Racing  •  Hands-on vehicle engineering, fabrication, and national collegiate competitions",
+      "orgs": [
         {
           "name": "Sunseeker Solar Car Project",
           "subtitle": "Renewable Energy Racing",
           "logo": "images/teams/sunseeker-logo.jpg",
           "desc": "Founded in 1990, Sunseeker is a 30+ year WMU tradition. Students design, manufacture, and race highway-capable solar electric vehicles in the Formula Sun Grand Prix and the American Solar Challenge.",
           "location": "Floyd Hall Solar Workshop",
-          "contact": "@wmusolarcar \u2022 sunseekerwmu.org",
+          "contact": "@wmusolarcar • sunseekerwmu.org",
           "highlights": [
             "30+ year WMU solar engineering legacy since 1990",
             "Custom carbon-fiber aerodynamic shell & solar array design",
@@ -142,17 +164,18 @@
               "value": "1,000+",
               "label": "Race Miles"
             }
-          ]
+          ],
+          "image": "images/original8.jpg"
         }
       ]
     },
     {
-      "id": "rso-aerospace",
+      "id": "rso-aerospace-aiaa-pegasus-chapter",
       "type": "rso-trio",
-      "duration": 18000,
+      "duration": 12000,
       "badge": "STUDENT ORGANIZATIONS",
-      "title": "MAE Aerospace & Space Systems Orgs",
-      "subtitle": "Aeronautics, rocketry, small satellite development, and autonomous mobility",
+      "title": "AIAA Pegasus Chapter",
+      "subtitle": "Aeronautics & Astronautics  •  Aeronautics, rocketry, small satellite development, and autonomous mobility",
       "orgs": [
         {
           "name": "AIAA Pegasus Chapter",
@@ -160,7 +183,7 @@
           "logo": "images/teams/aiaa-pegasus-logo.jpg",
           "desc": "WMU's premier aerospace organization hosting three active engineering project divisions: RCAT (Design/Build/Fly aircraft), ARC (NASA Student Launch Initiative rocketry), and the Bronco Propulsion Laboratory.",
           "location": "Floyd Hall Room F-209",
-          "contact": "@wmuaiaa \u2022 wmuaiaa.org",
+          "contact": "@wmuaiaa • wmuaiaa.org",
           "highlights": [
             "ARC Division: NASA Student Launch Initiative high-power rocketry",
             "RCAT Division: AIAA Design/Build/Fly mission aircraft design",
@@ -170,21 +193,32 @@
           "stats": [
             {
               "value": "3 Div",
-              "label": "ARC \u2022 RCAT \u2022 BPL"
+              "label": "ARC • RCAT • BPL"
             },
             {
               "value": "NASA",
               "label": "Student Launch"
             }
-          ]
-        },
+          ],
+          "image": "images/original3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "rso-aerospace-western-aerospace-launch-initiative",
+      "type": "rso-trio",
+      "duration": 12000,
+      "badge": "STUDENT ORGANIZATIONS",
+      "title": "Western Aerospace Launch Initiative (WALI)",
+      "subtitle": "CubeSats & High-Altitude Research  •  Aeronautics, rocketry, small satellite development, and autonomous mobility",
+      "orgs": [
         {
           "name": "Western Aerospace Launch Initiative (WALI)",
           "subtitle": "CubeSats & High-Altitude Research",
           "logo": "images/teams/wali-logo.png",
           "desc": "Dedicated to the engineering, fabrication, testing, and orbital launch of small satellites (CubeSats). Members gain practical experience in CAD, orbital simulation, telemetry, and high-altitude balloon flights.",
           "location": "Floyd Hall Room G-204",
-          "contact": "@wali.wmu \u2022 wali-wmu.org",
+          "contact": "@wali.wmu • wali-wmu.org",
           "highlights": [
             "WMU CubeSat satellite design for low Earth orbit (LEO) research",
             "High-altitude scientific balloon flights with telemetry payloads",
@@ -200,8 +234,19 @@
               "value": "100k ft",
               "label": "Near-Space Flight"
             }
-          ]
-        },
+          ],
+          "image": "images/original9.jpg"
+        }
+      ]
+    },
+    {
+      "id": "rso-aerospace-autonomous-vehicles-at-wmu",
+      "type": "rso-trio",
+      "duration": 12000,
+      "badge": "STUDENT ORGANIZATIONS",
+      "title": "Autonomous Vehicles at WMU",
+      "subtitle": "Connected & Intelligent Mobility  •  Aeronautics, rocketry, small satellite development, and autonomous mobility",
+      "orgs": [
         {
           "name": "Autonomous Vehicles at WMU",
           "subtitle": "Connected & Intelligent Mobility",
@@ -224,17 +269,18 @@
               "value": "Level 4",
               "label": "Autonomous AI"
             }
-          ]
+          ],
+          "image": "images/original11.jpg"
         }
       ]
     },
     {
-      "id": "rso-mechanical",
+      "id": "rso-mechanical-asme-student-section",
       "type": "rso-trio",
-      "duration": 18000,
+      "duration": 12000,
       "badge": "STUDENT ORGANIZATIONS",
-      "title": "Mechanical Engineering & Robotics Orgs",
-      "subtitle": "Professional engineering societies, robotics, and applied mechanics",
+      "title": "ASME Student Section",
+      "subtitle": "American Society of Mechanical Engineers  •  Professional engineering societies, robotics, and applied mechanics",
       "orgs": [
         {
           "name": "ASME Student Section",
@@ -242,7 +288,7 @@
           "logo": "images/wmu-brandmark-official.svg",
           "desc": "Connects mechanical engineering students with practicing professionals and alumni. Hosts regional plant tours, engineering workshops, resume reviews, and student technical design competitions.",
           "location": "Floyd Hall Department Hub",
-          "contact": "rso-asme@wmich.edu \u2022 experiencewmu.wmich.edu",
+          "contact": "rso-asme@wmich.edu • experiencewmu.wmich.edu",
           "highlights": [
             "Professional networking with aerospace & automotive alumni",
             "Regional engineering plant tours, workshops & design reviews",
@@ -258,8 +304,19 @@
               "value": "Top 10",
               "label": "National Section"
             }
-          ]
-        },
+          ],
+          "image": "images/original4.jpg"
+        }
+      ]
+    },
+    {
+      "id": "rso-mechanical-smash",
+      "type": "rso-trio",
+      "duration": 12000,
+      "badge": "STUDENT ORGANIZATIONS",
+      "title": "SMASH (Solid Mechanics & Structures Hub)",
+      "subtitle": "Materials & Finite Element Modeling  •  Professional engineering societies, robotics, and applied mechanics",
+      "orgs": [
         {
           "name": "SMASH (Solid Mechanics & Structures Hub)",
           "subtitle": "Materials & Finite Element Modeling",
@@ -282,8 +339,19 @@
               "value": "ISO",
               "label": "Composites Testing"
             }
-          ]
-        },
+          ],
+          "image": "images/original12.jpg"
+        }
+      ]
+    },
+    {
+      "id": "rso-mechanical-bronco-robotics",
+      "type": "rso-trio",
+      "duration": 12000,
+      "badge": "STUDENT ORGANIZATIONS",
+      "title": "Bronco Robotics",
+      "subtitle": "Mechatronics & Automation  •  Professional engineering societies, robotics, and applied mechanics",
+      "orgs": [
         {
           "name": "Bronco Robotics",
           "subtitle": "Mechatronics & Automation",
@@ -306,7 +374,8 @@
               "value": "Multi-Dis",
               "label": "Engineering Team"
             }
-          ]
+          ],
+          "image": "images/original1.jpg"
         }
       ]
     },
@@ -318,7 +387,7 @@
       "labName": "Aerospace Laboratory for Plasma Experiments",
       "acronym": "ALPE",
       "director": "Dr. Kristina Lemmer",
-      "directorTitle": "Professor of MAE \u2022 Hallquist Endowed Professor",
+      "directorTitle": "Professor of MAE • Hallquist Endowed Professor",
       "room": "Floyd Hall Propulsion Wing",
       "image": "images/labs/alpe-lemmer.jpg",
       "highlights": [
@@ -349,50 +418,78 @@
           "value": "15+",
           "label": "Years Plasma Thruster Innovation"
         }
+      ],
+      "overlayTag": "HIGH-VACUUM SPACE SIMULATION"
+    },
+    {
+      "id": "lab-applied-aero",
+      "type": "lab-spotlight",
+      "duration": 14000,
+      "badge": "RESEARCH LABORATORY",
+      "labName": "Applied Aerodynamics Laboratory",
+      "acronym": "AERO",
+      "director": "Dr. Tianshu Liu",
+      "directorTitle": "Director  •  Applied Aerodynamics",
+      "room": "Floyd Hall Wind Tunnel Wing",
+      "image": "images/original10.jpg",
+      "overlayTag": "SUPERSONIC & SUBSONIC WIND TUNNELS",
+      "highlights": [
+        "Advanced design Mach 1.5–3.0 supersonic and subsonic wind tunnels",
+        "Small gas turbine engine test cell and acoustic flow diagnostic systems",
+        "Molecular pressure- and temperature-sensitive optical paint measurement",
+        "Particle Image Velocimetry (PIV) and boundary layer transition diagnostics",
+        "Aerodynamic drag reduction research for commercial & defense aircraft"
+      ],
+      "tags": [
+        "Mach 1.5–3.0 Supersonic Tunnel",
+        "Laser Diagnostics",
+        "Optical Surface Paint"
+      ],
+      "stats": [
+        {
+          "value": "Mach 3",
+          "label": "Supersonic Tunnel"
+        },
+        {
+          "value": "PIV",
+          "label": "Laser Flow Diagnostics"
+        }
       ]
     },
     {
-      "id": "lab-aero-autolab",
-      "type": "dual-lab",
-      "duration": 16000,
-      "badge": "RESEARCH LABORATORIES",
-      "title": "Aerodynamics & Powertrain Research Centers",
-      "left": {
-        "title": "Applied Aerodynamics Laboratory",
-        "director": "Dr. Tianshu Liu, Director",
-        "features": [
-          "Advanced design Mach 1.5\u20133.0 supersonic and subsonic wind tunnels",
-          "Small gas turbine engine test cell and acoustic flow diagnostic systems",
-          "Molecular pressure- and temperature-sensitive optical paint measurement",
-          "Particle Image Velocimetry (PIV) and boundary layer transition diagnostics",
-          "Aerodynamic drag reduction research for commercial & defense aircraft"
-        ],
-        "image": "images/original10.jpg",
-        "facility": "Floyd Hall Wind Tunnel Wing",
-        "badges": [
-          "Mach 1.5\u20133.0 Supersonic Tunnel",
-          "Laser Diagnostics",
-          "Optical Surface Paint"
-        ]
-      },
-      "right": {
-        "title": "Automotive Lab & CAViDS",
-        "director": "Dr. Claudia Fajardo, Director",
-        "features": [
-          "Center for Advanced Vehicle Design and Simulation (CAViDS)",
-          "Single-cylinder optical research engine with pulsed Nd:YAG laser imaging",
-          "EcoCAR EV Innovation Challenge in direct collaboration with General Motors",
-          "Advanced chassis dynamometer testing and battery pack thermal profiling",
-          "Autonomous vehicle perception benchmarking with LiDAR & radar sensor suites"
-        ],
-        "image": "images/labs/ecocar-team.jpg",
-        "facility": "Floyd Hall Automotive Research Wing",
-        "badges": [
-          "Single-Cylinder Optical Engine",
-          "Pulsed Nd:YAG Laser",
-          "GM EcoCAR Innovation"
-        ]
-      }
+      "id": "lab-autolab-cavids",
+      "type": "lab-spotlight",
+      "duration": 14000,
+      "badge": "RESEARCH LABORATORY",
+      "labName": "Automotive Lab & CAViDS",
+      "acronym": "CAViDS",
+      "director": "Dr. Claudia Fajardo",
+      "directorTitle": "Director  •  Automotive Lab & CAViDS",
+      "room": "Floyd Hall Automotive Research Wing",
+      "image": "images/labs/ecocar-team.jpg",
+      "overlayTag": "POWERTRAIN, EcoCAR & AUTONOMY",
+      "highlights": [
+        "Center for Advanced Vehicle Design and Simulation (CAViDS)",
+        "Single-cylinder optical research engine with pulsed Nd:YAG laser imaging",
+        "EcoCAR EV Innovation Challenge in direct collaboration with General Motors",
+        "Advanced chassis dynamometer testing and battery pack thermal profiling",
+        "Autonomous vehicle perception benchmarking with LiDAR & radar sensor suites"
+      ],
+      "tags": [
+        "Single-Cylinder Optical Engine",
+        "Pulsed Nd:YAG Laser",
+        "GM EcoCAR Innovation"
+      ],
+      "stats": [
+        {
+          "value": "EcoCAR",
+          "label": "GM Innovation Challenge"
+        },
+        {
+          "value": "Optical",
+          "label": "Single-Cylinder Engine"
+        }
+      ]
     },
     {
       "id": "senior-design-countdown",
@@ -404,7 +501,7 @@
       "location": "Floyd Hall Atrium & Presentation Auditoriums",
       "image": "images/labs/senior-design.jpg",
       "description": "Graduating senior engineering teams present capstone design solutions to real-world technical challenges sponsored by aerospace, automotive, and industrial corporate partners.",
-      "callToAction": "Free and Open to the Public \u2022 Industry Evaluators & Alumni Welcome",
+      "callToAction": "Free and Open to the Public • Industry Evaluators & Alumni Welcome",
       "stats": [
         {
           "value": "40+",
@@ -436,24 +533,24 @@
       "badge": "CAREER PATHWAYS & CO-OPS",
       "college": "COLLEGE OF ENGINEERING & APPLIED SCIENCES",
       "title": "Engineering Careers & Industry Co-ops",
-      "subtitle": "Elson S. Floyd Hall \u2022 Engineering Career Network",
+      "subtitle": "Elson S. Floyd Hall • Engineering Career Network",
       "summary": "WMU Mechanical & Aerospace Engineering graduates are recruited by premier aerospace, automotive, defense, and automation companies nationwide. Students gain hands-on experience through paid co-ops, internships, and corporate-sponsored capstones.",
       "programs": [
         {
           "name": "Aerospace & Defense",
-          "note": "Boeing \u2022 Lockheed Martin \u2022 Pratt & Whitney"
+          "note": "Boeing • Lockheed Martin • Pratt & Whitney"
         },
         {
           "name": "Automotive & E-Mobility",
-          "note": "General Motors \u2022 Ford \u2022 Stellantis \u2022 Denso"
+          "note": "General Motors • Ford • Stellantis • Denso"
         },
         {
           "name": "Space Exploration & Tech",
-          "note": "NASA Centers \u2022 SpaceX \u2022 AFRL \u2022 Northrop"
+          "note": "NASA Centers • SpaceX • AFRL • Northrop"
         },
         {
           "name": "Advanced Manufacturing",
-          "note": "Stryker \u2022 Eaton \u2022 Parker Hannifin \u2022 Whirlpool"
+          "note": "Stryker • Eaton • Parker Hannifin • Whirlpool"
         }
       ],
       "image": "images/original7.jpg",
@@ -483,9 +580,9 @@
       ]
     },
     {
-      "id": "announcements-board",
+      "id": "announcement-1",
       "type": "announcements",
-      "duration": 15000,
+      "duration": 12000,
       "badge": "DEPARTMENT NOTICE BOARD",
       "title": "Department Notices & Advising Information",
       "items": [
@@ -494,7 +591,7 @@
           "badgeClass": "badge-gold",
           "title": "Accelerated Graduate Degree Program (AGDP)",
           "desc": "Qualifying undergraduate students can earn both a B.S. and an M.S. in Mechanical or Aerospace Engineering in 5 years. Schedule an advising session in Floyd Hall Room E-102.",
-          "contact": "Floyd Hall Room E-102 \u2022 Advising Office",
+          "contact": "Floyd Hall Room E-102 • Advising Office",
           "bullets": [
             "Earn both B.S. and M.S. degrees in only 5 years",
             "Double-count up to 12 graduate credit hours toward both degrees",
@@ -502,14 +599,23 @@
             "Aerospace & Mechanical Engineering graduate thesis tracks",
             "Dedicated faculty advising in Floyd Hall Room E-102"
           ],
-          "metaHighlight": "ELIGIBILITY: GPA 3.25+ \u2022 12 Grad Credits Count Double"
-        },
+          "metaHighlight": "ELIGIBILITY: GPA 3.25+ • 12 Grad Credits Count Double"
+        }
+      ]
+    },
+    {
+      "id": "announcement-2",
+      "type": "announcements",
+      "duration": 12000,
+      "badge": "DEPARTMENT NOTICE BOARD",
+      "title": "Department Notices & Advising Information",
+      "items": [
         {
           "category": "RESEARCH POSITIONS",
           "badgeClass": "badge-slate",
           "title": "Undergraduate Research Assistantships",
           "desc": "Research positions are available in the Plasma Propulsion Lab (ALPE), Autonomous Vehicles Lab (EEAV), and Aerodynamics Lab. Contact lab directors directly for application details.",
-          "contact": "Floyd Hall Research Wing \u2022 Contact Lab Directors",
+          "contact": "Floyd Hall Research Wing • Contact Lab Directors",
           "bullets": [
             "Paid undergraduate positions in ALPE Plasma, CAViDS & Aero Labs",
             "Work directly on NASA Glenn, AFOSR & defense-sponsored grants",
@@ -518,13 +624,22 @@
             "Apply directly with CV & unofficial transcript to lab directors"
           ],
           "metaHighlight": "FUNDING: Paid NASA, AFRL & Industry Research Assistantships"
-        },
+        }
+      ]
+    },
+    {
+      "id": "announcement-3",
+      "type": "announcements",
+      "duration": 12000,
+      "badge": "DEPARTMENT NOTICE BOARD",
+      "title": "Department Notices & Advising Information",
+      "items": [
         {
           "category": "FACILITIES & SUPPORT",
           "badgeClass": "badge-brown",
           "title": "CAE Computer Center & Tutoring",
           "desc": "The Floyd Hall Computer Aided Engineering Center is open 24/7 with valid Bronco Card access. Walk-in engineering tutoring is available Monday through Thursday in the student study lounge.",
-          "contact": "Floyd Hall Center \u2022 Open 24/7 with Bronco Card",
+          "contact": "Floyd Hall Center • Open 24/7 with Bronco Card",
           "bullets": [
             "CAE computer lab open 24/7 with active student Bronco Card",
             "Free walk-in engineering peer tutoring Monday through Thursday",
@@ -532,7 +647,7 @@
             "High-speed 3D printing and rapid prototyping resources",
             "Remote workstation access available via WMU Virtual Lab (VCL)"
           ],
-          "metaHighlight": "ACCESS: 24/7 with Bronco Card \u2022 Free Peer Tutoring"
+          "metaHighlight": "ACCESS: 24/7 with Bronco Card • Free Peer Tutoring"
         }
       ]
     },
@@ -541,12 +656,55 @@
       "type": "wayfinding",
       "duration": 15000,
       "badge": "DEPARTMENT DIRECTORY",
-      "title": "Department of Mechanical & Aerospace Engineering",
+      "title": "Department Office & Digital Gateway",
       "chair": "Dr. Peter Gustafson, Department Chair (Office: F-234)",
       "office": "Main Department Office: Floyd Hall, Room F-234",
       "phone": "(269) 276-3420",
       "email": "mae-info@wmich.edu",
-      "hours": "Monday \u2013 Friday: 8:00 AM \u2013 5:00 PM",
+      "hours": "Monday – Friday: 8:00 AM – 5:00 PM",
+      "rooms": [],
+      "qrUrl": "https://wmich.edu/mechanical-aerospace",
+      "qrLabel": "Scan for Department Information",
+      "quickContacts": [
+        {
+          "dept": "MAE Main Department Office",
+          "room": "F-234",
+          "phone": "(269) 276-3420"
+        },
+        {
+          "dept": "CEAS Academic Advising",
+          "room": "E-102",
+          "phone": "(269) 276-3270"
+        },
+        {
+          "dept": "Student Projects & Machine Shop",
+          "room": "G-Wing",
+          "phone": "Ground Floor"
+        },
+        {
+          "dept": "CAE Computer Center & Tutoring",
+          "room": "E-204",
+          "phone": "24/7 Access"
+        }
+      ],
+      "portalFeatures": [
+        "Real-Time Course Schedules & Curriculum Track Guides",
+        "Faculty Office Hours, Directory & Research Publications",
+        "Undergraduate Lab Research & Student Org Applications",
+        "Senior Capstone Showcase Archives & Project Briefs"
+      ]
+    },
+    {
+      "id": "wayfinding-facilities",
+      "type": "wayfinding",
+      "duration": 14000,
+      "badge": "FACILITIES DIRECTORY",
+      "title": "Floyd Hall Labs, Bays & Student Spaces",
+      "chair": "Dr. Peter Gustafson, Department Chair (Office: F-234)",
+      "office": "Main Department Office: Floyd Hall, Room F-234",
+      "phone": "(269) 276-3420",
+      "email": "mae-info@wmich.edu",
+      "hours": "Monday – Friday: 8:00 AM – 5:00 PM",
       "rooms": [
         {
           "label": "MAE Department Main Office",
@@ -589,36 +747,10 @@
           "room": "CAViDS Center"
         }
       ],
-      "qrUrl": "https://wmich.edu/mechanical-aerospace",
-      "qrLabel": "Scan for Department Information",
-      "quickContacts": [
-        {
-          "dept": "MAE Main Department Office",
-          "room": "F-234",
-          "phone": "(269) 276-3420"
-        },
-        {
-          "dept": "CEAS Academic Advising",
-          "room": "E-102",
-          "phone": "(269) 276-3270"
-        },
-        {
-          "dept": "Student Projects & Machine Shop",
-          "room": "G-Wing",
-          "phone": "Ground Floor"
-        },
-        {
-          "dept": "CAE Computer Center & Tutoring",
-          "room": "E-204",
-          "phone": "24/7 Access"
-        }
-      ],
-      "portalFeatures": [
-        "Real-Time Course Schedules & Curriculum Track Guides",
-        "Faculty Office Hours, Directory & Research Publications",
-        "Undergraduate Lab Research & Student Org Applications",
-        "Senior Capstone Showcase Archives & Project Briefs"
-      ]
+      "qrUrl": "",
+      "qrLabel": "",
+      "quickContacts": [],
+      "portalFeatures": []
     }
   ]
 }

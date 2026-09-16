@@ -66,8 +66,33 @@
     }, pollInterval);
   }
 
+  // Lock layout to the 2048×1152 design canvas and scale it to the viewport
+  // so type, spacing, and cards stay in the same proportions on every display.
+  const DESIGN_WIDTH = 2048;
+  const DESIGN_HEIGHT = 1152;
+
+  function fitDesignCanvas() {
+    const root = document.querySelector('.kiosk-root');
+    if (!root) return;
+
+    const scale = Math.min(
+      window.innerWidth / DESIGN_WIDTH,
+      window.innerHeight / DESIGN_HEIGHT
+    );
+    const x = (window.innerWidth - DESIGN_WIDTH * scale) / 2;
+    const y = (window.innerHeight - DESIGN_HEIGHT * scale) / 2;
+    root.style.transform = 'translate(' + x + 'px, ' + y + 'px) scale(' + scale + ')';
+  }
+
   // Application Entry Point
   window.addEventListener('DOMContentLoaded', async () => {
+    fitDesignCanvas();
+    window.addEventListener('resize', fitDesignCanvas);
+    window.addEventListener('orientationchange', fitDesignCanvas);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', fitDesignCanvas);
+    }
+
     initClock();
 
     const data = await loadSlideData();

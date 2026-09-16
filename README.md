@@ -9,7 +9,7 @@ Designed and tuned specifically to run on an **Ubuntu 24.04 LTS iMac (iMac13,2)*
 ## 🌟 Key Features
 
 * **Official WMU Branding**: Uses official **WMU Brown (`#532E1F`)**, **WMU Gold (`#F1C500`)**, dark glassmorphism, and brand typography (**Montserrat** and **JetBrains Mono**).
-* **Distance-Scaled Typography**: Fluid scaling tuned for a 55-inch display viewed across a busy department hallway (10–30 feet).
+* **Distance-Scaled Typography**: Type and layout are authored at **2048 × 1152** and uniformly scaled to the real screen, so proportions stay consistent across display sizes. Tuned for a 55-inch board viewed across a busy department hallway (10–30 feet).
 * **Data-Driven Architecture**: All slide contents, announcements, events, and lab highlights are configured in `data/slides.json`. Update slides without touching HTML, CSS, or JS code!
 * **AIAA Pegasus Chapter Spotlight**: Dedicated showcase for WMU's flagship aerospace branch, including **RCAT** (Design/Build/Fly), **ARC** (NASA Student Launch Initiative), and **BPL** (Bronco Propulsion Lab solid rocket motor).
 * **Flagship Student Engineering Teams**: Rich presentation cards for **Bronco Racing (Formula SAE)**, **WMU Sunseeker (Solar Car)**, **WALI (CubeSat)**, and **Bronco Baja SAE**.
