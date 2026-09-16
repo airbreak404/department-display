@@ -1,8 +1,4 @@
-/**
- * WMU MAE Fallback Data
- * Embedded offline backup to guarantee 24/7 kiosk operation.
- */
-window.SLIDESHOW_DATA = {
+window.DEFAULT_SLIDES_DATA = {
   "config": {
     "defaultSlideDuration": 15000,
     "weatherRefreshIntervalMinutes": 15,
@@ -84,9 +80,10 @@ window.SLIDESHOW_DATA = {
           "location": "Floyd Hall Student Projects Bay",
           "contact": "@broncoracing \u2022 broncoracing.org",
           "highlights": [
-            "Combustion & EV Formula SAE divisions",
-            "Annual Formula SAE at Michigan Int'l Speedway",
-            "Custom CAD chassis, aerodynamics & telemetry"
+            "Combustion & EV Formula SAE race vehicle divisions",
+            "Annual Formula SAE competition at Michigan Int'l Speedway",
+            "Custom CAD monocoque chassis, active aerodynamics & telemetry",
+            "Hands-on engine tuning, battery management & composites layup"
           ],
           "stats": [
             {
@@ -107,9 +104,10 @@ window.SLIDESHOW_DATA = {
           "location": "Floyd Hall Student Projects Bay",
           "contact": "@broncobaja \u2022 rso-broncobaja@wmich.edu",
           "highlights": [
-            "Single-seat rugged all-terrain vehicle build",
-            "Custom 4WD drivetrain & long-travel suspension",
-            "National SAE rock crawl & endurance events"
+            "Single-seat rugged all-terrain off-road competition vehicle",
+            "Custom student-designed 4WD drivetrain & long-travel suspension",
+            "National SAE rock crawl, sled pull & 4-hour endurance events",
+            "Severe load simulation, FEA structural modeling & welding"
           ],
           "stats": [
             {
@@ -130,9 +128,10 @@ window.SLIDESHOW_DATA = {
           "location": "Floyd Hall Solar Workshop",
           "contact": "@wmusolarcar \u2022 sunseekerwmu.org",
           "highlights": [
-            "30+ year flagship solar vehicle tradition",
-            "Custom carbon-fiber aerodynamic monocoque",
-            "Formula Sun Grand Prix & American Solar Challenge"
+            "30+ year WMU solar engineering legacy since 1990",
+            "Custom carbon-fiber aerodynamic shell & solar array design",
+            "Formula Sun Grand Prix track race & American Solar Challenge",
+            "High-efficiency regenerative braking & battery thermal systems"
           ],
           "stats": [
             {
@@ -163,9 +162,10 @@ window.SLIDESHOW_DATA = {
           "location": "Floyd Hall Room F-209",
           "contact": "@wmuaiaa \u2022 wmuaiaa.org",
           "highlights": [
-            "ARC: NASA Student Launch Initiative rocketry",
-            "RCAT: AIAA Design/Build/Fly aircraft",
-            "Bronco Propulsion Lab: Rocket motor testing"
+            "ARC Division: NASA Student Launch Initiative high-power rocketry",
+            "RCAT Division: AIAA Design/Build/Fly mission aircraft design",
+            "Bronco Propulsion Lab: Hybrid and solid rocket motor static testing",
+            "Annual national aerospace fly-offs and AIAA conferences"
           ],
           "stats": [
             {
@@ -186,9 +186,10 @@ window.SLIDESHOW_DATA = {
           "location": "Floyd Hall Room G-204",
           "contact": "@wali.wmu \u2022 wali-wmu.org",
           "highlights": [
-            "Small satellite (CubeSat) orbital engineering",
-            "High-altitude balloon telemetry flights",
-            "Thermal-vacuum and ground station testing"
+            "WMU CubeSat satellite design for low Earth orbit (LEO) research",
+            "High-altitude scientific balloon flights with telemetry payloads",
+            "Custom VHF/UHF ground station communications tracking",
+            "Radiation-hardened avionics & solar deployment mechanisms"
           ],
           "stats": [
             {
@@ -209,9 +210,10 @@ window.SLIDESHOW_DATA = {
           "location": "Energy Efficient & Autonomous Vehicles Lab",
           "contact": "wmich.edu/autonomous-vehicles",
           "highlights": [
-            "Connected & automated vehicle navigation",
-            "Multi-sensor fusion: LiDAR, Radar & Vision",
-            "Energy-efficient electric powertrain controls"
+            "Connected & automated full-scale test vehicle navigation",
+            "Multi-sensor fusion: LiDAR, mmWave Radar & AI stereo vision",
+            "Energy-efficient powertrain controls & trajectory planning",
+            "Real-time vehicle-to-everything (V2X) communication research"
           ],
           "stats": [
             {
@@ -242,9 +244,20 @@ window.SLIDESHOW_DATA = {
           "location": "Floyd Hall Department Hub",
           "contact": "rso-asme@wmich.edu \u2022 experiencewmu.wmich.edu",
           "highlights": [
-            "Professional networking with industry leaders",
-            "Regional manufacturing plant tours & workshops",
-            "Design competitions & FE exam review"
+            "Professional networking with aerospace & automotive alumni",
+            "Regional engineering plant tours, workshops & design reviews",
+            "Student design paper competitions & FE Exam review bootcamps",
+            "Annual leadership conferences & industry mentorship"
+          ],
+          "stats": [
+            {
+              "value": "150+",
+              "label": "Student Members"
+            },
+            {
+              "value": "Top 10",
+              "label": "National Section"
+            }
           ]
         },
         {
@@ -255,9 +268,20 @@ window.SLIDESHOW_DATA = {
           "location": "Floyd Hall Materials Testing Lab",
           "contact": "experiencewmu.wmich.edu/organization/smash",
           "highlights": [
-            "Finite Element Analysis (FEA) modeling",
-            "Advanced composites fabrication & tensile tests",
-            "Structural integrity & failure analysis"
+            "Finite Element Analysis (FEA) structural modeling & topology",
+            "Advanced carbon & glass composite fabrication and tensile testing",
+            "Structural failure analysis, fatigue modeling & strain gauging",
+            "Collaboration with department mechanical research centers"
+          ],
+          "stats": [
+            {
+              "value": "100+",
+              "label": "FEA Simulations"
+            },
+            {
+              "value": "ISO",
+              "label": "Composites Testing"
+            }
           ]
         },
         {
@@ -268,9 +292,20 @@ window.SLIDESHOW_DATA = {
           "location": "Floyd Hall Maker Space",
           "contact": "experiencewmu.wmich.edu/organization/robotics",
           "highlights": [
-            "Autonomous ground rovers & drone platforms",
-            "Custom PCB design & embedded microcontrollers",
-            "Interdisciplinary mechatronics builds"
+            "Autonomous ground rovers, robotic manipulators & drone platforms",
+            "Custom PCB circuit design, motor controllers & embedded firmware",
+            "ROS2 navigation stacks, computer vision & SLAM mapping",
+            "Hands-on prototyping in Floyd Hall maker space and machine bays"
+          ],
+          "stats": [
+            {
+              "value": "3+",
+              "label": "Autonomous Bots"
+            },
+            {
+              "value": "Multi-Dis",
+              "label": "Engineering Team"
+            }
           ]
         }
       ]
@@ -508,28 +543,44 @@ window.SLIDESHOW_DATA = {
       "hours": "Monday \u2013 Friday: 8:00 AM \u2013 5:00 PM",
       "rooms": [
         {
-          "label": "Chair's Office",
+          "label": "MAE Department Main Office",
           "room": "F-234"
         },
         {
-          "label": "Department Office",
-          "room": "F-234"
+          "label": "CEAS Academic Advising Office",
+          "room": "E-102"
         },
         {
-          "label": "AIAA Pegasus Hub",
+          "label": "AIAA Pegasus Aerospace Hub",
           "room": "F-209"
         },
         {
-          "label": "WALI Space Lab",
+          "label": "WALI Space & SmallSat Lab",
           "room": "G-204"
         },
         {
-          "label": "Fluid Mechanics Lab",
-          "room": "G-106 / G-107"
+          "label": "ALPE Plasma Propulsion Lab",
+          "room": "Propulsion Wing"
         },
         {
-          "label": "Student Projects Bay",
+          "label": "Applied Aerodynamics Wind Tunnels",
+          "room": "Wind Tunnel Wing"
+        },
+        {
+          "label": "Materials Testing & Structures Lab",
+          "room": "G-115"
+        },
+        {
+          "label": "Student Projects & Machine Bay",
           "room": "Ground Floor Bays"
+        },
+        {
+          "label": "CAE Center & 24/7 Computer Lab",
+          "room": "E-204"
+        },
+        {
+          "label": "Autonomous Vehicles & Robotics Lab",
+          "room": "CAViDS Center"
         }
       ],
       "qrUrl": "https://wmich.edu/mechanical-aerospace",
