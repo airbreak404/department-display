@@ -603,17 +603,23 @@ html, body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: space-evenly;
+  gap: clamp(6px, 1vh, 10px);
   flex: 1;
 }
 
 .rso-highlights-list li {
-  font-size: clamp(12px, 0.88vw, 14.2px);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(241, 197, 0, 0.2);
+  border-left: 3px solid var(--wmu-gold);
+  border-radius: 8px;
+  padding: clamp(8px, 1.1vh, 13px) clamp(10px, 1.0vw, 14px);
+  font-size: clamp(12.5px, 0.9vw, 15px);
   color: #FFFFFF;
   line-height: 1.4;
   display: flex;
-  align-items: baseline;
-  gap: 6px;
+  align-items: center;
+  gap: 8px;
 }
 
 .rso-highlights-list li .hl-bullet {
@@ -1518,22 +1524,24 @@ html, body {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  justify-content: space-evenly;
+  gap: clamp(6px, 0.9vh, 10px);
   flex: 1;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(241, 197, 0, 0.15);
   border-radius: 10px;
-  padding: clamp(8px, 1.1vh, 12px);
-  margin-bottom: clamp(8px, 1.1vh, 12px);
+  padding: clamp(10px, 1.3vh, 16px);
+  margin-bottom: clamp(6px, 0.8vh, 10px);
 }
 
 .announcement-bullets-list li {
-  font-size: clamp(12px, 0.85vw, 14px);
+  font-size: clamp(13px, 0.95vw, 15.5px);
   color: #FFFFFF;
-  line-height: 1.4;
+  line-height: 1.5;
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 8px;
+  padding: 2px 0;
 }
 
 .ann-bullet {
@@ -1559,12 +1567,13 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: clamp(14px, 1.8vh, 22px);
   height: 100%;
   background: rgba(26, 19, 15, 0.94);
   border: 1px solid rgba(241, 197, 0, 0.3);
   border-top: 3px solid var(--wmu-gold);
   border-radius: 18px;
-  padding: clamp(16px, 2.2vh, 26px) clamp(20px, 2vw, 30px);
+  padding: clamp(20px, 2.6vh, 32px) clamp(24px, 2.2vw, 34px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65);
 }
 
@@ -1577,12 +1586,12 @@ html, body {
 
 .qc-chip {
   background: rgba(241, 197, 0, 0.08);
-  border: 1px solid rgba(241, 197, 0, 0.22);
+  border: 1px solid rgba(241, 197, 0, 0.28);
   border-radius: 10px;
-  padding: clamp(6px, 1vh, 10px);
+  padding: clamp(10px, 1.4vh, 16px) clamp(14px, 1.2vw, 18px);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
 }
 
 .qc-dept {
@@ -1610,7 +1619,7 @@ html, body {
   border: 1px solid rgba(241, 197, 0, 0.25);
   border-left: 4px solid var(--wmu-gold);
   border-radius: 10px;
-  padding: clamp(8px, 1.1vh, 12px) clamp(12px, 1.1vw, 16px);
+  padding: clamp(11px, 1.4vh, 16px) clamp(14px, 1.3vw, 20px);
   display: flex;
   justify-content: space-between;
   align-items: center;
