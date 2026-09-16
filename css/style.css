@@ -210,10 +210,10 @@ html, body {
   position: relative;
   width: 100%;
   height: 100%;
-  padding: clamp(14px, 2vh, 32px) clamp(24px, 3vw, 48px);
+  padding: clamp(20px, 2.5vh, 40px) clamp(32px, 3.5vw, 64px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   z-index: 5;
   box-sizing: border-box;
 }
@@ -269,6 +269,8 @@ html, body {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: clamp(16px, 2vw, 32px);
+  flex: 1;
+  min-height: 0;
   height: 100%;
   max-height: 100%;
   align-items: stretch;
@@ -421,6 +423,7 @@ html, body {
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(14px, 1.6vw, 24px);
   flex: 1;
+  min-height: 0;
   box-sizing: border-box;
 }
 
@@ -759,7 +762,7 @@ html, body {
   position: relative;
   width: 100%;
   height: 100%;
-  max-height: calc(100vh - var(--hud-header-height) - var(--hud-footer-height) - 60px);
+  max-height: clamp(520px, 68vh, 760px);
   border-radius: 18px;
   overflow: hidden;
   border: 2px solid var(--glass-border);
@@ -1030,13 +1033,13 @@ html, body {
   background: rgba(83, 46, 31, 0.45);
   border: 2px solid var(--wmu-gold);
   border-radius: 14px;
-  padding: clamp(12px, 1.5vh, 20px) clamp(14px, 1.4vw, 24px);
+  padding: clamp(16px, 2vh, 28px) clamp(18px, 1.8vw, 30px);
   text-align: center;
-  min-width: clamp(80px, 7vw, 120px);
+  min-width: clamp(110px, 9vw, 160px);
 }
 
 .countdown-digits {
-  font-size: clamp(34px, 3.2vw, 54px);
+  font-size: clamp(52px, 4.5vw, 78px);
   font-weight: 900;
   color: var(--wmu-gold);
   line-height: 1;
@@ -1044,12 +1047,12 @@ html, body {
 }
 
 .countdown-label {
-  font-size: clamp(11px, 0.8vw, 13px);
+  font-size: clamp(13px, 1.0vw, 16px);
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--wmu-sand);
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 /* ------------------------------------------------------------- */
