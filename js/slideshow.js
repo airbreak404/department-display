@@ -89,12 +89,27 @@ class SlideshowEngine {
   /* ---------------- TEMPLATES ---------------- */
 
   templateSplitOverview(slide) {
+    const metricsHtml = (slide.metrics || []).map(m => `
+      <div class="overview-metric-chip">
+        <span class="om-val">${m.value}</span>
+        <span class="om-lbl">${m.label}</span>
+      </div>
+    `).join('');
+
     const programsHtml = (slide.programs || []).map((p, i) => `
       <div class="program-chip animate-in delay-${i + 2}">
         <span class="program-chip-name">${p.name}</span>
-        <span class="program-chip-note">${p.note}</span>
+        <span class="program-chip-note"><span class="text-gold">✦</span> ${p.note}</span>
       </div>
     `).join('');
+
+    const tags = slide.facilities || slide.coopFeatures || [];
+    const tagsHtml = tags.length ? `
+      <div class="overview-facilities-bar">
+        <span class="facilities-label">KEY STRENGTHS:</span>
+        ${tags.map(t => `<span class="overview-tag-item"><span class="text-gold">✦</span> ${t}</span>`).join('')}
+      </div>
+    ` : '';
 
     return `
       <div class="slide-inner">
@@ -104,18 +119,23 @@ class SlideshowEngine {
               <div class="badge-pill">${slide.badge || 'DEPARTMENT OVERVIEW'}</div>
               <div class="overview-college-tag">${slide.college || 'COLLEGE OF ENGINEERING & APPLIED SCIENCES'}</div>
               <h1 class="overview-title">${slide.title}</h1>
-              <div class="overview-location">${slide.subtitle}</div>
+              <div class="overview-location">📍 ${slide.subtitle}</div>
               <p class="overview-summary">${slide.summary}</p>
+              ${metricsHtml ? `<div class="overview-metrics-strip">${metricsHtml}</div>` : ''}
             </div>
-            <div class="overview-programs-grid">
-              ${programsHtml}
+            <div>
+              <div class="overview-programs-grid">
+                ${programsHtml}
+              </div>
+              ${tagsHtml}
             </div>
           </div>
           <div class="overview-photo-card animate-in delay-2">
             <div class="overview-photo-wrapper">
               <img src="${slide.image}" alt="WMU MAE Students and Engineering Labs">
+              <div class="overview-photo-overlay-tag">✦ ELSON S. FLOYD HALL • WMU PARKVIEW CAMPUS</div>
             </div>
-            ${slide.caption ? `<div class="overview-photo-caption">${slide.caption}</div>` : ''}
+            ${slide.caption ? `<div class="overview-photo-caption"><span class="text-gold font-bold">✦</span> ${slide.caption}</div>` : ''}
           </div>
         </div>
       </div>
@@ -135,18 +155,21 @@ class SlideshowEngine {
           </div>
           <p class="rso-card-desc">${org.desc}</p>
           ${org.highlights ? `
-          <ul class="rso-highlights-list">
-            ${org.highlights.map(h => `<li>${h}</li>`).join('')}
-          </ul>` : ''}
+          <div class="rso-highlights-box">
+            <div class="rso-highlights-title">KEY HIGHLIGHTS & ACTIVITIES</div>
+            <ul class="rso-highlights-list">
+              ${org.highlights.map(h => `<li><span class="hl-bullet">✦</span> <span>${h}</span></li>`).join('')}
+            </ul>
+          </div>` : ''}
         </div>
         <div class="rso-card-meta">
           <div class="rso-meta-row">
-            <span class="rso-meta-label">LOCATION:</span>
+            <span class="rso-meta-label">📍 LOCATION:</span>
             <span class="rso-meta-val">${org.location}</span>
           </div>
           <div class="rso-meta-row">
-            <span class="rso-meta-label">CONNECT:</span>
-            <span class="rso-meta-val">${org.contact}</span>
+            <span class="rso-meta-label">🔗 CONNECT:</span>
+            <span class="rso-meta-val text-gold font-bold">${org.contact}</span>
           </div>
         </div>
       </div>
@@ -223,7 +246,21 @@ class SlideshowEngine {
   }
 
   templateLabSpotlight(slide) {
-    const highlightsHtml = (slide.highlights || []).map(h => `<li>${h}</li>`).join('');
+    const highlightsHtml = (slide.highlights || []).map(h => `
+      <li><span class="hl-bullet">✦</span> <span>${h}</span></li>
+    `).join('');
+    
+    const sponsorsHtml = (slide.sponsors || []).map(s => `
+      <span class="sponsor-tag">${s}</span>
+    `).join('');
+
+    const statsHtml = (slide.stats || []).map(st => `
+      <div class="cd-stat-chip">
+        <span class="cd-stat-val">${st.value}</span>
+        <span class="cd-stat-lbl">${st.label}</span>
+      </div>
+    `).join('');
+
     const tagsHtml = (slide.tags || []).map(t => `<span class="tag-pill">${t}</span>`).join('');
 
     return `
@@ -232,22 +269,37 @@ class SlideshowEngine {
         <div class="lab-split-layout">
           <div class="lab-photo-frame animate-in delay-1">
             <img src="${slide.image}" alt="${slide.labName}">
+            <div class="lab-photo-badge">✦ RESEARCH FACILITY SPOTLIGHT</div>
             <div class="lab-photo-overlay">
-              <span class="text-gold mono-telemetry font-bold">${slide.room}</span>
-              <span class="text-sand text-sm">FACILITY SPOTLIGHT</span>
+              <span class="text-gold mono-telemetry font-bold">📍 ${slide.room}</span>
+              <span class="text-sand text-sm font-bold">HIGH-VACUUM SPACE SIMULATION</span>
             </div>
           </div>
           <div class="lab-details-panel">
-            <h1 class="lab-title-text animate-in delay-2">${slide.labName}</h1>
-            <div class="lab-director-box animate-in delay-3">
-              <div class="lab-director-name">${slide.director}</div>
-              <div class="lab-director-title">${slide.directorTitle}</div>
+            <div>
+              <h1 class="lab-title-text animate-in delay-2">${slide.labName}</h1>
+              <div class="lab-director-box animate-in delay-3">
+                <div class="lab-director-name">${slide.director}</div>
+                <div class="lab-director-title">${slide.directorTitle}</div>
+                <div class="lab-director-loc">📍 ${slide.room} • Western Michigan University</div>
+              </div>
+              <div class="lab-highlights-container animate-in delay-4">
+                <div class="lab-section-title">CORE RESEARCH & CAPABILITIES</div>
+                <ul class="lab-highlights-list">
+                  ${highlightsHtml}
+                </ul>
+              </div>
             </div>
-            <ul class="lab-highlights-list animate-in delay-4">
-              ${highlightsHtml}
-            </ul>
-            <div class="lab-tags-row animate-in delay-5">
-              ${tagsHtml}
+            <div>
+              ${statsHtml ? `<div class="lab-stats-strip animate-in delay-4">${statsHtml}</div>` : ''}
+              ${sponsorsHtml ? `
+              <div class="lab-sponsors-bar animate-in delay-5">
+                <span class="sponsors-label">SPONSORED BY:</span>
+                ${sponsorsHtml}
+              </div>` : ''}
+              <div class="lab-tags-row animate-in delay-5">
+                ${tagsHtml}
+              </div>
             </div>
           </div>
         </div>
@@ -291,45 +343,40 @@ class SlideshowEngine {
   }
 
   templateDualLab(slide) {
+    const renderLabCard = (lab, delay) => {
+      const badgesHtml = (lab.badges || []).map(b => `<span class="lab-badge-chip">${b}</span>`).join('');
+      return `
+        <div class="team-card animate-in delay-${delay}">
+          <div>
+            <div class="lab-card-image-box">
+              <img src="${lab.image}" alt="${lab.title}">
+              <div class="lab-card-tag">📍 ${lab.facility || 'Floyd Hall'}</div>
+            </div>
+            <h2 class="team-name" style="margin-bottom: 4px; font-size: clamp(20px, 1.5vw, 26px);">${lab.title}</h2>
+            <div class="text-gold font-bold mb-2" style="font-size: clamp(14px, 1.05vw, 17px);">${lab.director}</div>
+            <ul class="lab-highlights-list" style="margin-top: 10px; margin-bottom: 0;">
+              ${lab.features.map(f => `<li><span class="hl-bullet">✦</span> <span>${f}</span></li>`).join('')}
+            </ul>
+          </div>
+          <div>
+            ${badgesHtml ? `<div class="lab-badges-strip">${badgesHtml}</div>` : ''}
+            ${lab.facility ? `
+            <div class="rso-meta-row" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+              <span class="rso-meta-label">FACILITY:</span>
+              <span class="rso-meta-val">${lab.facility}</span>
+            </div>` : ''}
+          </div>
+        </div>
+      `;
+    };
+
     return `
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
         <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 16px;">${slide.title}</h1>
         <div class="teams-grid">
-          <div class="team-card animate-in delay-2">
-            <div>
-              <div class="lab-photo-frame" style="height: clamp(170px, 22vh, 250px); margin-bottom: 14px;">
-                <img src="${slide.left.image}" alt="${slide.left.title}">
-              </div>
-              <h2 class="team-name" style="margin-bottom: 4px; font-size: clamp(18px, 1.4vw, 24px);">${slide.left.title}</h2>
-              <div class="text-gold font-bold mb-2" style="font-size: clamp(13px, 0.95vw, 15px);">${slide.left.director}</div>
-              <ul class="lab-highlights-list" style="margin-top: 10px; margin-bottom: 0;">
-                ${slide.left.features.map(f => `<li>${f}</li>`).join('')}
-              </ul>
-            </div>
-            ${slide.left.facility ? `
-            <div class="rso-meta-row" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-              <span class="rso-meta-label">FACILITY:</span>
-              <span class="rso-meta-val">${slide.left.facility}</span>
-            </div>` : ''}
-          </div>
-          <div class="team-card animate-in delay-3">
-            <div>
-              <div class="lab-photo-frame" style="height: clamp(170px, 22vh, 250px); margin-bottom: 14px;">
-                <img src="${slide.right.image}" alt="${slide.right.title}">
-              </div>
-              <h2 class="team-name" style="margin-bottom: 4px; font-size: clamp(18px, 1.4vw, 24px);">${slide.right.title}</h2>
-              <div class="text-gold font-bold mb-2" style="font-size: clamp(13px, 0.95vw, 15px);">${slide.right.director}</div>
-              <ul class="lab-highlights-list" style="margin-top: 10px; margin-bottom: 0;">
-                ${slide.right.features.map(f => `<li>${f}</li>`).join('')}
-              </ul>
-            </div>
-            ${slide.right.facility ? `
-            <div class="rso-meta-row" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-              <span class="rso-meta-label">FACILITY:</span>
-              <span class="rso-meta-val">${slide.right.facility}</span>
-            </div>` : ''}
-          </div>
+          ${renderLabCard(slide.left, 2)}
+          ${renderLabCard(slide.right, 3)}
         </div>
       </div>
     `;
@@ -364,41 +411,60 @@ class SlideshowEngine {
   }
 
   templateCountdown(slide) {
+    const statsHtml = (slide.stats || []).map(s => `
+      <div class="cd-stat-chip">
+        <span class="cd-stat-val">${s.value}</span>
+        <span class="cd-stat-lbl">${s.label}</span>
+      </div>
+    `).join('');
+
+    const highlightsHtml = (slide.highlights || []).map(h => `
+      <div class="cd-hl-item"><span class="text-gold font-bold">✦</span> <span>${h}</span></div>
+    `).join('');
+
     return `
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
         <div class="countdown-split">
-          <div>
-            <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 10px;">${slide.title}</h1>
-            <p class="hero-subtitle animate-in delay-2" style="text-align: left; margin-bottom: 16px;">${slide.description}</p>
-            <div class="countdown-timer-box animate-in delay-3" id="countdownTimerContainer">
-              <div class="countdown-block">
-                <div class="countdown-digits" id="cdDays">--</div>
-                <div class="countdown-label">DAYS</div>
+          <div class="countdown-left-panel">
+            <div>
+              <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 8px;">${slide.title}</h1>
+              <p class="hero-subtitle animate-in delay-2" style="text-align: left; margin-bottom: 12px; font-size: clamp(15px, 1.1vw, 19px);">${slide.description}</p>
+              ${statsHtml ? `<div class="countdown-stats-strip animate-in delay-2">${statsHtml}</div>` : ''}
+              <div class="countdown-timer-box animate-in delay-3" id="countdownTimerContainer">
+                <div class="countdown-block">
+                  <div class="countdown-digits" id="cdDays">--</div>
+                  <div class="countdown-label">DAYS</div>
+                </div>
+                <div class="countdown-block">
+                  <div class="countdown-digits" id="cdHours">--</div>
+                  <div class="countdown-label">HOURS</div>
+                </div>
+                <div class="countdown-block">
+                  <div class="countdown-digits" id="cdMinutes">--</div>
+                  <div class="countdown-label">MINUTES</div>
+                </div>
+                <div class="countdown-block">
+                  <div class="countdown-digits" id="cdSeconds">--</div>
+                  <div class="countdown-label">SECONDS</div>
+                </div>
               </div>
-              <div class="countdown-block">
-                <div class="countdown-digits" id="cdHours">--</div>
-                <div class="countdown-label">HOURS</div>
-              </div>
-              <div class="countdown-block">
-                <div class="countdown-digits" id="cdMinutes">--</div>
-                <div class="countdown-label">MINUTES</div>
-              </div>
-              <div class="countdown-block">
-                <div class="countdown-digits" id="cdSeconds">--</div>
-                <div class="countdown-label">SECONDS</div>
-              </div>
+              ${highlightsHtml ? `<div class="cd-highlights-list animate-in delay-3">${highlightsHtml}</div>` : ''}
             </div>
-            <div class="aiaa-footer-bar animate-in delay-4" style="margin-top: 10px;">
-              <span><strong>Location:</strong> ${slide.location}</span>
-              <span class="text-gold font-bold">${slide.callToAction}</span>
+            <div class="cd-cta-banner animate-in delay-4">
+              <div class="cd-cta-icon">📍</div>
+              <div>
+                <div class="cd-cta-loc">${slide.location}</div>
+                <div class="cd-cta-action">${slide.callToAction}</div>
+              </div>
             </div>
           </div>
-          <div class="lab-photo-frame animate-in delay-2" style="max-height: clamp(260px, 42vh, 480px);">
+          <div class="lab-photo-frame animate-in delay-2" style="height: 100%;">
             <img src="${slide.image}" alt="${slide.title}">
+            <div class="lab-photo-badge">✦ SENIOR CAPSTONE EXPO</div>
             <div class="lab-photo-overlay">
-              <span class="text-gold font-bold">SENIOR CAPSTONE EXPO</span>
-              <span class="text-sand">FLOYD HALL ATRIUM</span>
+              <span class="text-gold font-bold">ANNUAL DESIGN DEMONSTRATION</span>
+              <span class="text-sand font-bold">FLOYD HALL ATRIUM</span>
             </div>
           </div>
         </div>
@@ -407,25 +473,32 @@ class SlideshowEngine {
   }
 
   templateAnnouncements(slide) {
-    const itemsHtml = (slide.items || []).map((item, i) => `
-      <div class="announcement-card animate-in delay-${i + 2}">
-        <div>
-          <div class="announcement-badge ${item.badgeClass}">${item.category}</div>
-          <h2 class="announcement-title">${item.title}</h2>
-          <p class="announcement-desc">${item.desc}</p>
+    const itemsHtml = (slide.items || []).map((item, i) => {
+      const bulletsHtml = (item.bullets || []).map(b => `
+        <li><span class="ann-bullet">✓</span> <span>${b}</span></li>
+      `).join('');
+
+      return `
+        <div class="announcement-card animate-in delay-${i + 2}">
+          <div>
+            <div class="announcement-badge ${item.badgeClass}">${item.category}</div>
+            <h2 class="announcement-title">${item.title}</h2>
+            <p class="announcement-desc">${item.desc}</p>
+            ${bulletsHtml ? `<ul class="announcement-bullets-list">${bulletsHtml}</ul>` : ''}
+          </div>
+          ${item.contact ? `
+          <div class="rso-meta-row" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+            <span class="rso-meta-label">📍 CONTACT:</span>
+            <span class="rso-meta-val">${item.contact}</span>
+          </div>` : ''}
         </div>
-        ${item.contact ? `
-        <div class="rso-meta-row" style="margin-top: 16px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-          <span class="rso-meta-label">INFO:</span>
-          <span class="rso-meta-val">${item.contact}</span>
-        </div>` : ''}
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     return `
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
-        <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 18px;">${slide.title}</h1>
+        <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 14px;">${slide.title}</h1>
         <div class="announcements-grid">
           ${itemsHtml}
         </div>
@@ -441,27 +514,41 @@ class SlideshowEngine {
       </div>
     `).join('');
 
+    const contactsHtml = (slide.quickContacts || []).map(c => `
+      <div class="qc-chip">
+        <span class="qc-dept">${c.dept}</span>
+        <span class="qc-meta">${c.room} • ${c.phone}</span>
+      </div>
+    `).join('');
+
     return `
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
         <div class="wayfinding-grid">
-          <div>
-            <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 12px;">${slide.title}</h1>
-            <div class="lab-director-box animate-in delay-2" style="margin-bottom: 16px;">
-              <div class="lab-director-name">${slide.chair}</div>
-              <div class="lab-director-title">${slide.office} • ${slide.phone}</div>
-              <div class="lab-director-title" style="margin-top: 4px;">Office Hours: ${slide.hours}</div>
+          <div class="wayfinding-left-panel">
+            <div>
+              <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 10px;">${slide.title}</h1>
+              <div class="lab-director-box animate-in delay-2" style="margin-bottom: 12px;">
+                <div class="lab-director-name">${slide.chair}</div>
+                <div class="lab-director-title">${slide.office} • ${slide.phone}</div>
+                <div class="lab-director-title" style="margin-top: 4px;">Office Hours: ${slide.hours}</div>
+              </div>
+              ${contactsHtml ? `<div class="quick-contacts-grid animate-in delay-2">${contactsHtml}</div>` : ''}
             </div>
-            <div class="room-chips-row animate-in delay-3">
-              ${roomsHtml}
+            <div>
+              <div class="rso-highlights-title" style="margin-bottom: 8px;">DEPARTMENT FACILITIES & HUBS</div>
+              <div class="room-chips-row animate-in delay-3">
+                ${roomsHtml}
+              </div>
             </div>
           </div>
           <div class="qr-panel animate-in delay-3">
             <div class="qr-box">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(slide.qrUrl)}" alt="Department Website QR">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(slide.qrUrl)}" alt="Department Website QR">
             </div>
-            <div class="text-gold font-bold text-lg mb-1">${slide.qrLabel}</div>
-            <div class="text-sand text-sm">${slide.qrUrl.replace('https://', '')}</div>
+            <div class="text-gold font-bold text-xl mb-1">${slide.qrLabel}</div>
+            <div class="text-sand text-base font-mono mb-3">${slide.qrUrl.replace('https://', '')}</div>
+            <div class="badge-pill" style="margin-bottom: 0;">✦ SCAN WITH MOBILE CAMERA ✦</div>
           </div>
         </div>
       </div>

@@ -39,7 +39,31 @@ window.DEFAULT_SLIDES_DATA = {
         }
       ],
       "image": "images/original3.jpg",
-      "caption": "Aerospace students with high-powered rocketry projects at Floyd Hall"
+      "caption": "Aerospace students with high-powered rocketry projects at Floyd Hall",
+      "metrics": [
+        {
+          "value": "2",
+          "label": "ABET B.S. Degrees"
+        },
+        {
+          "value": "5 Yr",
+          "label": "Accelerated B.S. + M.S."
+        },
+        {
+          "value": "100%",
+          "label": "Hands-On Labs"
+        },
+        {
+          "value": "Top 50",
+          "label": "Public Engineering"
+        }
+      ],
+      "facilities": [
+        "Floyd Hall Project Bays",
+        "Supersonic Wind Tunnel",
+        "Plasma Space Chambers",
+        "CAE Computer Labs"
+      ]
     },
     {
       "id": "rso-motorsports",
@@ -209,6 +233,22 @@ window.DEFAULT_SLIDES_DATA = {
         "PLASMA DIAGNOSTICS",
         "HALL THRUSTERS",
         "SPACE ENVIRONMENT"
+      ],
+      "sponsors": [
+        "NASA Glenn & Marshall",
+        "Air Force Office of Scientific Research (AFOSR)",
+        "Air Force Research Laboratory (AFRL)",
+        "Hallquist Endowed Professorship"
+      ],
+      "stats": [
+        {
+          "value": "3+",
+          "label": "Space Simulation Chambers"
+        },
+        {
+          "value": "15+",
+          "label": "Years Plasma Thruster Innovation"
+        }
       ]
     },
     {
@@ -226,7 +266,12 @@ window.DEFAULT_SLIDES_DATA = {
           "Pressure- and temperature-sensitive optical paint measurement"
         ],
         "image": "images/original10.jpg",
-        "facility": "Floyd Hall Wind Tunnel Wing"
+        "facility": "Floyd Hall Wind Tunnel Wing",
+        "badges": [
+          "Mach 1.5\u20133.0 Supersonic Tunnel",
+          "Laser Diagnostics",
+          "Optical Surface Paint"
+        ]
       },
       "right": {
         "title": "Automotive Lab & CAViDS",
@@ -237,7 +282,12 @@ window.DEFAULT_SLIDES_DATA = {
           "EcoCAR Innovation Challenge in collaboration with General Motors"
         ],
         "image": "images/labs/ecocar-team.jpg",
-        "facility": "Floyd Hall Automotive Research Wing"
+        "facility": "Floyd Hall Automotive Research Wing",
+        "badges": [
+          "Single-Cylinder Optical Engine",
+          "Pulsed Nd:YAG Laser",
+          "GM EcoCAR Innovation"
+        ]
       }
     },
     {
@@ -250,7 +300,26 @@ window.DEFAULT_SLIDES_DATA = {
       "location": "Floyd Hall Atrium & Presentation Auditoriums",
       "image": "images/labs/senior-design.jpg",
       "description": "Graduating senior engineering teams present capstone design solutions to real-world technical challenges sponsored by aerospace, automotive, and industrial corporate partners.",
-      "callToAction": "Free and Open to the Public \u2022 Industry Evaluators & Alumni Welcome"
+      "callToAction": "Free and Open to the Public \u2022 Industry Evaluators & Alumni Welcome",
+      "stats": [
+        {
+          "value": "40+",
+          "label": "Capstone Projects"
+        },
+        {
+          "value": "15+",
+          "label": "Industry Sponsors"
+        },
+        {
+          "value": "100%",
+          "label": "Senior Participation"
+        }
+      ],
+      "highlights": [
+        "Aerospace, Automotive & Industrial Systems",
+        "Real-World Technical Solutions for Industry Sponsors",
+        "Free and Open to Students, Faculty & Public"
+      ]
     },
     {
       "id": "careers-partnerships",
@@ -280,7 +349,30 @@ window.DEFAULT_SLIDES_DATA = {
         }
       ],
       "image": "images/original7.jpg",
-      "caption": "WMU engineering students connecting with aerospace and automotive recruiters at Floyd Hall"
+      "caption": "WMU engineering students connecting with aerospace and automotive recruiters at Floyd Hall",
+      "metrics": [
+        {
+          "value": ",500",
+          "label": "Avg Starting Salary"
+        },
+        {
+          "value": "95%+",
+          "label": "Career Placement"
+        },
+        {
+          "value": "50+",
+          "label": "Annual Co-op Employers"
+        },
+        {
+          "value": "100%",
+          "label": "Paid Internships"
+        }
+      ],
+      "coopFeatures": [
+        "Paid Corporate Co-ops & Aerospace Internships",
+        "Industry-Sponsored Capstone Design Projects",
+        "Annual Floyd Hall Engineering Career Fair"
+      ]
     },
     {
       "id": "announcements-board",
@@ -294,21 +386,36 @@ window.DEFAULT_SLIDES_DATA = {
           "badgeClass": "badge-gold",
           "title": "Accelerated Graduate Degree Program (AGDP)",
           "desc": "Qualifying undergraduate students can earn both a B.S. and an M.S. in Mechanical or Aerospace Engineering in 5 years. Schedule an advising session in Floyd Hall Room E-102.",
-          "contact": "Floyd Hall Room E-102 \u2022 Advising Office"
+          "contact": "Floyd Hall Room E-102 \u2022 Advising Office",
+          "bullets": [
+            "Earn both B.S. and M.S. degrees in only 5 years",
+            "Double-count up to 12 graduate credit hours",
+            "Aerospace & Mechanical Engineering tracks"
+          ]
         },
         {
           "category": "RESEARCH POSITIONS",
           "badgeClass": "badge-slate",
           "title": "Undergraduate Research Assistantships",
           "desc": "Research positions are available in the Plasma Propulsion Lab (ALPE), Autonomous Vehicles Lab (EEAV), and Aerodynamics Lab. Contact lab directors directly for application details.",
-          "contact": "Floyd Hall Research Wing \u2022 Contact Lab Directors"
+          "contact": "Floyd Hall Research Wing \u2022 Contact Lab Directors",
+          "bullets": [
+            "Paid positions in ALPE Plasma, CAViDS & Aero Labs",
+            "Work directly with NASA & defense-sponsored projects",
+            "Direct path to graduate study and technical publishing"
+          ]
         },
         {
           "category": "FACILITIES & SUPPORT",
           "badgeClass": "badge-brown",
           "title": "CAE Computer Center & Tutoring",
           "desc": "The Floyd Hall Computer Aided Engineering Center is open 24/7 with valid Bronco Card access. Walk-in engineering tutoring is available Monday through Thursday in the student study lounge.",
-          "contact": "Floyd Hall Center \u2022 Open 24/7 with Bronco Card"
+          "contact": "Floyd Hall Center \u2022 Open 24/7 with Bronco Card",
+          "bullets": [
+            "CAE computer lab open 24/7 with valid Bronco Card",
+            "Free walk-in engineering tutoring Monday through Thursday",
+            "Siemens NX, SolidWorks, MATLAB, ANSYS & FEA access"
+          ]
         }
       ]
     },
@@ -350,7 +457,24 @@ window.DEFAULT_SLIDES_DATA = {
         }
       ],
       "qrUrl": "https://wmich.edu/mechanical-aerospace",
-      "qrLabel": "Scan for Department Information"
+      "qrLabel": "Scan for Department Information",
+      "quickContacts": [
+        {
+          "dept": "MAE Main Department Office",
+          "room": "F-234",
+          "phone": "(269) 276-3420"
+        },
+        {
+          "dept": "CEAS Advising Center",
+          "room": "E-102",
+          "phone": "(269) 276-3270"
+        },
+        {
+          "dept": "Student Projects & Teams Bay",
+          "room": "Ground Floor",
+          "phone": "Floyd Hall"
+        }
+      ]
     }
   ]
 };

@@ -5,15 +5,15 @@
   --font-serif: Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
-  /* Fluid typography clamped for 2048x1152 resolution at 10-30ft distance */
-  --text-hero: clamp(64px, 5.2vw, 92px);
-  --text-h1: clamp(46px, 3.8vw, 68px);
-  --text-h2: clamp(34px, 2.8vw, 48px);
-  --text-h3: clamp(24px, 2.0vw, 34px);
-  --text-body: clamp(20px, 1.7vw, 28px);
-  --text-caption: clamp(15px, 1.2vw, 20px);
-  --text-stat-number: clamp(64px, 5.5vw, 96px);
-  --text-stat-label: clamp(16px, 1.3vw, 20px);
+  /* Fluid typography clamped for 2048x1152 and 2560x1440 resolution at 10-30ft distance */
+  --text-hero: clamp(68px, 5.5vw, 98px);
+  --text-h1: clamp(48px, 4.0vw, 72px);
+  --text-h2: clamp(34px, 2.9vw, 50px);
+  --text-h3: clamp(26px, 2.1vw, 36px);
+  --text-body: clamp(20px, 1.6vw, 28px);
+  --text-caption: clamp(16px, 1.3vw, 22px);
+  --text-stat-number: clamp(68px, 5.8vw, 100px);
+  --text-stat-label: clamp(17px, 1.35vw, 22px);
 }
 
 body {
