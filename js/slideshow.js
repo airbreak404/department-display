@@ -143,37 +143,47 @@ class SlideshowEngine {
   }
 
   templateRsoTrio(slide) {
-    const orgsHtml = (slide.orgs || []).map((org, i) => `
-      <div class="rso-card animate-in delay-${i + 2}">
-        <div>
-          <div class="rso-card-header">
-            <img src="${org.logo}" alt="${org.name}" class="rso-card-logo">
-            <div class="rso-card-name-block">
-              <div class="rso-card-subtitle">${org.subtitle}</div>
-              <h2 class="rso-card-name">${org.name}</h2>
+    const orgsHtml = (slide.orgs || []).map((org, i) => {
+      const statsHtml = (org.stats || []).map(st => `
+        <div class="rso-stat-chip">
+          <span class="rso-stat-val">${st.value}</span>
+          <span class="rso-stat-lbl">${st.label}</span>
+        </div>
+      `).join('');
+
+      return `
+        <div class="rso-card animate-in delay-${i + 2}">
+          <div>
+            <div class="rso-card-header">
+              <img src="${org.logo}" alt="${org.name}" class="rso-card-logo">
+              <div class="rso-card-name-block">
+                <div class="rso-card-subtitle">${org.subtitle}</div>
+                <h2 class="rso-card-name">${org.name}</h2>
+              </div>
+            </div>
+            <p class="rso-card-desc">${org.desc}</p>
+            ${statsHtml ? `<div class="rso-stats-strip">${statsHtml}</div>` : ''}
+            ${org.highlights ? `
+            <div class="rso-highlights-box">
+              <div class="rso-highlights-title">KEY HIGHLIGHTS & COMPETITION DIVISIONS</div>
+              <ul class="rso-highlights-list">
+                ${org.highlights.map(h => `<li><span class="hl-bullet">✦</span> <span>${h}</span></li>`).join('')}
+              </ul>
+            </div>` : ''}
+          </div>
+          <div class="rso-card-meta">
+            <div class="rso-meta-row">
+              <span class="rso-meta-label">📍 LOCATION:</span>
+              <span class="rso-meta-val">${org.location}</span>
+            </div>
+            <div class="rso-meta-row">
+              <span class="rso-meta-label">🔗 CONNECT:</span>
+              <span class="rso-meta-val text-gold font-bold">${org.contact}</span>
             </div>
           </div>
-          <p class="rso-card-desc">${org.desc}</p>
-          ${org.highlights ? `
-          <div class="rso-highlights-box">
-            <div class="rso-highlights-title">KEY HIGHLIGHTS & ACTIVITIES</div>
-            <ul class="rso-highlights-list">
-              ${org.highlights.map(h => `<li><span class="hl-bullet">✦</span> <span>${h}</span></li>`).join('')}
-            </ul>
-          </div>` : ''}
         </div>
-        <div class="rso-card-meta">
-          <div class="rso-meta-row">
-            <span class="rso-meta-label">📍 LOCATION:</span>
-            <span class="rso-meta-val">${org.location}</span>
-          </div>
-          <div class="rso-meta-row">
-            <span class="rso-meta-label">🔗 CONNECT:</span>
-            <span class="rso-meta-val text-gold font-bold">${org.contact}</span>
-          </div>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     return `
       <div class="slide-inner">
@@ -418,9 +428,17 @@ class SlideshowEngine {
       </div>
     `).join('');
 
-    const highlightsHtml = (slide.highlights || []).map(h => `
-      <div class="cd-hl-item"><span class="text-gold font-bold">✦</span> <span>${h}</span></div>
-    `).join('');
+    const highlightsHtml = (slide.highlights || []).map(h => {
+      const parts = h.split(':');
+      const title = parts.length > 1 ? parts[0] : '';
+      const desc = parts.length > 1 ? parts.slice(1).join(':') : h;
+      return `
+        <div class="cd-hl-card">
+          ${title ? `<div class="cd-hl-badge"><span class="text-gold">✦</span> ${title.trim()}</div>` : ''}
+          <div class="cd-hl-text">${desc.trim()}</div>
+        </div>
+      `;
+    }).join('');
 
     return `
       <div class="slide-inner">
@@ -484,12 +502,13 @@ class SlideshowEngine {
             <div class="announcement-badge ${item.badgeClass}">${item.category}</div>
             <h2 class="announcement-title">${item.title}</h2>
             <p class="announcement-desc">${item.desc}</p>
+            ${item.metaHighlight ? `<div class="announcement-highlight-pill"><span class="text-gold font-bold">✦</span> ${item.metaHighlight}</div>` : ''}
             ${bulletsHtml ? `<ul class="announcement-bullets-list">${bulletsHtml}</ul>` : ''}
           </div>
           ${item.contact ? `
-          <div class="rso-meta-row" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+          <div class="rso-meta-row" style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
             <span class="rso-meta-label">📍 CONTACT:</span>
-            <span class="rso-meta-val">${item.contact}</span>
+            <span class="rso-meta-val text-gold font-bold">${item.contact}</span>
           </div>` : ''}
         </div>
       `;
@@ -521,6 +540,12 @@ class SlideshowEngine {
       </div>
     `).join('');
 
+    const portalFeaturesHtml = (slide.portalFeatures || []).map(pf => `
+      <div class="qr-feature-item">
+        <span class="text-gold font-bold">✦</span> <span>${pf}</span>
+      </div>
+    `).join('');
+
     return `
       <div class="slide-inner">
         <div class="badge-pill animate-in">${slide.badge}</div>
@@ -528,7 +553,7 @@ class SlideshowEngine {
           <div class="wayfinding-left-panel">
             <div>
               <h1 class="slide-heading animate-in delay-1" style="text-align: left; margin-bottom: 10px;">${slide.title}</h1>
-              <div class="lab-director-box animate-in delay-2" style="margin-bottom: 12px;">
+              <div class="lab-director-box animate-in delay-2" style="margin-bottom: 14px;">
                 <div class="lab-director-name">${slide.chair}</div>
                 <div class="lab-director-title">${slide.office} • ${slide.phone}</div>
                 <div class="lab-director-title" style="margin-top: 4px;">Office Hours: ${slide.hours}</div>
@@ -536,19 +561,21 @@ class SlideshowEngine {
               ${contactsHtml ? `<div class="quick-contacts-grid animate-in delay-2">${contactsHtml}</div>` : ''}
             </div>
             <div>
-              <div class="rso-highlights-title" style="margin-bottom: 8px;">DEPARTMENT FACILITIES & HUBS</div>
+              <div class="rso-highlights-title" style="margin-bottom: 8px;">DEPARTMENT FACILITIES & RESEARCH LABS</div>
               <div class="room-chips-row animate-in delay-3">
                 ${roomsHtml}
               </div>
             </div>
           </div>
           <div class="qr-panel animate-in delay-3">
+            <div class="qr-top-tag">✦ DEPARTMENT DIGITAL GATEWAY</div>
             <div class="qr-box">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(slide.qrUrl)}" alt="Department Website QR">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=230x230&data=${encodeURIComponent(slide.qrUrl)}" alt="Department Website QR">
             </div>
             <div class="text-gold font-bold text-xl mb-1">${slide.qrLabel}</div>
             <div class="text-sand text-base font-mono mb-3">${slide.qrUrl.replace('https://', '')}</div>
-            <div class="badge-pill" style="margin-bottom: 0;">✦ SCAN WITH MOBILE CAMERA ✦</div>
+            ${portalFeaturesHtml ? `<div class="qr-features-list">${portalFeaturesHtml}</div>` : ''}
+            <div class="badge-pill" style="margin-top: 10px; margin-bottom: 0;">✦ SCAN WITH MOBILE CAMERA ✦</div>
           </div>
         </div>
       </div>

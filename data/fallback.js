@@ -1,5 +1,8 @@
-// Fallback bundled slide configuration for offline or file:// protocol use
-window.DEFAULT_SLIDES_DATA = {
+/**
+ * WMU MAE Fallback Data
+ * Embedded offline backup to guarantee 24/7 kiosk operation.
+ */
+window.SLIDESHOW_DATA = {
   "config": {
     "defaultSlideDuration": 15000,
     "weatherRefreshIntervalMinutes": 15,
@@ -84,6 +87,16 @@ window.DEFAULT_SLIDES_DATA = {
             "Combustion & EV Formula SAE divisions",
             "Annual Formula SAE at Michigan Int'l Speedway",
             "Custom CAD chassis, aerodynamics & telemetry"
+          ],
+          "stats": [
+            {
+              "value": "120+",
+              "label": "Global Teams"
+            },
+            {
+              "value": "2 Div",
+              "label": "Combustion & EV"
+            }
           ]
         },
         {
@@ -97,6 +110,16 @@ window.DEFAULT_SLIDES_DATA = {
             "Single-seat rugged all-terrain vehicle build",
             "Custom 4WD drivetrain & long-travel suspension",
             "National SAE rock crawl & endurance events"
+          ],
+          "stats": [
+            {
+              "value": "4WD",
+              "label": "Custom Drivetrain"
+            },
+            {
+              "value": "100%",
+              "label": "Student Built"
+            }
           ]
         },
         {
@@ -110,6 +133,16 @@ window.DEFAULT_SLIDES_DATA = {
             "30+ year flagship solar vehicle tradition",
             "Custom carbon-fiber aerodynamic monocoque",
             "Formula Sun Grand Prix & American Solar Challenge"
+          ],
+          "stats": [
+            {
+              "value": "30+ Yr",
+              "label": "Solar Legacy"
+            },
+            {
+              "value": "1,000+",
+              "label": "Race Miles"
+            }
           ]
         }
       ]
@@ -133,6 +166,16 @@ window.DEFAULT_SLIDES_DATA = {
             "ARC: NASA Student Launch Initiative rocketry",
             "RCAT: AIAA Design/Build/Fly aircraft",
             "Bronco Propulsion Lab: Rocket motor testing"
+          ],
+          "stats": [
+            {
+              "value": "3 Div",
+              "label": "ARC \u2022 RCAT \u2022 BPL"
+            },
+            {
+              "value": "NASA",
+              "label": "Student Launch"
+            }
           ]
         },
         {
@@ -146,6 +189,16 @@ window.DEFAULT_SLIDES_DATA = {
             "Small satellite (CubeSat) orbital engineering",
             "High-altitude balloon telemetry flights",
             "Thermal-vacuum and ground station testing"
+          ],
+          "stats": [
+            {
+              "value": "CubeSat",
+              "label": "Orbital Flights"
+            },
+            {
+              "value": "100k ft",
+              "label": "Near-Space Flight"
+            }
           ]
         },
         {
@@ -159,6 +212,16 @@ window.DEFAULT_SLIDES_DATA = {
             "Connected & automated vehicle navigation",
             "Multi-sensor fusion: LiDAR, Radar & Vision",
             "Energy-efficient electric powertrain controls"
+          ],
+          "stats": [
+            {
+              "value": "LiDAR",
+              "label": "Sensor Fusion"
+            },
+            {
+              "value": "Level 4",
+              "label": "Autonomous AI"
+            }
           ]
         }
       ]
@@ -313,12 +376,16 @@ window.DEFAULT_SLIDES_DATA = {
         {
           "value": "100%",
           "label": "Senior Participation"
+        },
+        {
+          "value": "150+",
+          "label": "Engineering Grads"
         }
       ],
       "highlights": [
-        "Aerospace, Automotive & Industrial Systems",
-        "Real-World Technical Solutions for Industry Sponsors",
-        "Free and Open to Students, Faculty & Public"
+        "Presentation Auditoriums: Formal capstone briefings before faculty & corporate advisory boards",
+        "Floyd Hall Atrium Demos: Live working exhibits of autonomous vehicles, aircraft & propulsion rigs",
+        "Corporate Recruiting: Direct interaction with hiring managers from aerospace & defense sponsors"
       ]
     },
     {
@@ -389,9 +456,12 @@ window.DEFAULT_SLIDES_DATA = {
           "contact": "Floyd Hall Room E-102 \u2022 Advising Office",
           "bullets": [
             "Earn both B.S. and M.S. degrees in only 5 years",
-            "Double-count up to 12 graduate credit hours",
-            "Aerospace & Mechanical Engineering tracks"
-          ]
+            "Double-count up to 12 graduate credit hours toward both degrees",
+            "Waived GRE requirement for WMU undergraduates with GPA 3.25+",
+            "Aerospace & Mechanical Engineering graduate thesis tracks",
+            "Dedicated faculty advising in Floyd Hall Room E-102"
+          ],
+          "metaHighlight": "ELIGIBILITY: GPA 3.25+ \u2022 12 Grad Credits Count Double"
         },
         {
           "category": "RESEARCH POSITIONS",
@@ -400,10 +470,13 @@ window.DEFAULT_SLIDES_DATA = {
           "desc": "Research positions are available in the Plasma Propulsion Lab (ALPE), Autonomous Vehicles Lab (EEAV), and Aerodynamics Lab. Contact lab directors directly for application details.",
           "contact": "Floyd Hall Research Wing \u2022 Contact Lab Directors",
           "bullets": [
-            "Paid positions in ALPE Plasma, CAViDS & Aero Labs",
-            "Work directly with NASA & defense-sponsored projects",
-            "Direct path to graduate study and technical publishing"
-          ]
+            "Paid undergraduate positions in ALPE Plasma, CAViDS & Aero Labs",
+            "Work directly on NASA Glenn, AFOSR & defense-sponsored grants",
+            "Direct laboratory training in space vacuum chambers and optical lasers",
+            "Co-author academic conference papers and journal publications",
+            "Apply directly with CV & unofficial transcript to lab directors"
+          ],
+          "metaHighlight": "FUNDING: Paid NASA, AFRL & Industry Research Assistantships"
         },
         {
           "category": "FACILITIES & SUPPORT",
@@ -412,10 +485,13 @@ window.DEFAULT_SLIDES_DATA = {
           "desc": "The Floyd Hall Computer Aided Engineering Center is open 24/7 with valid Bronco Card access. Walk-in engineering tutoring is available Monday through Thursday in the student study lounge.",
           "contact": "Floyd Hall Center \u2022 Open 24/7 with Bronco Card",
           "bullets": [
-            "CAE computer lab open 24/7 with valid Bronco Card",
-            "Free walk-in engineering tutoring Monday through Thursday",
-            "Siemens NX, SolidWorks, MATLAB, ANSYS & FEA access"
-          ]
+            "CAE computer lab open 24/7 with active student Bronco Card",
+            "Free walk-in engineering peer tutoring Monday through Thursday",
+            "Siemens NX, SolidWorks, MATLAB, ANSYS FEA & CFD suites",
+            "High-speed 3D printing and rapid prototyping resources",
+            "Remote workstation access available via WMU Virtual Lab (VCL)"
+          ],
+          "metaHighlight": "ACCESS: 24/7 with Bronco Card \u2022 Free Peer Tutoring"
         }
       ]
     },
@@ -465,15 +541,26 @@ window.DEFAULT_SLIDES_DATA = {
           "phone": "(269) 276-3420"
         },
         {
-          "dept": "CEAS Advising Center",
+          "dept": "CEAS Academic Advising",
           "room": "E-102",
           "phone": "(269) 276-3270"
         },
         {
-          "dept": "Student Projects & Teams Bay",
-          "room": "Ground Floor",
-          "phone": "Floyd Hall"
+          "dept": "Student Projects & Machine Shop",
+          "room": "G-Wing",
+          "phone": "Ground Floor"
+        },
+        {
+          "dept": "CAE Computer Center & Tutoring",
+          "room": "E-204",
+          "phone": "24/7 Access"
         }
+      ],
+      "portalFeatures": [
+        "Real-Time Course Schedules & Curriculum Track Guides",
+        "Faculty Office Hours, Directory & Research Publications",
+        "Undergraduate Lab Research & Student Org Applications",
+        "Senior Capstone Showcase Archives & Project Briefs"
       ]
     }
   ]
