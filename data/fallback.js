@@ -352,7 +352,7 @@ window.DEFAULT_SLIDES_DATA = {
       "caption": "WMU engineering students connecting with aerospace and automotive recruiters at Floyd Hall",
       "metrics": [
         {
-          "value": ",500",
+          "value": "$75,500",
           "label": "Avg Starting Salary"
         },
         {

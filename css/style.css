@@ -282,10 +282,11 @@ html, body {
   border: 1px solid rgba(241, 197, 0, 0.32);
   border-top: 3px solid var(--wmu-gold);
   border-radius: 18px;
-  padding: clamp(18px, 2.4vh, 30px) clamp(22px, 2.2vw, 34px);
+  padding: clamp(20px, 2.6vh, 32px) clamp(24px, 2.4vw, 36px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: clamp(14px, 1.8vh, 22px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65);
   box-sizing: border-box;
   overflow: hidden;
@@ -295,52 +296,53 @@ html, body {
 .overview-info-top {
   display: flex;
   flex-direction: column;
+  gap: clamp(4px, 0.6vh, 8px);
 }
 
 .overview-college-tag {
-  font-size: clamp(11.5px, 0.85vw, 13.5px);
+  font-size: clamp(12px, 0.9vw, 14px);
   font-weight: 800;
   letter-spacing: 2px;
   color: var(--wmu-gold);
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .overview-title {
-  font-size: clamp(28px, 2.5vw, 44px);
+  font-size: clamp(30px, 2.7vw, 46px);
   font-weight: 900;
   color: #FFFFFF;
   line-height: 1.15;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   letter-spacing: -0.5px;
 }
 
 .overview-location {
-  font-size: clamp(13.5px, 1.0vw, 16.5px);
+  font-size: clamp(14px, 1.05vw, 17px);
   color: var(--wmu-sand);
   font-weight: 600;
-  margin-bottom: clamp(8px, 1.2vh, 14px);
+  margin-bottom: clamp(6px, 0.9vh, 10px);
 }
 
 .overview-summary {
-  font-size: clamp(15px, 1.15vw, 19px);
-  line-height: 1.55;
+  font-size: clamp(16px, 1.25vw, 20.5px);
+  line-height: 1.6;
   color: #FFFFFF;
-  margin-bottom: clamp(10px, 1.3vh, 16px);
+  margin-bottom: clamp(8px, 1.2vh, 14px);
 }
 
 .overview-metrics-strip {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(8px, 1vw, 12px);
-  margin-bottom: clamp(10px, 1.3vh, 16px);
+  gap: clamp(10px, 1.1vw, 16px);
+  margin-bottom: clamp(4px, 0.6vh, 8px);
 }
 
 .overview-metric-chip {
-  background: rgba(241, 197, 0, 0.08);
-  border: 1px solid rgba(241, 197, 0, 0.25);
-  border-radius: 10px;
-  padding: clamp(6px, 1.0vh, 10px) clamp(6px, 0.8vw, 10px);
+  background: linear-gradient(135deg, rgba(241, 197, 0, 0.12) 0%, rgba(83, 46, 31, 0.25) 100%);
+  border: 1px solid rgba(241, 197, 0, 0.35);
+  border-radius: 12px;
+  padding: clamp(10px, 1.4vh, 16px) clamp(8px, 0.9vw, 12px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -348,7 +350,7 @@ html, body {
 }
 
 .om-val {
-  font-size: clamp(18px, 1.5vw, 26px);
+  font-size: clamp(22px, 1.85vw, 32px);
   font-weight: 900;
   color: var(--wmu-gold);
   font-family: var(--font-mono);
@@ -356,18 +358,18 @@ html, body {
 }
 
 .om-lbl {
-  font-size: clamp(9.5px, 0.72vw, 11.5px);
+  font-size: clamp(10px, 0.78vw, 12.5px);
   font-weight: 700;
   color: #FFFFFF;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-top: 2px;
+  letter-spacing: 0.6px;
+  margin-top: 4px;
 }
 
 .overview-programs-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(8px, 1.1vh, 12px);
+  gap: clamp(10px, 1.3vh, 14px);
 }
 
 .program-chip {
@@ -510,14 +512,22 @@ html, body {
   border: 1px solid rgba(241, 197, 0, 0.28);
   border-top: 3px solid var(--wmu-gold);
   border-radius: 18px;
-  padding: clamp(14px, 2.0vh, 22px);
+  padding: clamp(16px, 2.2vh, 24px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: clamp(10px, 1.4vh, 16px);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
   box-sizing: border-box;
   overflow: hidden;
   height: 100%;
+}
+
+.rso-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .rso-card-header {
@@ -562,21 +572,22 @@ html, body {
 }
 
 .rso-card-desc {
-  font-size: clamp(12.5px, 0.95vw, 15px);
-  line-height: 1.5;
+  font-size: clamp(13px, 0.98vw, 15.5px);
+  line-height: 1.55;
   color: #E6E1DC;
-  margin-bottom: clamp(8px, 1.1vh, 12px);
+  margin-bottom: clamp(10px, 1.4vh, 16px);
 }
 
 .rso-highlights-box {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(241, 197, 0, 0.16);
-  border-radius: 10px;
-  padding: clamp(8px, 1.1vh, 12px);
-  margin-bottom: clamp(8px, 1.1vh, 12px);
+  border-radius: 12px;
+  padding: clamp(10px, 1.4vh, 16px);
+  margin-bottom: clamp(6px, 0.8vh, 10px);
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
 }
 
 .rso-highlights-title {
@@ -1397,8 +1408,16 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: clamp(10px, 1.4vh, 16px);
   overflow: hidden;
   height: 100%;
+}
+
+.announcement-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
 .announcement-badge {
