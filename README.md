@@ -33,7 +33,7 @@ Digital signage and hallway kiosk for the Department of Mechanical and Aerospace
 |                                                                      |
 |  * Management CLI: ~/.local/bin/mae-display                          |
 |  * Service: department-kiosk.service (under systemd-inhibit)         |
-|  * Launcher: ~/.local/bin/kiosk-launcher.sh + 15s Wi-Fi keepalive    |
+|  * Launcher: ~/.local/bin/kiosk-launcher.sh + 60s Wi-Fi keepalive    |
 |  * RAM Disk Cache: /dev/shm/kiosk-chrome-cache/                      |
 |                                                                      |
 |  +-------------------------------+  +-------------------------------+|
@@ -105,7 +105,7 @@ Slide definitions are stored in [`data/slides.json`](data/slides.json) and mirro
 
 The kiosk host includes multiple layers of 24/7 hardening:
 1. **Wi-Fi Low-Power Sleep (`lps`) Prevention**:
-   The Realtek USB Wi-Fi dongle (`rtw88_8822bu`) drops connection when entering USB power-saving. An active 15-second heartbeat ping in `kiosk-launcher.sh` targets the local subnet gateway (`10.80.140.1`), keeping the network interface continuously active without generating external internet traffic.
+   The Realtek USB Wi-Fi dongle (`rtw88_8822bu`) drops connection when entering USB power-saving. An active 60-second heartbeat ping in `kiosk-launcher.sh` (throttled to every 4th watchdog cycle) targets the local subnet gateway (`10.80.140.1`), keeping the network interface continuously active without generating external internet traffic or redundant network noise.
 2. **Systemd Sleep & Idle Inhibitor**:
    The `department-kiosk.service` unit runs under `systemd-inhibit --what=idle:sleep`, actively preventing OS-level suspend, sleep, or GNOME screen lockouts.
 3. **DPMS Hardware Lockdown**:
@@ -121,9 +121,6 @@ The kiosk host includes multiple layers of 24/7 hardening:
 
 ```
 department-display/
-├── .github/
-│   └── workflows/
-│       └── validate.yml      # CI workflow for JSON and asset validation
 ├── css/
 │   ├── animations.css        # Smooth slide transitions & ambient animations
 │   ├── style.css             # Layout, HUD, and glassmorphism styling
