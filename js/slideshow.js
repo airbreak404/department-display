@@ -159,7 +159,7 @@ class SlideshowEngine {
         </div>`;
       const photoHtml = (isSingle && org.image) ? `
         <div class="rso-photo-frame animate-in delay-${i + 2}">
-          <img src="${org.image}" alt="${org.name}">
+          <img src="${org.image}" alt="${org.name}" onerror="this.style.visibility='hidden'">
           ${metaChips}
         </div>` : '';
 
@@ -168,7 +168,7 @@ class SlideshowEngine {
         <div class="rso-card animate-in delay-${i + 2}">
           <div>
             <div class="rso-card-header">
-              <img src="${org.logo}" alt="${org.name}" class="rso-card-logo">
+              <img src="${org.logo}" alt="${org.name}" class="rso-card-logo" onerror="this.style.display='none'">
               <div class="rso-card-name-block">
                 <div class="rso-card-subtitle">${org.subtitle}</div>
                 <h2 class="rso-card-name">${org.name}</h2>

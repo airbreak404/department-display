@@ -95,7 +95,7 @@ window.DEFAULT_SLIDES_DATA = {
               "label": "Combustion & EV"
             }
           ],
-          "image": "images/original5.jpg"
+          "image": "images/original9.jpg"
         }
       ]
     },
@@ -130,7 +130,7 @@ window.DEFAULT_SLIDES_DATA = {
               "label": "Student Built"
             }
           ],
-          "image": "images/original6.jpg"
+          "image": "images/teams/baja-race.jpg"
         }
       ]
     },
@@ -165,7 +165,7 @@ window.DEFAULT_SLIDES_DATA = {
               "label": "Race Miles"
             }
           ],
-          "image": "images/original8.jpg"
+          "image": "images/teams/sunseeker-competition.jpg"
         }
       ]
     },
@@ -235,7 +235,7 @@ window.DEFAULT_SLIDES_DATA = {
               "label": "Near-Space Flight"
             }
           ],
-          "image": "images/original9.jpg"
+          "image": "images/teams/wali-cubesat.jpg"
         }
       ]
     },
@@ -270,7 +270,7 @@ window.DEFAULT_SLIDES_DATA = {
               "label": "Autonomous AI"
             }
           ],
-          "image": "images/original11.jpg"
+          "image": "images/teams/autonomous-pod.jpg"
         }
       ]
     },
@@ -375,7 +375,7 @@ window.DEFAULT_SLIDES_DATA = {
               "label": "Engineering Team"
             }
           ],
-          "image": "images/original1.jpg"
+          "image": "images/teams/bronco-robotics-maker.jpg"
         }
       ]
     },
@@ -431,7 +431,7 @@ window.DEFAULT_SLIDES_DATA = {
       "director": "Dr. Tianshu Liu",
       "directorTitle": "Director  •  Applied Aerodynamics",
       "room": "Floyd Hall Wind Tunnel Wing",
-      "image": "images/original10.jpg",
+      "image": "images/original5.jpg",
       "overlayTag": "SUPERSONIC & SUBSONIC WIND TUNNELS",
       "highlights": [
         "Advanced design Mach 1.5–3.0 supersonic and subsonic wind tunnels",

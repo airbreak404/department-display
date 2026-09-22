@@ -100,14 +100,17 @@
     // Start Weather Service
     const weather = new window.WeatherService(data.config || {});
     weather.init();
+    window.appWeather = weather;
 
     // Start Slideshow Engine
     const slideshow = new window.SlideshowEngine(data);
     slideshow.init();
+    window.appSlideshow = slideshow;
 
     // Start Kiosk Controls
     const controls = new window.KioskControls(slideshow);
     controls.init();
+    window.appControls = controls;
 
     // Start Auto-Refresh Watchdog
     setupWatchdog(slideshow);
