@@ -29,7 +29,7 @@ Digital signage and hallway kiosk for the Department of Mechanical and Aerospace
        SSH command forwarding                            | ETag polling
                 v                                        | (every 15 min)
 +---------------+----------------------------------------v-------------+
-| Remote Kiosk Machine (Ubuntu 24.04 LTS, 10.80.143.128)               |
+| Remote Kiosk Machine (Ubuntu 24.04 LTS, <kiosk-host-ip>)             |
 |                                                                      |
 |  * Management CLI: ~/.local/bin/mae-display                          |
 |  * Service: department-kiosk.service (under systemd-inhibit)         |
@@ -105,7 +105,7 @@ Slide definitions are stored in [`data/slides.json`](data/slides.json) and mirro
 
 The kiosk host includes multiple layers of 24/7 hardening:
 1. **Wi-Fi Low-Power Sleep (`lps`) Prevention**:
-   The Realtek USB Wi-Fi dongle (`rtw88_8822bu`) drops connection when entering USB power-saving. An active 60-second heartbeat ping in `kiosk-launcher.sh` (throttled to every 4th watchdog cycle) targets the local subnet gateway (`10.80.140.1`), keeping the network interface continuously active without generating external internet traffic or redundant network noise.
+   The Realtek USB Wi-Fi dongle (`rtw88_8822bu`) drops connection when entering USB power-saving. An active 60-second heartbeat ping in `kiosk-launcher.sh` (throttled to every 4th watchdog cycle) targets the local subnet gateway (dynamically resolved via `ip route`), keeping the network interface continuously active without generating external internet traffic or redundant network noise.
 2. **Systemd Sleep & Idle Inhibitor**:
    The `department-kiosk.service` unit runs under `systemd-inhibit --what=idle:sleep`, actively preventing OS-level suspend, sleep, or GNOME screen lockouts.
 3. **DPMS Hardware Lockdown**:
