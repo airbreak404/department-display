@@ -46,9 +46,42 @@ class SlideshowEngine {
     this.showSlide(initialIndex);
   }
 
+  escapeHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  sanitizeSlideData(data) {
+    if (data === null || data === undefined) return data;
+    if (typeof data === 'string') {
+      return this.escapeHtml(data);
+    }
+    if (Array.isArray(data)) {
+      return data.map(item => this.sanitizeSlideData(item));
+    }
+    if (typeof data === 'object') {
+      const sanitized = {};
+      for (const [key, val] of Object.entries(data)) {
+        if (key === 'image' || key === 'qrUrl') {
+          sanitized[key] = String(val).replace(/["'<>]/g, '');
+        } else {
+          sanitized[key] = this.sanitizeSlideData(val);
+        }
+      }
+      return sanitized;
+    }
+    return data;
+  }
+
   renderAllSlides() {
     this.container.innerHTML = '';
-    this.slides.forEach((slide, idx) => {
+    this.slides.forEach((rawSlide, idx) => {
+      const slide = this.sanitizeSlideData(rawSlide);
       const slideEl = document.createElement('div');
       slideEl.className = `slide slide-${slide.type}`;
       slideEl.id = `slide-${idx}`;
