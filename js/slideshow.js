@@ -657,14 +657,19 @@ class SlideshowEngine {
     this.progressStartTime = performance.now();
     this.progressElapsed = 0;
 
+    if (this.progressBar) {
+      this.progressBar.style.transformOrigin = 'left center';
+      this.progressBar.style.transform = 'scaleX(0)';
+    }
+
     const tick = (now) => {
       if (this.isPaused) return;
 
       this.progressElapsed = now - this.progressStartTime;
-      const pct = Math.min(100, (this.progressElapsed / this.currentDuration) * 100);
+      const progress = Math.min(1, this.progressElapsed / this.currentDuration);
 
       if (this.progressBar) {
-        this.progressBar.style.width = `${pct}%`;
+        this.progressBar.style.transform = `scaleX(${progress})`;
       }
 
       if (this.progressElapsed >= this.currentDuration) {
