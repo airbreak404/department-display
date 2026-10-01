@@ -33,7 +33,8 @@ Digital signage and hallway kiosk for the Department of Mechanical and Aerospace
 |                                                                      |
 |  * Management CLI: ~/.local/bin/mae-display                          |
 |  * Service: department-kiosk.service (under systemd-inhibit)         |
-|  * Launcher: ~/.local/bin/kiosk-launcher.sh + 60s Wi-Fi keepalive    |
+|  * Encrypted IP Beacon: department-kiosk-ip-beacon.timer (every 2m)  |
+|  * Wi-Fi Keepalive: department-kiosk-net-keepalive.timer (every 60s) |
 |  * RAM Disk Cache: /dev/shm/kiosk-chrome-cache/                      |
 |                                                                      |
 |  +-------------------------------+  +-------------------------------+|
@@ -53,23 +54,30 @@ The presentation is authored to a fixed **2048 × 1152** reference coordinate sp
 
 ## Management CLI (`mae-display`)
 
-The kiosk is managed using the `mae-display` CLI. It can be run from the Linux kiosk host or forwarded over SSH from a Windows terminal.
+The kiosk is managed using the `mae-display` CLI. It can be run locally from the Linux kiosk host or forwarded over SSH from a Windows terminal.
 
 ### Available Commands
 ```bash
-mae-display status          # Check systemd service, Chrome PIDs, and active displays
-mae-display reload          # Trigger zero-flicker CDP reload without restarting browser
-mae-display restart         # Restart systemd kiosk service
-mae-display stop            # Stop kiosk and close Chrome instances cleanly
-mae-display start           # Start kiosk service
-mae-display logs            # View recent kiosk journalctl logs
-mae-display sync            # Check GitHub Pages and reload if updated
-mae-display screenshot tv   # Capture live hallway TV screenshot
-mae-display screenshot mac  # Capture iMac desk display screenshot
+mae-display status             # Check systemd service, Chrome PIDs, and active displays
+mae-display reload             # Trigger zero-flicker CDP reload without restarting browser
+mae-display restart            # Restart systemd kiosk service
+mae-display stop               # Stop kiosk and close Chrome instances cleanly
+mae-display start              # Start kiosk service
+mae-display logs               # View recent kiosk journalctl logs
+mae-display sync               # Check GitHub Pages and reload if updated
+mae-display screenshot tv      # Capture live hallway TV screenshot
+mae-display screenshot mac     # Capture iMac desk display screenshot
+mae-display set-ip <new_ip>    # Manually verify and update kiosk IP address in SSH config
+mae-display <new_ip>           # Shorthand to verify and set a new kiosk IP
 ```
 
-### Windows Workstation Setup
-The local repository includes `mae-display.cmd` and `mae-display.ps1` in `AppData\Local\agy\bin\` (which is on the system `PATH`), allowing you to type `mae-display status` or `mae-display reload` directly from PowerShell or Command Prompt.
+### Windows Workstation Client & Zero-Touch Self-Healing
+The local workstation environment includes `mae-display.cmd` and `mae-display-resolve.ps1` in `AppData\Local\agy\bin\` (on `PATH`) and integrated into the PowerShell profile (`$PROFILE`):
+
+1. **Direct Fast-Path**: Probes the currently configured IP on port 22. If reachable, executes immediately (< 1 second).
+2. **Encrypted Beacon Auto-Discovery**: If the kiosk's dynamic DHCP IP has rotated, the client queries the zero-credential encrypted rendezvous endpoint, decrypts the AES-256-CBC payload in memory, cryptographically verifies the kiosk's pinned Ed25519 host key (`ssh -o BatchMode=yes`), updates `~/.ssh/config` automatically, and runs the command.
+3. **Zero Network Scanning**: Operates strictly point-to-point without sending sequential SYN scans across campus subnets.
+4. **Persistent Sessions**: SSH connection uses `ServerAliveInterval 30` and `ServerAliveCountMax 3` to keep terminal sessions active across campus firewalls.
 
 ---
 
@@ -101,18 +109,26 @@ Slide definitions are stored in [`data/slides.json`](data/slides.json) and mirro
 
 ---
 
-## 24/7 Kiosk Hardening
+## 24/7 Kiosk Hardening & Security Architecture
 
-The kiosk host includes multiple layers of 24/7 hardening:
+The kiosk host includes multiple layers of 24/7 hardening and defensive security:
 1. **Wi-Fi Low-Power Sleep (`lps`) Prevention**:
-   The Realtek USB Wi-Fi dongle (`rtw88_8822bu`) drops connection when entering USB power-saving. An active 60-second heartbeat ping in `kiosk-launcher.sh` (throttled to every 4th watchdog cycle) targets the local subnet gateway (dynamically resolved via `ip route`), keeping the network interface continuously active without generating external internet traffic or redundant network noise.
-2. **Systemd Sleep & Idle Inhibitor**:
+   The Realtek USB Wi-Fi dongle (`rtw88_8822bu`) drops connection when entering USB power-saving. A dedicated user systemd service and timer (`department-kiosk-net-keepalive.timer`) sends an ICMP ping to the local subnet gateway every 60 seconds (dynamically resolved via `ip route`), keeping the network interface continuously active and maintaining DHCP lease stability without generating external internet traffic.
+2. **Zero-Credential Encrypted IP Beacon**:
+   An independent systemd timer (`department-kiosk-ip-beacon.timer`) runs every 2 minutes. When network changes occur, it encrypts the new local IP with AES-256-CBC and PBKDF2 (10,000 iterations, SHA-256) and publishes the ciphertext. It requires **zero GitHub tokens, passwords, or accounts on the kiosk**, ensuring that filesystem inspection yields no usable credentials.
+3. **Cryptographic SSH & Host Key Pinning**:
+   - Remote SSH daemon has password authentication permanently disabled (`PasswordAuthentication no`).
+   - Host key is pinned via Ed25519 in client `~/.ssh/known_hosts`, mathematically preventing spoofing or man-in-the-middle attacks.
+   - `fail2ban` monitors port 22 with automated ban policies.
+4. **Local Loopback Service Isolation**:
+   Chrome DevTools Protocol (CDP) on port `9222` and systemd-resolved on port `53` are strictly bound to `127.0.0.1` loopback only, never exposed across the network.
+5. **Systemd Sleep & Idle Inhibitor**:
    The `department-kiosk.service` unit runs under `systemd-inhibit --what=idle:sleep`, actively preventing OS-level suspend, sleep, or GNOME screen lockouts.
-3. **DPMS Hardware Lockdown**:
+6. **DPMS Hardware Lockdown**:
    The watchdog loop continuously re-enforces `xset dpms force on; xset -dpms s off s noblank`.
-4. **RAM Disk Caching**:
+7. **RAM Disk Caching**:
    Chrome disk caches are mounted on `/dev/shm/kiosk-chrome-cache/{tv,mac}` (tmpfs in RAM), completely eliminating mechanical HDD wear and stutter.
-5. **Zero-Flicker Chrome DevTools Protocol (CDP) Reloads**:
+8. **Zero-Flicker Chrome DevTools Protocol (CDP) Reloads**:
    Content updates reload dynamically via `Page.reload` on port `9222` without killing the browser process or flickering the screen.
 
 ---
