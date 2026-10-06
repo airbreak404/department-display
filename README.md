@@ -64,6 +64,7 @@ mae-display restart            # Restart systemd kiosk service
 mae-display stop               # Stop kiosk and close Chrome instances cleanly
 mae-display start              # Start kiosk service
 mae-display logs               # View recent kiosk journalctl logs
+mae-display incidents          # View recent incidents and autonomous reboot requests
 mae-display sync               # Check GitHub Pages and reload if updated
 mae-display screenshot tv      # Capture live hallway TV screenshot
 mae-display screenshot mac     # Capture iMac desk display screenshot
@@ -130,6 +131,16 @@ The kiosk host includes multiple layers of 24/7 hardening and defensive security
    Chrome disk caches are mounted on `/dev/shm/kiosk-chrome-cache/{tv,mac}` (tmpfs in RAM), completely eliminating mechanical HDD wear and stutter.
 8. **Zero-Flicker Chrome DevTools Protocol (CDP) Reloads**:
    Content updates reload dynamically via `Page.reload` on port `9222` without killing the browser process or flickering the screen.
+9. **Autonomous Watchdog Reboot Escalation**:
+   After X11 remains unreachable for 180 continuous seconds, the watchdog requests `systemctl --no-ask-password reboot -i`, falling back to `loginctl --no-ask-password reboot`. X11 probes have timeouts, and the outage timer also runs when no graphical session is available at service startup. The service starts under the lingering user manager's default target and remains running when the graphical-session target stops. A locked, persistent guard permits at most two automated reboot requests per rolling 15-minute window, including failed requests; invalid guard state blocks escalation. Incidents are recorded in `~/.local/state/kiosk/incidents.log` and available through `mae-display incidents`.
+
+   With an estimated 90-second boot, expected recovery is about 4.5 minutes plus polling/probe time. This is a recovery target, not a guaranteed outage bound: reboot authorization, a functioning watchdog/kernel, and a successful boot are required. When the guard trips, automatic reboot requests stop until a slot expires.
+
+   **Deployment prerequisite:** reboot, multiple-session reboot, and inhibitor-bypass authorization must work without interactive authentication even after the graphical login ends. On October 6, the active watchdog passed the first two checks but inhibitor bypass required authentication; inactive-session defaults also required authentication. A service-scoped polkit rule has been prepared in the host's `kiosk-self-healing-20261006.GhpsSn` rollback bundle, but still requires administrator installation. Until then, unattended recovery relies on the active local session's permissions and absence of blocking shutdown inhibitors.
+10. **iMac Human-Work Protection**:
+    Both presentation windows open fullscreen at startup. During routine health checks, only the hallway TV has its geometry and fullscreen state enforced. The iMac window may be moved, minimized, or taken out of fullscreen; closing it relaunches only that window. The existing `~/.config/kiosk-mac-disabled` flag suppresses iMac relaunch. TV browser recovery can still rebuild both windows because they share one Chrome process tree.
+
+The launcher has no `--frame-throttle-fps` limit. Other Chrome flags, GPU settings, and presentation CSS remain unchanged by this recovery update; the existing display modes determine the native refresh rates.
 
 ---
 
