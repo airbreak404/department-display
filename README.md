@@ -125,6 +125,7 @@ The kiosk host includes multiple layers of 24/7 hardening and defensive security
    Chrome DevTools Protocol (CDP) on port `9222` and systemd-resolved on port `53` are strictly bound to `127.0.0.1` loopback only, never exposed across the network.
 5. **Systemd Sleep & Idle Inhibitor**:
    The `department-kiosk.service` unit runs under `systemd-inhibit --what=idle:sleep`, actively preventing OS-level suspend, sleep, or GNOME screen lockouts.
+   Service reloads send SIGHUP to the launcher that handles browser recovery, rather than to the inhibitor wrapper. This keeps the watchdog running when the GitHub Pages sync timer requests a reload.
 6. **DPMS Hardware Lockdown**:
    The watchdog loop continuously re-enforces `xset dpms force on; xset -dpms s off s noblank`.
 7. **RAM Disk Caching**:
