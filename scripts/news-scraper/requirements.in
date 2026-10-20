@@ -1,0 +1,4 @@
+requests>=2.32.4
+beautifulsoup4>=4.13
+google-genai>=1.0
+tzdata>=2025.2

@@ -35,35 +35,56 @@
     setInterval(update, 1000);
   }
 
-  // Load Slides Configuration (Network with local fallback)
+  let baseData = null;
+  let newsData = window.MaeNews.empty();
+  let loading = false;
+
+  // Independent bounded requests; a news failure cannot replace the base deck.
   async function loadSlideData() {
-    try {
-      const response = await fetch('data/slides.json?t=' + Date.now(), { cache: 'no-store' });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return await response.json();
-    } catch (err) {
-      console.warn('slides.json fetch failed, using fallback bundled data:', err.message);
-      return window.DEFAULT_SLIDES_DATA || {};
+    const results = await Promise.allSettled([
+      window.MaeNews.fetchJson('data/slides.json', 512 * 1024),
+      window.MaeNews.fetchJson('data/news.json')
+    ]);
+    if (results[0].status === 'fulfilled' && results[0].value && Array.isArray(results[0].value.slides) && results[0].value.slides.length) {
+      baseData = results[0].value;
     }
+    if (!baseData) baseData = JSON.parse(JSON.stringify(window.DEFAULT_SLIDES_DATA || { slides: [] }));
+    if (results[1].status === 'fulfilled') {
+      try { newsData = window.MaeNews.validate(results[1].value); }
+      catch (_) { console.warn('News validation failed; retaining unexpired news.'); }
+    }
+    return window.MaeNews.compose(baseData, newsData);
   }
 
   // Background Watchdog for Auto-Updates
   function setupWatchdog(slideshow) {
     const pollInterval = (slideshow.config.contentPollIntervalMinutes || 10) * 60 * 1000;
     
-    setInterval(async () => {
+    const refresh = async () => {
+      if (loading) return;
+      loading = true;
       try {
         const newData = await loadSlideData();
-        if (newData && newData.slides && JSON.stringify(newData.slides) !== JSON.stringify(slideshow.slides)) {
-          console.log('Slide updates detected! Refreshing presentation in background...');
-          slideshow.slides = newData.slides;
-          slideshow.renderAllSlides();
-          slideshow.showSlide(slideshow.currentIndex);
+        if (JSON.stringify(newData.slides) !== JSON.stringify(slideshow.pendingData ? slideshow.pendingData.slides : slideshow.slides) ||
+            JSON.stringify(newData.config) !== JSON.stringify(slideshow.config)) {
+          slideshow.queueData(newData);
         }
       } catch (e) {
-        console.warn('Watchdog check failed:', e);
+        console.warn('Watchdog check failed.');
+      } finally { loading = false; }
+    };
+    setInterval(refresh, pollInterval);
+    slideshow.beforeAdvance = () => {
+      const current = window.MaeNews.compose(baseData, newsData);
+      if (JSON.stringify(current.slides) !== JSON.stringify(slideshow.pendingData ? slideshow.pendingData.slides : slideshow.slides)) slideshow.pendingData = current;
+    };
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        slideshow.beforeAdvance();
+        if (slideshow.pendingData) slideshow.applyPending(false);
+        refresh();
       }
-    }, pollInterval);
+    });
   }
 
   // Lock layout to the 2048×1152 design canvas and scale it to the viewport

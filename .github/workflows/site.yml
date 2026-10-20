@@ -1,0 +1,22 @@
+name: Validate and publish site
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+permissions: {}
+jobs:
+  test:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/tests-reusable.yml
+  deploy:
+    needs: test
+    if: github.event_name != 'pull_request'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/pages-reusable.yml
+    with:
+      revision: ${{ github.sha }}

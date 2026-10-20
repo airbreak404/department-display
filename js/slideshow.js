@@ -114,12 +114,31 @@ class SlideshowEngine {
         return this.templateAnnouncements(slide);
       case 'wayfinding':
         return this.templateWayfinding(slide);
+      case 'mae-news':
+        return this.templateMaeNews(slide);
       default:
         return this.templateSplitOverview(slide);
     }
   }
 
   /* ---------------- TEMPLATES ---------------- */
+
+  // Text has already passed sanitizeSlideData: do not escape it a second time.
+  templateMaeNews(slide) {
+    const items = slide.newsItems || [];
+    return `<div class="slide-inner news-inner">
+      <div class="badge-pill">DEPARTMENT NEWS</div>
+      <div class="news-heading-row"><h1>MAE News &amp; Highlights</h1><span class="news-page">${slide.page} / ${slide.pages}</span></div>
+      <div class="news-grid news-count-${items.length}">${items.map((item, i) => `
+        <article class="news-card ${i === 0 ? 'news-primary' : ''}">
+          <div class="news-source">${item.source}</div>
+          <h2>${item.title}</h2>
+          <div class="news-date">${window.MaeNews.formatDate(item.publishedDate)}</div>
+          <p>${item.summary}</p>
+          <div class="news-attribution">Source: wmich.edu</div>
+        </article>`).join('')}</div>
+    </div>`;
+  }
 
   templateSplitOverview(slide) {
     const metricsHtml = (slide.metrics || []).map(m => `
@@ -615,6 +634,7 @@ class SlideshowEngine {
   /* ---------------- ENGINE LIFECYCLE ---------------- */
 
   showSlide(index) {
+    if (!this.slides.length) return;
     document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
 
     this.currentIndex = (index + this.slides.length) % this.slides.length;
@@ -641,11 +661,47 @@ class SlideshowEngine {
   }
 
   nextSlide() {
+    if (this.beforeAdvance) this.beforeAdvance();
+    if (this.pendingData) { this.applyPending(true); return; }
     this.showSlide(this.currentIndex + 1);
   }
 
   prevSlide() {
+    if (this.beforeAdvance) this.beforeAdvance();
+    if (this.pendingData) this.applyPending(false);
     this.showSlide(this.currentIndex - 1);
+  }
+
+  queueData(data) {
+    this.pendingData = data;
+    if (this.isPaused) this.applyPending(false);
+  }
+
+  applyPending(advance) {
+    if (!this.pendingData || !this.pendingData.slides.length) return;
+    const previous = this.slides;
+    const index = this.currentIndex;
+    const id = previous[index] && previous[index].id;
+    const data = this.pendingData;
+    this.pendingData = null;
+    this.clearIntervals();
+    cancelAnimationFrame(this.rafId);
+    clearTimeout(this.slideTimer);
+    this.slides = data.slides;
+    this.config = data.config || {};
+    let next = this.slides.findIndex(slide => slide.id === id);
+    if (next >= 0) {
+      if (advance) next = (next + 1) % this.slides.length;
+    } else {
+      for (let offset = 1; offset <= previous.length; offset++) {
+        const survivor = previous[(index + offset) % previous.length];
+        next = this.slides.findIndex(slide => slide.id === survivor.id);
+        if (next >= 0) break;
+      }
+      if (next < 0) next = 0;
+    }
+    this.renderAllSlides();
+    this.showSlide(next);
   }
 
   startProgressBar() {

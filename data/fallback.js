@@ -7,7 +7,8 @@ window.DEFAULT_SLIDES_DATA = {
       "lat": 42.2576,
       "lon": -85.6433
     },
-    "enableKenBurns": false
+    "enableKenBurns": false,
+    "newsEnabled": false
   },
   "slides": [
     {

@@ -181,6 +181,12 @@ Changes pushed to `master` are automatically deployed to GitHub Pages. Within 15
 
 ## Local Development
 
+### MAE News Feed
+
+Official WMU news is collected weekly with verified dates, strict relevance checks, and explicit expiry. The kiosk adds up to three news pages before wayfinding, detects news-only updates, and preserves the base deck through failures. Gemini credentials remain in GitHub Actions; the browser fetches only same-origin JSON.
+
+See [MAE news operations](docs/mae-news-operations.md) for key setup, manual corrections, dry runs, deployment, emergency suppression, and rollback, and [validation evidence](docs/mae-news-validation.md) for completed and outstanding checks. Social feeds are optional and currently disabled. The public site is packaged from an explicit asset allowlist.
+
 To run the display locally:
 ```bash
 # Start a simple HTTP server

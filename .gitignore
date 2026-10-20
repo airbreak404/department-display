@@ -22,3 +22,5 @@ env/
 scratch/
 test-*.png
 screenshots/
+test-results/
+.superdesign/
