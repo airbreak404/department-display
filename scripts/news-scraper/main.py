@@ -116,6 +116,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
     report["inventory"] = len(urls)
     report["deferred"] = sum(due(u) for u in urls) - len(selected)
     report["rulesApproved"] = 0
+    report.update({"attempted": 0, "parsed": 0, "articleFailures": 0})
     for url in selected:
         if time.monotonic() >= deadline:
             report["budgetExceeded"] = True
@@ -123,6 +124,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
         candidate_id = identity(url)
         if candidate_id in blocked or url in blocked:
             continue
+        report["attempted"] += 1
         previous = state["inventory"].get(url, {})
         state["inventory"][url] = {"lastAttempt": stamp(now), "retryAfter": stamp(now + timedelta(hours=24 if url in existing_urls else 6)), "failures": 0}
         try:
@@ -135,6 +137,9 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
                 item, body = extract_event(document, url, now)
             validate_item(item, now)
         except (FetchError, ValueError) as exc:
+            expected_skip = str(exc) in {"expired", "single_structured_event_required", "event_outside_upcoming_window", "no_upcoming_verified_events", "event_cancelled_or_rescheduled"}
+            if isinstance(exc, FetchError) or not expected_skip or url in existing_urls and str(exc) == "single_structured_event_required":
+                report["articleFailures"] += 1
             failures = min(previous.get("failures", 0) + 1, 10)
             state["inventory"][url].update({"failures": failures,
                 "retryAfter": stamp(now + timedelta(hours=min(2 ** failures, 168)))})
@@ -145,6 +150,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
                 blocked.add(candidate_id)  # A known cancelled/past event must not be retained.
             report["candidates"].append({"id": candidate_id, "url": url, "status": str(exc)})
             continue
+        report["parsed"] += 1
         if candidate_id in manual_ids:
             report["candidates"].append({"id": candidate_id, "url": url, "title": item["title"],
                                          "publishedDate": item["publishedDate"], "status": "manual_approved"})
@@ -173,7 +179,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
             status = "rejected"
         report["candidates"].append({"id": candidate_id, "url": url, "title": item["title"],
                                      "publishedDate": item["publishedDate"], "status": status,
-                                     "reason": judge.error if decision is None else decision["reason"]})
+                                     "reason": (judge.error or ("call_budget_exhausted" if judge.calls >= MAX_CALLS else "no_decision")) if decision is None else decision["reason"]})
     items = merge(old["items"], approved, blocked, now)
     # Manual approval can supply verified event expiry, but cannot override explicit blocks.
     items = merge(items, manual, set(overrides["blocked"]) | removed, now)
@@ -183,9 +189,10 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
     report["deferred"] = sum(due(u) for u in urls if identity(u) not in blocked and u not in blocked)
     automation_ready = not report.get("budgetExceeded", False) and not report["inventoryTruncated"]
     classifier_status = judge.error or ("call_budget_exhausted" if judge.calls >= MAX_CALLS and report["held"] else "available")
+    parser_degraded = report["articleFailures"] >= 3 and report["articleFailures"] * 4 >= report["attempted"]
     report.update({"status": "degraded" if not automation_ready else
                             "degraded" if judge.error else
-                            "partial" if classifier_status == "call_budget_exhausted" or report["deferred"] else
+                            "partial" if parser_degraded or classifier_status == "call_budget_exhausted" or report["deferred"] else
                             "ok" if all(s["status"] == "ok" for s in report["sources"]) else "partial",
                    "classifierStatus": classifier_status, "items": len(items),
                    "automationReady": automation_ready,
@@ -194,6 +201,8 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
     report["classificationFailures"] = getattr(judge, "failures", {})
     if judge.error:
         print("::warning title=MAE news coverage reduced::Gemini unavailable; explicit relevance rules remain automatic. Uncertain stories are skipped; inspect diagnostics.")
+    if parser_degraded:
+        print("::warning title=MAE article intake degraded::At least a quarter of attempted article/event pages failed retrieval or parsing. Retained valid content; inspect candidate diagnostics.")
     if len(items) < 3:
         report["coverageWarning"] = "Fewer than three eligible stories; inspect source health and skipped candidates."
     report["socialCoverage"] = "not_connected: no authorized account access"
@@ -201,6 +210,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
               "items": len(items), "classifierStatus": report["classifierStatus"],
               "automaticRules": relevance.VERSION, "sources": report["sources"],
               "inventory": len(urls), "deferred": report["deferred"],
+              "attempted": report["attempted"], "parsed": report["parsed"], "articleFailures": report["articleFailures"],
               "feedSha256": hashlib.sha256((json.dumps(output, ensure_ascii=False, indent=2) + "\n").encode()).hexdigest(),
               "socialCoverage": report["socialCoverage"]}
     if not dry_run:

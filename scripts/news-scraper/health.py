@@ -12,13 +12,20 @@ from news import instant
 
 def validate(value):
     fields = {"schemaVersion", "checkedAt", "status", "items", "classifierStatus", "automaticRules", "sources", "inventory", "deferred", "socialCoverage"}
-    if (not isinstance(value, dict) or set(value) not in (fields, fields | {"feedSha256"}) or
+    if (not isinstance(value, dict) or not fields <= set(value) or
+            set(value) - fields - {"feedSha256", "attempted", "parsed", "articleFailures"} or
             value["schemaVersion"] != 1 or value["status"] not in {"ok", "partial", "degraded"} or
             type(value["items"]) is not int or not 0 <= value["items"] <= 8 or
             any(type(value[k]) is not int or not 0 <= value[k] <= 1200 for k in ("inventory", "deferred")) or
             not isinstance(value["sources"], list) or len(value["sources"]) > 30):
         raise ValueError("health_schema")
     instant(value["checkedAt"])
+    for key in ("attempted", "parsed", "articleFailures"):
+        if key in value and (type(value[key]) is not int or not 0 <= value[key] <= 80):
+            raise ValueError("health_intake_counts")
+    metrics = {"attempted", "parsed", "articleFailures"} & set(value)
+    if metrics and (len(metrics) != 3 or value["parsed"] + value["articleFailures"] > value["attempted"]):
+        raise ValueError("health_intake_consistency")
     if "feedSha256" in value and (not isinstance(value["feedSha256"], str) or not re.fullmatch(r"[a-f0-9]{64}", value["feedSha256"])):
         raise ValueError("health_hash")
     for key in ("classifierStatus", "automaticRules", "socialCoverage"):
@@ -45,6 +52,8 @@ def check(value, now):
         raise ValueError("collector_stale_or_future")
     if not any(s["status"] == "ok" for s in value["sources"]):
         raise ValueError("no_healthy_sources")
+    if value.get("attempted", 0) >= 3 and value.get("parsed", 0) == 0 and value.get("articleFailures", 0) >= 3:
+        raise ValueError("article_intake_outage")
     return value
 
 

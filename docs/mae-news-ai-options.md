@@ -1,6 +1,6 @@
 # Free classification provider choice
 
-Checked October 20, 2026 after the owner supplied their Copilot Student settings. That snapshot shows 200 included AI credits, additional usage disabled and a $0 spending budget. Those settings were not changed.
+Checked October 20, 2026. The comparison uses the no-paid-services requirement. No Copilot credits were consumed and no billing settings were changed. Individual account billing details are not needed in this operational guide.
 
 Keep Gemini as the current classifier. It has a direct structured-output API, a configured Actions secret, and successful live positive/negative tests. Narrow local rules, content-hash caching, bounded generation and automatic retries on later runs reduce dependence on an external model. Keep Google project billing disabled; a key cannot prove billing status. There is no automatic paid-model fallback or search grounding. [Google pricing](https://ai.google.dev/gemini-api/docs/pricing).
 

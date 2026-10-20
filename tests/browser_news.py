@@ -108,7 +108,9 @@ def run():
             # Verify every real published URL, including the longer source slugs,
             # at both actual screen scales, independently of the QR encoder.
             real = json.loads((ROOT / 'data/news.json').read_text(encoding='utf-8'))
-            real['items'].append({**real['items'][0], 'id': 'f' * 24,
+            real['items'] = [i for i in real['items'] if datetime.fromisoformat(i['expiresAt'].replace('Z', '+00:00')) > datetime.now(timezone.utc)]
+            query_fixture = real['items'][0] if real['items'] else feed(1)['items'][0]
+            real['items'].append({**query_fixture, 'id': 'f' * 24,
                                   'url': 'https://wmich.edu/engineer/news/2026/10/example?id=1&view=full'})
             for start in range(0, len(real['items']), 3):
                 chunk = {**real, 'items': real['items'][start:start + 3]}

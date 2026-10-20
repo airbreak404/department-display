@@ -22,6 +22,8 @@ Read current health from [the raw repository record](https://raw.githubuserconte
 
 Every displayed item has its own locally generated QR code opening that exact source URL. Future social posts use their original post URLs when connected. Black/white 224px symbols include quiet borders; generation is cached and has no QR-service request or paid dependency. Department wayfinding uses the same local encoder. The MIT-licensed vendor build is hash-pinned and independently decoded in Chromium screenshot tests at both screen sizes. Phone scanning under actual lighting and distance remains part of physical review.
 
+The collector's immutable output artifact must pass a separate read-only validation/QR job before publication gets write access. It uses the exact source revision, no API key and no persisted checkout credentials. Any malformed output or unreadable/wrong QR stops publication. An article-parser outage is detected independently of successful index pages; partial failure ratios produce warnings and total article intake failure makes the health check fail.
+
 Direct Instagram, LinkedIn and Facebook collection is **not connected**. The official accounts are confirmed but the user has no admin access. See [social access](mae-news-social-access.md). Do not bypass controls, purchase RSS bridges or claim unverified social ingestion. ScholarWorks lists archival 2016-2020 newsletters and remains unsuitable for current news.
 
 ## Manual verification and corrections

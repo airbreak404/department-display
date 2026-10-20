@@ -105,6 +105,21 @@ class AutomationTests(unittest.TestCase):
             self.assertTrue(report['cacheRecovered'])
             self.assertEqual(report['items'], 1)
 
+    def test_healthy_listings_cannot_hide_article_parser_outage(self):
+        class BrokenArticles:
+            def get(self, url):
+                if url == 'https://wmich.edu/engineer/news':
+                    return '<main>' + ''.join(f'<a href="/engineer/news/2026/10/story-{i}">News</a>' for i in range(3)) + '</main>'
+                return '<main>Publisher layout changed</main>'
+        with tempfile.TemporaryDirectory() as temp, patch('main.source_urls', return_value=['https://wmich.edu/engineer/news']):
+            report, code = run(Path(temp), client=BrokenArticles(), classifier=Judge(), now=NOW)
+            self.assertEqual(code, 0)
+            self.assertEqual(report['sources'][0]['status'], 'ok')
+            self.assertEqual((report['attempted'], report['parsed'], report['articleFailures']), (3, 0, 3))
+            self.assertEqual(report['status'], 'partial')
+            value = json.loads((Path(temp) / 'data/news-health.json').read_text())
+            with self.assertRaisesRegex(ValueError, 'article_intake_outage'): check(value, NOW)
+
     def test_event_dates_expiry_and_cancel(self):
         event = {'@type': 'Event', 'name': 'MAE career fair', 'startDate': '2026-11-04T13:00:00-05:00',
                  'endDate': '2026-11-04T15:00:00-05:00', 'description': 'Open to all students.'}
