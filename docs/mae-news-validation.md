@@ -1,5 +1,7 @@
 # MAE news validation ledger
 
+Current result: deployed and visible on both real displays; 19 Python regressions and Chromium checks pass; real news-only polling verified without document/browser reload. Remaining: configure a Gemini key and verify live AI classification; complete and review the running 24-hour soak.
+
 ## 2026-10-20 implementation checks
 
 - Source repository started clean at `aa5aa01`; default branch `master`.
@@ -48,3 +50,15 @@ See later entries below for evidence gathered after this checkpoint. Do not infe
 - 18 Python tests and real Chromium regressions passed locally and in Linux CI.
 - A hidden 24-hour collector started at 11:59:40 EDT (local PID 14080), sampling every five minutes. First enabled sample succeeded with zero collection failures. Evidence: local `scratch/soak/status.json` and `samples.jsonl`. Soak acceptance remains pending.
 - A genuine live news-only refresh without document/browser reload is being checked separately; Chromium regression coverage already passes. Do not infer this gate from the initial deployment reload.
+
+## Final live content-refresh proof
+
+- [Second ingestion and explicit deployment](https://github.com/airbreak404/department-display/actions/runs/39453684523) applied a manually reviewed correction: the source excerpt now ends at a complete sentence and removes an inline-link spacing artifact. Bot commit `61af9ae` changed only generated `data/news.json`.
+- Both real browsers picked up that deployed correction by the 12:09:40 EDT probe through their normal 10-minute content poll and slide-boundary update. No reload, visibility event, fake feed, accelerated clock, or manual refresh was used for this proof.
+- Before and after document time origins remained **1792511940193.1** (2560×1440) and **1792511935332.8** (2048×1152). Chrome PID remained **65345**. The service still reported `NRestarts=0`; both displays retained 21 slides and unpaused cycling.
+- The exact corrected excerpt was observed in each live deck. DOM count remained 959 per page. Short heap samples varied within the same range; the 24-hour trend remains pending.
+- [Final Linux regression/deployment run](https://github.com/airbreak404/department-display/actions/runs/39454169198) passed after correcting publisher attribution and inline punctuation. All 19 Python tests and real Chromium checks passed. Both runtime and test dependency audits found no known vulnerabilities.
+- Source change revision is `9858443`. Documentation-only pushes now skip site deployment to avoid unnecessary kiosk update notifications.
+- Live screenshots of the news page were visually checked on each display; synthetic one-, two-, and three-card layouts were also visually checked at both target sizes. Evidence and the final read-only probe are retained locally under `scratch/kiosk/` and `test-results/`.
+- Repository secrets were checked and `GEMINI_API_KEY` remains absent. Live AI classification is intentionally unverified and held fail-closed. The functioning visible seed is a source-verified manual approval, not an AI approval.
+- The 24-hour collector continues in the background under PID 14080. It started October 20 at 11:59:40 EDT and should finish around October 21 noon EDT. Inspect `scratch/soak/status.json` and `samples.jsonl` afterward; collection success alone does not establish visual smoothness. Do not mark soak acceptance complete until reviewed.
