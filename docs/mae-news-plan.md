@@ -2,6 +2,8 @@
 
 Reviewed October 20, 2026 against repository baseline `aa5aa01`. This specification supersedes the original Desktop plan. Implementation details and operational commands are in [operations](mae-news-operations.md); actual results and remaining gates are in [validation](mae-news-validation.md).
 
+Coverage follow-up: see [remaining work](mae-news-remaining-work.md). Discovery now also covers WMU latest news and monthly archives for the retention window, including pagination and other official departmental news publishers. Manual event invitations may expire at a verified start when an end is unavailable. AI unavailability is reported as degraded automation, and the feed now includes four source-reviewed items rather than a single seed. Social and currently inaccessible bulletin feeds remain unfinished optional coverage.
+
 ## Goal and selected defaults
 
 Add up to eight verified MAE news stories to the existing dual-display hallway kiosk using official WMU sources, weekly GitHub Actions ingestion, committed JSON, and explicit GitHub Pages deployment. Automatically publish only strictly validated, relevant stories. Hold uncertain candidates. Social sources are optional additions, not launch dependencies. Keep the existing base deck and kiosk operating configuration reliable through news failures.

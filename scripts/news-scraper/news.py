@@ -12,8 +12,37 @@ from network import FetchError, safe_url
 
 UTC = timezone.utc
 SOURCES = ("https://wmich.edu/engineer/news", "https://wmich.edu/mechanical-aerospace")
-ARTICLE_PATH = re.compile(r"^/(?:engineer/news|news(?:/news)?)/\d{4}/\d{2}/[^/]+/?$")
-EVENT = re.compile(r"\b(?:will (?:host|hold|honor|present)|upcoming|register|registration|deadline|join us|takes? place|scheduled|invites?|welcomes?|to host)\b", re.I)
+ARTICLE_PATH = re.compile(r"^/(?:[a-z][a-z0-9-]*/)?news/\d{4}/\d{2}/[^/]+/?$")
+# Future project presentations are not themselves invitations to a dated event.
+EVENT = re.compile(r"\b(?:will (?:host|hold|honor)|upcoming|register|registration|deadline|join us|takes? place|scheduled|invites?|welcomes?|to host)\b", re.I)
+EVENT_TITLE = re.compile(r"\b(?:events?|speaker series|seminar|workshop|ceremony|career fair|conference)\b", re.I)
+DISCOVERY_HINT = re.compile(r"\b(?:engineer\w*|mechanical|aerospace|propulsion|robot\w*|sunseeker|ecocar|bronco racing|baja|aiaa|wali|lemmer|gustafson|fajardo|scholarship\w*|career fair\w*|research opportunit\w*)\b", re.I)
+
+
+def source_urls(now):
+    """Bounded backfill covering the entire 180-day retention window."""
+    today = now.astimezone(ZoneInfo("America/New_York")).date()
+    earliest = today - timedelta(days=180)
+    months = []
+    year, month = today.year, today.month
+    while (year, month) >= (earliest.year, earliest.month):
+        months.append(f"https://wmich.edu/news/{year}/{month:02d}")
+        year, month = (year - 1, 12) if month == 1 else (year, month - 1)
+    return list(SOURCES) + ["https://wmich.edu/news/latest"] + months
+
+
+def next_listing(document, base):
+    """Follow only a publisher's explicit same-listing next link, max 3 pages."""
+    soup = BeautifulSoup(document, "html.parser")
+    link = soup.select_one('.pager a[rel="next"][href]')
+    if not link:
+        return None
+    target = canonical(urljoin(base, link["href"]))
+    original, result = urlsplit(base), urlsplit(target)
+    query = dict(parse_qsl(result.query))
+    if (original.path != result.path or set(query) != {"page"} or query["page"] not in {"1", "2"}):
+        return None
+    return target
 
 
 def text(value, limit=None):
@@ -42,14 +71,20 @@ def discovery(document, base):
     soup = BeautifulSoup(document, "html.parser")
     area = soup.select_one("main") or soup
     links = set()
+    recognized = 0
+    broad = urlsplit(base).path.startswith("/news/")
     for anchor in area.select("a[href]"):
         try:
             url = canonical(urljoin(base, anchor["href"]))
             if ARTICLE_PATH.fullmatch(urlsplit(url).path):
-                links.add(url)
+                recognized += 1
+                row = anchor.find_parent("div", class_="views-row")
+                context = row.get_text(" ", strip=True) if row else anchor.get_text(" ", strip=True)
+                if not broad or DISCOVERY_HINT.search(context):
+                    links.add(url)
         except (ValueError, FetchError):
             continue
-    if not links:
+    if not recognized:
         raise ValueError("listing_parser_failure")
     return sorted(links, reverse=True)
 
@@ -113,9 +148,9 @@ def extract(document, url, now):
     expiry = datetime.combine(published + timedelta(days=180), time.min, UTC)
     result = {"id": identity(url), "title": title, "url": canonical(url),
               "publishedDate": published.isoformat(), "summary": summary,
-              "source": "WMU News" if urlsplit(url).path.startswith("/news/") else
-                        "WMU College of Engineering and Applied Sciences", "expiresAt": stamp(expiry)}
-    return result, content, bool(EVENT.search(title + " " + content))
+              "source": "WMU College of Engineering and Applied Sciences" if urlsplit(url).path.startswith("/engineer/") else
+                        "WMU News", "expiresAt": stamp(expiry)}
+    return result, content, bool(EVENT.search(title + " " + content) or EVENT_TITLE.search(title))
 
 
 def stamp(value):

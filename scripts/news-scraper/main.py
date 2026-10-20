@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 
 from classifier import Classifier, MODEL, PROMPT_VERSION
 from network import Client, FetchError
-from news import SOURCES, discovery, extract, identity, merge, stamp, validate_feed, validate_item
+from news import source_urls, next_listing, discovery, extract, identity, merge, stamp, validate_feed, validate_item
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -53,18 +53,27 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
     if any(not isinstance(value, str) for value in blocked):
         raise ValueError("override_block_type")
     manual = [validate_item(item, now, allow_expired=True) for item in overrides["approved"]]
+    manual_ids = {item["id"] for item in manual}
     state_path = root / "scripts/news-scraper/state.json"
     state = read(state_path, {"version": 1, "decisions": {}})
     if state.get("version") != 1 or not isinstance(state.get("decisions"), dict):
         raise ValueError("state_schema")
     http = client or Client()
-    urls = set(item["url"] for item in old["items"])
+    urls = {item["url"] for item in old["items"] + manual}
     successes = 0
-    for source in SOURCES:
+    sources = source_urls(now)
+    for source in sources:
+        if time.monotonic() >= deadline:
+            report["budgetExceeded"] = True
+            break
         try:
-            found = discovery(http.get(source), source)
+            document = http.get(source)
+            found = discovery(document, source)
             urls.update(found)
             report["sources"].append({"source": source, "status": "ok", "links": len(found)})
+            following = next_listing(document, source)
+            if following and following not in sources and len(sources) < 30:
+                sources.append(following)
             successes += 1
         except (FetchError, ValueError) as exc:
             report["sources"].append({"source": source, "status": str(exc)})
@@ -78,7 +87,12 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
     removed = set()
     # Recheck displayed stories first, then newest paths. All requests stay bounded.
     existing_urls = {item["url"] for item in old["items"]}
-    selected = sorted(urls, key=lambda u: (u not in existing_urls, tuple(-ord(c) for c in u)))[:100]
+    import re
+    def priority(url):
+        match = re.search(r"/(\d{4})/(\d{2})/", url)
+        month = int(match[1]) * 12 + int(match[2]) if match else 0
+        return (url not in existing_urls, -month, url)
+    selected = sorted(urls, key=priority)[:100]
     for url in selected:
         if time.monotonic() >= deadline:
             report["budgetExceeded"] = True
@@ -93,7 +107,11 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
             if isinstance(exc, FetchError) and exc.kind == "not_found":
                 blocked.add(candidate_id)
                 removed.add(candidate_id)
-            report["candidates"].append({"id": candidate_id, "status": str(exc)})
+            report["candidates"].append({"id": candidate_id, "url": url, "status": str(exc)})
+            continue
+        if candidate_id in manual_ids:
+            report["candidates"].append({"id": candidate_id, "url": url, "title": item["title"],
+                                         "publishedDate": item["publishedDate"], "status": "manual_approved"})
             continue
         fingerprint = hashlib.sha256(json.dumps([item, body, MODEL, PROMPT_VERSION], sort_keys=True).encode()).hexdigest()
         cached = state["decisions"].get(candidate_id, {})
@@ -102,7 +120,8 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
             # Event dates cannot safely be inferred by relevance AI. Use explicit manual metadata.
             report["held"] += 1
             blocked.add(candidate_id)
-            report["candidates"].append({"id": candidate_id, "title": item["title"], "status": "event_needs_review"})
+            report["candidates"].append({"id": candidate_id, "url": url, "title": item["title"],
+                                         "publishedDate": item["publishedDate"], "status": "event_needs_review"})
             continue
         if decision is None:
             decision = judge.classify(item, body)
@@ -120,16 +139,26 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
             blocked.add(candidate_id)
             report["rejected"] += 1
             status = "rejected"
-        report["candidates"].append({"id": candidate_id, "title": item["title"], "status": status})
+        report["candidates"].append({"id": candidate_id, "url": url, "title": item["title"],
+                                     "publishedDate": item["publishedDate"], "status": status,
+                                     "reason": judge.error if decision is None else decision["reason"]})
     items = merge(old["items"], approved, blocked, now)
     # Manual approval can supply verified event expiry, but cannot override explicit blocks.
     items = merge(items, manual, set(overrides["blocked"]) | removed, now)
     output = {"schemaVersion": 1, "contentUpdatedAt": old["contentUpdatedAt"] if items == old["items"] else stamp(now),
               "items": items}
     validate_feed(output, now)
-    report.update({"status": "ok" if all(s["status"] == "ok" for s in report["sources"]) else "partial",
+    automation_ready = judge.error is None and not report.get("budgetExceeded", False)
+    report.update({"status": "degraded" if not automation_ready else
+                            "ok" if all(s["status"] == "ok" for s in report["sources"]) else "partial",
                    "classifierStatus": judge.error or "available", "items": len(items),
+                   "automationReady": automation_ready,
+                   "manualApproved": sum(item["id"] in manual_ids for item in items),
                    "contentChanged": output != old, "requests": judge.calls})
+    if judge.error:
+        print("::warning title=MAE news automation incomplete::AI classification unavailable; new uncertain stories are held. Configure GEMINI_API_KEY and inspect the news report.")
+    if len(items) < 3:
+        report["coverageWarning"] = "Fewer than three eligible stories; review sources and held candidates."
     if not dry_run:
         atomic(feed_path, output)
         state["decisions"] = {k: v for k, v in state["decisions"].items()

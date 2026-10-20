@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT / "scripts/news-scraper"))
 from classifier import Classifier, response_value
 from main import atomic, run
 from network import Client, FetchError, LIMIT, safe_url
-from news import canonical, discovery, extract, identity, merge, stamp, validate_feed, validate_item
+from news import SOURCES, canonical, discovery, extract, identity, merge, next_listing, source_urls, stamp, validate_feed, validate_item
 
 NOW = datetime(2026, 10, 20, 15, tzinfo=timezone.utc)
 URL = "https://wmich.edu/engineer/news/2026/10/research"
@@ -46,6 +46,36 @@ class Http:
 
 
 class FeedTests(unittest.TestCase):
+    def setUp(self):
+        # Keep pipeline failure fixtures independent of the live archive inventory.
+        patcher = patch("main.source_urls", return_value=list(SOURCES))
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def test_retention_window_archive_sources(self):
+        sources = source_urls(NOW)
+        self.assertIn("https://wmich.edu/news/2026/04", sources)
+        self.assertIn("https://wmich.edu/news/2026/10", sources)
+        self.assertNotIn("https://wmich.edu/news/2026/03", sources)
+        self.assertIn("https://wmich.edu/news/latest", sources)
+
+    def test_broad_discovery_uses_teaser_and_all_publishers(self):
+        listing = '<main><div class="views-row"><h2><a href="/international/news/2026/08/alumnus">A local success story</a></h2><p>Aerospace engineering alumnus at WMU.</p></div></main>'
+        self.assertEqual(discovery(listing, 'https://wmich.edu/news/2026/08'), ['https://wmich.edu/international/news/2026/08/alumnus'])
+        # Recognized but unrelated news is a healthy listing with no candidates.
+        unrelated = listing.replace('Aerospace engineering alumnus at WMU.', 'Music recital.')
+        self.assertEqual(discovery(unrelated, 'https://wmich.edu/news/2026/08'), [])
+
+    def test_pagination_is_bounded_to_same_listing(self):
+        document = '<nav class="pager"><a rel="next" href="?page=1">Next</a></nav>'
+        self.assertEqual(next_listing(document, 'https://wmich.edu/news/2026/09'), 'https://wmich.edu/news/2026/09?page=1')
+        for href in ('?page=3', '/news/2026/08?page=1', '?page=1&other=x'):
+            self.assertIsNone(next_listing(document.replace('?page=1', href), 'https://wmich.edu/news/2026/09'))
+
+    def test_program_future_presentation_is_not_dated_event(self):
+        markup = ARTICLE.replace('tested a new propulsion system.', 'will present their final vehicles at the conclusion of the multiyear program.')
+        self.assertFalse(extract(markup, URL, NOW)[2])
+        self.assertTrue(extract(ARTICLE.replace('MAE researchers develop new propulsion', 'MAE seminar announced'), URL, NOW)[2])
     def test_extract_only_article_body_and_verified_date(self):
         value, content, event = extract('<nav>bad</nav>' + ARTICLE, URL, NOW)
         self.assertEqual(value["publishedDate"], "2026-10-05")
@@ -162,6 +192,18 @@ class FeedTests(unittest.TestCase):
             self.assertFalse((root / "data/news.json").exists())
             self.assertFalse((root / "scripts/news-scraper/state.json").exists())
             self.assertEqual(result["items"], 0)
+
+    def test_manual_approval_does_not_need_an_ai_key(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root, judge = Path(temp), Judge(None)
+            judge.error = 'missing_key'
+            atomic(root / 'data/news-overrides.json', {'approved': [item()], 'blocked': []})
+            report, _ = run(root, client=Http(), classifier=judge, now=NOW)
+            self.assertEqual(report['held'], 0)
+            self.assertEqual(report['manualApproved'], 1)
+            self.assertFalse(report['automationReady'])
+            self.assertEqual(report['status'], 'degraded')
+            self.assertEqual(judge.calls, 0)
 
     def test_real_source_fixture(self):
         fixture = ROOT / "tests/fixtures/lemmer.html"
