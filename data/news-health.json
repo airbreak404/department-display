@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-20T17:44:10Z",
+  "checkedAt": "2026-10-20T18:06:42Z",
   "status": "partial",
-  "items": 8,
+  "items": 7,
   "classifierStatus": "call_budget_exhausted",
-  "automaticRules": "rules-2",
+  "automaticRules": "rules-3",
   "sources": [
     {
       "source": "https://wmich.edu/engineer/news",
@@ -92,6 +92,6 @@
   "attempted": 73,
   "parsed": 34,
   "articleFailures": 1,
-  "feedSha256": "29b068a2d8158a747dbe5607abd1f0edde6af84c7c2c873c0b5530e9799f17f5",
+  "feedSha256": "d2052cc2696bac0c5066cef429873bb5889ea24e0b39bc71ce4728a707786788",
   "socialCoverage": "not_connected: no authorized account access"
 }

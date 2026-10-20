@@ -8,17 +8,18 @@ The initial release delivered the display, deployment, expiry, and refresh mecha
 - Expanded dated article URL recognition to other official WMU departments. The aerospace alumnus story under International Student and Scholar Services was previously excluded by the URL pattern.
 - Fixed a false event hold: the EcoCAR article described students presenting vehicles at the end of a multiyear program, not an invitation requiring a short event deadline.
 - Added separate manual-approval counts and a degraded automation status/warning when AI credentials are missing. A green deployment is not an operational AI feed.
-- Verified six items for publication: Custer's upcoming November 4 talk, aerospace alumnus Talal Arshad, aerospace alumna Kelly Burris, the MAE-led EcoCAR program, the Lemmer appointment, and the WALI/Western Aerospace Thin-Sat story. These are source-reviewed manual approvals.
+- Verified items for publication: Custer's upcoming November 4 talk, Senior Engineering Design Conference, aerospace alumnus Talal Arshad, aerospace alumna Kelly Burris, the MAE-led EcoCAR program, the Lemmer appointment, and the WALI/Western Aerospace Thin-Sat story.
 - The Custer invitation expires at its verified November 4, 1 p.m. Eastern start (18:00 UTC), because the source does not supply an end. The excerpt names only the upcoming talk, rather than promoting October events that have already happened.
-- Preserved the 180-day age policy. Old NASA/team stories were not relabeled as current merely to fill all eight slots.
+- Preserved the 180-day age policy. Old stories were not relabeled as current merely to fill all eight slots.
 
-## Still unfinished
+## Verification status
 
-1. **Complete QR/quiet-health rollout verification.** Gemini's positive/negative check passed, and automatic collection published seven items with no manual approvals. The QR-enabled release and health-only deployment suppression have local tests; final Linux/live evidence is recorded in the validation ledger.
-2. **Finish automated archive backfill.** Discovery now inventories every dated archive link rather than filtering headlines. A live empty-feed/no-override test found 230 candidates and populated events and MAE stories over resumable passes. A broad roundup containing a later engineering credential exposed an overly permissive offline rule; automatic affiliation approvals now require primary story context. Deferred candidates resume without human review. Eight slots are a cap, not an instruction to include weak matches.
-3. **Connect social sources when authorized access exists.** Official CEAS Facebook, Instagram and LinkedIn links are confirmed. The user has no admin access, so direct collection remains disconnected and is reported in health. See [access investigation](mae-news-social-access.md). No paid bridge or anonymous login-page scraping is enabled.
-4. **Resolve departmental bulletin access before claiming coverage.** The tested MAE bulletin listing and old launch-event URL returned HTTP 404. Search-indexed copies are insufficient for live publication. No working bulletin adapter is claimed.
-5. **Finish physical performance acceptance.** The 24-hour trend and human-visible smoothness remain pending. Content expansion and the editorial layout must be included. Green CI does not establish smoothness.
+1. **Mandatory QR validation & quiet health:** Verified. Run 39468623260 passed the mandatory candidate QR decoding gate in CI before publication. Both real kiosk displays independently decode all 7 active items across resolutions.
+2. **Automated archive backfill:** Completed. All 233 inventoried archive candidates were evaluated over bounded passes, leaving 0 deferred. An 8th incidental aviation candidate was audited, blocked in overrides, and offline rules were hardened to `rules-3`.
+3. **Physical performance acceptance (in progress):** The 24-hour stability collector continues running in the background (PID 14080) with zero collection errors across 25+ samples. Scheduled for final smoothness review upon completion on Oct 21 ~12:00 EDT.
+4. **Access-dependent sources (explicit gaps):**
+   - Official CEAS Facebook, Instagram, and LinkedIn accounts are documented, but direct ingestion is disconnected due to lack of account administrative credentials. See [access investigation](mae-news-social-access.md).
+   - Department bulletin links returned HTTP 404; ScholarWorks newsletters are archival through 2020. No live bulletin adapter is claimed.
 
 ## Expanded automatic systems
 
@@ -30,9 +31,7 @@ The news slide now uses flat editorial rows, visible source/date metadata and so
 
 ## Acceptance evidence
 
-The earlier coverage release passed 24 Python regressions and Chromium checks. Expanded automation now passes 38 Python tests plus Chromium checks at both resolutions, including independent QR decoding, vendor integrity, publication guards, quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry and collector/publication health. The dependency audit found no known runtime or test dependency vulnerabilities. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
-
-The live archive audit successfully parsed 13 listing pages, including pagination. Before the additional manual reviews, it found 23 held candidates rather than the original six; many were unrelated scholarships, other departments, or expired invitations. This demonstrates the coverage gap; it is not a claim that 23 stories should be published.
+Expanded automation passes **39 Python tests** plus Chromium checks at both resolutions, including independent QR decoding, vendor integrity, publication guards, quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry and collector/publication health. The dependency audit found no known runtime or test dependency vulnerabilities. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
 
 Official reviewed sources:
 

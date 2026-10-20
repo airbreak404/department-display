@@ -1121,16 +1121,6 @@
       },
       "expiresAt": "2026-11-01T00:00:00Z"
     },
-    "e68f1c27067d6e8828d67e30": {
-      "hash": "6aa90d63dee9eb5b104d3a2c6ec7527fdb06eb6926696ad4d60eeb0fdd79bba1",
-      "decision": {
-        "id": "e68f1c27067d6e8828d67e30",
-        "relevant": true,
-        "reason": "Explicit WMU mechanical/aerospace engineering affiliation",
-        "method": "rules-2"
-      },
-      "expiresAt": "2026-10-26T00:00:00Z"
-    },
     "af925dc44ed7e0061a490e75": {
       "hash": "8bfaf1b8a975735265b1d8cc4e1e6ebf61a67d62f28436e631dad74883578d3e",
       "decision": {

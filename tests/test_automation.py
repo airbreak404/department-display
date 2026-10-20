@@ -74,6 +74,13 @@ class AutomationTests(unittest.TestCase):
         self.assertIsNone(classify(item(), 'WMU hosts a professor of mechanical engineering from University of Michigan.'))
         self.assertIsNone(classify(item(), 'WMU electrical engineering students received a scholarship.'))
         self.assertFalse(classify(dict(item(), title='Student music recital'), 'WMU students perform music for all students.')['relevant'])
+        klimas = ('It was the latter for Kevin Klimas, a senior majoring in aviation management and operations in the WMU College of Aviation.\n'
+                  'Two buddies lured Klimas to an informational meeting focusing on the Western chapter of Alpha Eta Rho, a coed professional '
+                  'aviation business fraternity, that links higher education to all aspects of the aviation industry, promoting careers in that '
+                  'field, in aeronautical engineering and in the aerospace sciences.')
+        self.assertIsNone(classify(dict(item(), url='https://wmich.edu/aviation/news/2026/04/klimas',
+                                        title="From Student Involvement to Airline Operations: Kevin Klimas' Aviation Management Path"), klimas))
+        self.assertIsNone(classify(item(), 'Western chapter of a fraternity promotes careers in aeronautical engineering.'))
 
     def test_inclusive_ceas_opportunity(self):
         opportunity = dict(item(), title='Engineering career fair')
