@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentUpdatedAt": "2026-10-20T17:14:13Z",
+  "contentUpdatedAt": "2026-10-20T17:44:10Z",
   "items": [
     {
       "id": "d96c2096dfed45a6faf60ad0",
@@ -66,6 +66,15 @@
       "summary": "The aerospace engineering master’s student followed the glowing arch of the SpaceX Falcon 9 rocket on March 30 as it carried Transporter-16—with his payload, the Western Aerospace Thin-Sat, on board—into the ionosphere. Scott’s research now rests in low Earth orbit, where no Bronco satellite has…",
       "source": "WMU News",
       "expiresAt": "2026-11-01T00:00:00Z"
+    },
+    {
+      "id": "e68f1c27067d6e8828d67e30",
+      "title": "From Student Involvement to Airline Operations: Kevin Klimas’ Aviation Management Path",
+      "url": "https://wmich.edu/aviation/news/2026/04/klimas",
+      "publishedDate": "2026-04-29",
+      "summary": "Two buddies lured Klimas to an informational meeting focusing on the Western chapter of Alpha Eta Rho, a coed professional aviation business fraternity, that links higher education to all aspects of the aviation industry, promoting careers in that field, in aeronautical engineering and in the…",
+      "source": "WMU News",
+      "expiresAt": "2026-10-26T00:00:00Z"
     }
   ]
 }
