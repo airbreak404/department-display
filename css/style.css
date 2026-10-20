@@ -1962,7 +1962,9 @@ body.idle-cursor * {
 .news-heading-row h1 { font-size: 60px; color: white; letter-spacing: -1px; }
 .news-page { font: 26px var(--font-primary); color: var(--wmu-sand); }
 .news-grid { display: grid; grid-template-rows: repeat(3, minmax(0, 1fr)); flex: 1; min-height: 0; }
-.news-card { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 38px; align-content: center; padding: 22px 0; border-bottom: 1px solid #685538; min-width: 0; min-height: 0; }
+.news-card { display: grid; grid-template-columns: 260px minmax(0, 1fr) 240px; gap: 30px; align-content: center; align-items: center; padding: 12px 0; border-bottom: 1px solid #685538; min-width: 0; min-height: 0; }
+.news-qr { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--wmu-sand); text-decoration: none; font: 22px/1.2 var(--font-primary); }
+.news-qr img { display: block; width: 224px; height: 224px; background: white; image-rendering: pixelated; }
 .news-card:last-child { border-bottom: 0; }
 .news-meta { display: flex; flex-direction: column; gap: 14px; }
 .news-source { color: var(--wmu-sand); font: 600 24px/1.35 var(--font-primary); overflow-wrap: anywhere; }

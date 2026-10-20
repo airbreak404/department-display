@@ -9,16 +9,22 @@ from unittest.mock import Mock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts/news-scraper'))
 from events import extract_event, CUSTER
-from health import check
+from health import check, verify_deployment
 from main import run
 from news import merge, validate_item
 from relevance import classify
 from state import validate as validate_state
 from classifier import Classifier, MAX_CALLS
 from test_news import ARTICLE, Http, Judge, NOW, URL, item
+import publish
 
 
 class AutomationTests(unittest.TestCase):
+    def test_vendored_qr_encoder_matches_reviewed_distribution(self):
+        import hashlib
+        path = Path(__file__).resolve().parents[1] / 'js/vendor/qrcodegen.js'
+        self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),
+                         '2511bc17f40a3c41d4a0578995db956b38997334d3d20113a5d4dc5c49c69480')
     def judge(self):
         judge = Classifier.__new__(Classifier)
         judge.client, judge.calls, judge.last_call = Mock(), 0, 0
@@ -134,9 +140,34 @@ class AutomationTests(unittest.TestCase):
         with self.assertRaises(ValueError): check(value, NOW + timedelta(hours=19))
         with self.assertRaises(ValueError): check(dict(value, sources=[]), NOW)
 
+    def test_health_detects_missing_publication_even_with_fresh_collection(self):
+        import hashlib
+        payload = b'{"schemaVersion":1,"contentUpdatedAt":null,"items":[]}'
+        health = {'feedSha256': hashlib.sha256(payload).hexdigest()}
+        verify_deployment(health, payload)
+        with self.assertRaises(ValueError): verify_deployment(health, payload + b' ')
+        with self.assertRaises(ValueError): verify_deployment({}, payload)
+
     def test_tampered_cache_cannot_approve(self):
         with self.assertRaises(ValueError): validate_state({'version': 1, 'decisions': {'bad': {}}, 'inventory': {}})
         with self.assertRaises(ValueError): validate_state({'version': 1, 'decisions': {}, 'inventory': {'https://evil.example/x': {}}})
+
+    def test_publisher_validates_all_artifacts_before_replacing_feed(self):
+        with tempfile.TemporaryDirectory() as temp, patch('main.source_urls', return_value=['https://wmich.edu/engineer/news']):
+            root = Path(temp)
+            run(root, client=Http(), classifier=Judge(), now=NOW)
+            before = (root / 'data/news.json').read_bytes()
+            artifacts = root / 'incoming'
+            artifacts.mkdir()
+            for path, name in [('data/news.json', 'news.json'), ('data/news-health.json', 'news-health.json')]:
+                (artifacts / name).write_bytes((root / path).read_bytes())
+            (artifacts / 'state.json').write_text(json.dumps({'version': 1, 'decisions': {'tampered': {}}}))
+            with patch('publish.ROOT', root), self.assertRaises(ValueError): publish.apply(artifacts)
+            self.assertEqual((root / 'data/news.json').read_bytes(), before)
+            (artifacts / 'state.json').write_text(json.dumps({'version': 1, 'decisions': {}, 'inventory': {}}))
+            (artifacts / 'unexpected.json').write_text('{}')
+            with patch('publish.ROOT', root), self.assertRaises(ValueError): publish.apply(artifacts)
+            self.assertEqual((root / 'data/news.json').read_bytes(), before)
 
 
 if __name__ == '__main__': unittest.main()

@@ -9,7 +9,7 @@
   <meta name="description" content="Department of Mechanical and Aerospace Engineering digital signage kiosk at Western Michigan University, Elson S. Floyd Hall.">
   
   <!-- Content Security Policy -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://api.qrserver.com data:; connect-src 'self' https://api.open-meteo.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.open-meteo.com;">
   
   <link rel="icon" type="image/svg+xml" href="images/wmu-brandmark-official.svg">
   
@@ -21,7 +21,7 @@
   <!-- Core Stylesheets -->
   <link rel="stylesheet" href="css/typography.css?v=20260922v1">
   <link rel="stylesheet" href="css/animations.css?v=20260922v1">
-  <link rel="stylesheet" href="css/style.css?v=20261020v3">
+  <link rel="stylesheet" href="css/style.css?v=20261020v4">
 </head>
 <body>
   <!-- Ambient Graphic Canvas Layer -->
@@ -96,10 +96,11 @@
 
   <!-- Client-side Logic & Data -->
   <script src="data/fallback.js?v=20260922v1"></script>
-  <script src="js/news.js?v=20261020v3"></script>
+  <script src="js/vendor/qrcodegen.js?v=2511bc17"></script>
+  <script src="js/news.js?v=20261020v4"></script>
   <script src="js/weather.js?v=20260922v1"></script>
-  <script src="js/slideshow.js?v=20261020v3"></script>
+  <script src="js/slideshow.js?v=20261020v4"></script>
   <script src="js/controls.js?v=20260922v1"></script>
-  <script src="js/app.js?v=20261020v3"></script>
+  <script src="js/app.js?v=20261020v4"></script>
 </body>
 </html>

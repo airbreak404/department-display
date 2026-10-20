@@ -83,6 +83,7 @@ jobs:
       contents: write
     outputs:
       revision: ${{ steps.commit.outputs.revision }}
+      news_changed: ${{ steps.commit.outputs.news_changed }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -105,6 +106,9 @@ jobs:
         run: |
           git config user.name mae-news-bot
           git config user.email mae-news-bot@users.noreply.github.com
+          news_changed=false
+          if ! git diff --quiet -- data/news.json; then news_changed=true; fi
+          echo "news_changed=$news_changed" >> "$GITHUB_OUTPUT"
           git add -- data/news.json data/news-health.json scripts/news-scraper/state.json
           if ! git diff --cached --quiet; then
             test -z "$(git diff --cached --name-only | grep -vE '^(data/news(-health)?.json|scripts/news-scraper/state.json)$')"
@@ -114,6 +118,7 @@ jobs:
           echo "revision=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   deploy:
     needs: publish
+    if: needs.publish.outputs.news_changed == 'true'
     permissions:
       contents: read
       pages: write

@@ -4,11 +4,14 @@ from datetime import datetime, timedelta, timezone
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
+from io import BytesIO
 import os
 from pathlib import Path
 import threading
 
 from playwright.sync_api import sync_playwright
+from PIL import Image
+import zxingcpp
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "test-results"
@@ -96,6 +99,31 @@ def run():
                       const r=e.getBoundingClientRect(), p=document.querySelector('.slides-viewport').getBoundingClientRect();
                       return r.left>=p.left-1 && r.right<=p.right+1 && r.bottom<=p.bottom+1 && r.top>=p.top-1;
                     })"""), "Card outside slide canvas"
+                    assert page.locator('.slide.active .news-qr img').count() == min(count, 3)
+                    for qr in page.locator('.slide.active .news-qr img').all():
+                        assert qr.get_attribute('src').startswith('data:image/svg+xml;base64,')
+                        expected = qr.locator('..').get_attribute('href')
+                        decoded = zxingcpp.read_barcode(Image.open(BytesIO(qr.screenshot())))
+                        assert decoded is not None and decoded.text == expected, f'Unreadable/wrong QR at {width}: {expected}'
+            # Verify every real published URL, including the longer source slugs,
+            # at both actual screen scales, independently of the QR encoder.
+            real = json.loads((ROOT / 'data/news.json').read_text(encoding='utf-8'))
+            real['items'].append({**real['items'][0], 'id': 'f' * 24,
+                                  'url': 'https://wmich.edu/engineer/news/2026/10/example?id=1&view=full'})
+            for start in range(0, len(real['items']), 3):
+                chunk = {**real, 'items': real['items'][start:start + 3]}
+                page.evaluate("""f => { const s=appSlideshow; s.queueData(MaeNews.compose({config:s.config,slides:s.slides},f));
+                  s.showSlide(s.slides.findIndex(x=>x.type==='mae-news')); }""", chunk)
+                for width, height in ((2048, 1152), (2560, 1440)):
+                    page.set_viewport_size({'width': width, 'height': height})
+                    page.wait_for_timeout(250)
+                    for qr, article in zip(page.locator('.slide.active .news-qr img').all(), chunk['items']):
+                        decoded = zxingcpp.read_barcode(Image.open(BytesIO(qr.screenshot())))
+                        assert decoded and decoded.text == article['url'], 'Real article/query QR destination changed'
+                    page.screenshot(path=str(OUT / f'news-real-{start // 3 + 1}-{width}.png'))
+            # Restore the synthetic title for the existing escaping assertion.
+            page.evaluate("""f=>{const s=appSlideshow;s.queueData(MaeNews.compose({config:s.config,slides:s.slides},f));
+              s.showSlide(s.slides.findIndex(x=>x.type==='mae-news'));}""", feed(3))
             # Source text is encoded exactly once, and each engine rebuild retains pause.
             assert page.locator('.slide.active h2').first.inner_text().startswith('MAE research & engineering: "')
             assert page.evaluate("appSlideshow.isPaused")

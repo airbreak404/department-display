@@ -3,6 +3,25 @@
   'use strict';
   const clone = value => JSON.parse(JSON.stringify(value));
   const empty = () => ({ schemaVersion: 1, contentUpdatedAt: null, items: [] });
+  const qrCache = new Map();
+  function qrImage(value) {
+    try {
+      const url = new URL(value);
+      if (url.protocol !== 'https:' || url.username || url.password || url.port || value.length > 2048) return null;
+      if (qrCache.has(value)) return qrCache.get(value);
+      const qr = window.qrcodegen.QrCode.encodeText(value, window.qrcodegen.QrCode.Ecc.MEDIUM);
+      const border = 4, size = qr.size + border * 2, path = [];
+      for (let y = 0; y < qr.size; y++) for (let x = 0; x < qr.size; x++) {
+        if (qr.getModule(x, y)) path.push(`M${x + border},${y + border}h1v1h-1z`);
+      }
+      // SVG contains only numeric module coordinates, never source-supplied markup.
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="white"/><path d="${path.join('')}" fill="black"/></svg>`;
+      const result = 'data:image/svg+xml;base64,' + btoa(svg);
+      if (qrCache.size >= 24) qrCache.clear();
+      qrCache.set(value, result);
+      return result;
+    } catch (_) { return null; } // A QR asset failure must not stop the base presentation.
+  }
   const dateString = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) &&
     Number.isFinite(Date.parse(value + 'T12:00:00Z')) && new Date(value + 'T12:00:00Z').toISOString().slice(0, 10) === value;
   const utc = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(value) && Number.isFinite(Date.parse(value));
@@ -45,6 +64,7 @@
     const pages = [];
     for (let i = 0; i < news.items.length; i += 3) {
       const items = news.items.slice(i, i + 3).map(item => ({ ...item,
+        qrDataUrl: qrImage(item.url),
         title: editorialText(item.title), summary: editorialText(item.summary), source: editorialText(item.source) }));
       pages.push({ id: 'mae-news-' + items.map(item => item.id).join('-'), type: 'mae-news',
         duration: 25000, newsItems: items, page: pages.length + 1, pages: Math.ceil(news.items.length / 3) });
@@ -92,5 +112,5 @@
       month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
       .format(new Date(item.eventStartsAt));
   }
-  window.MaeNews = { empty, validate, compose, fetchJson, formatDate, editorialText, itemDate };
+  window.MaeNews = { empty, validate, compose, fetchJson, formatDate, editorialText, itemDate, qrImage };
 })();

@@ -82,6 +82,7 @@ class SlideshowEngine {
     this.container.innerHTML = '';
     this.slides.forEach((rawSlide, idx) => {
       const slide = this.sanitizeSlideData(rawSlide);
+      if (rawSlide.type === 'wayfinding' && rawSlide.qrUrl) slide.qrDataUrl = window.MaeNews.qrImage(rawSlide.qrUrl);
       const slideEl = document.createElement('div');
       slideEl.className = `slide slide-${slide.type}`;
       slideEl.id = `slide-${idx}`;
@@ -133,6 +134,9 @@ class SlideshowEngine {
           <div class="news-meta"><div class="news-source">${item.source}</div>
             <div class="news-date">${window.MaeNews.itemDate(item)}</div></div>
           <div class="news-story"><h2>${item.title}</h2><p>${item.summary}</p></div>
+          <a class="news-qr" href="${item.url}" target="_blank" rel="noopener noreferrer">
+            ${item.qrDataUrl ? `<img src="${item.qrDataUrl}" width="224" height="224" alt="QR code for this ${item.eventStartsAt ? 'event' : 'article'}">` : ''}
+            <span>${item.eventStartsAt ? 'View event' : 'Read full story'}</span></a>
         </article>`).join('')}</div>
     </div>`;
   }
@@ -616,7 +620,7 @@ class SlideshowEngine {
           <div class="qr-panel animate-in delay-3">
             <div class="qr-top-tag">✦ DEPARTMENT DIGITAL GATEWAY</div>
             <div class="qr-box">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=230x230&data=${encodeURIComponent(slide.qrUrl)}" alt="Department Website QR">
+              ${slide.qrDataUrl ? `<img src="${slide.qrDataUrl}" alt="Department Website QR">` : '<span>Visit the department website</span>'}
             </div>
             <div class="text-gold font-bold text-xl mb-1">${slide.qrLabel}</div>
             <div class="text-sand text-base font-mono mb-3">${slide.qrUrl.replace('https://', '')}</div>

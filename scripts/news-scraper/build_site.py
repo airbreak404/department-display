@@ -21,8 +21,8 @@ def build():
     (target / "data").mkdir()
     for name in ("slides.json", "fallback.js", "news.json"):
         shutil.copyfile(ROOT / "data" / name, target / "data" / name)
-    if health.exists():
-        shutil.copyfile(health, target / "data/news-health.json")
+    # Operational health lives at the public raw-repository URL. Exclude it from
+    # Pages to avoid presenting an old deployment's health as the latest attempt.
     shutil.copyfile(ROOT / "index.html", target / "index.html")
     (target / ".nojekyll").touch()
     print("feed_sha256=" + hashlib.sha256((target / "data/news.json").read_bytes()).hexdigest())

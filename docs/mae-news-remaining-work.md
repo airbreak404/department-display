@@ -14,7 +14,7 @@ The initial release delivered the display, deployment, expiry, and refresh mecha
 
 ## Still unfinished
 
-1. **Complete release verification for expanded automation.** The owner saved the GitHub Gemini secret. Live run [39461275630](https://github.com/airbreak404/department-display/actions/runs/39461275630) returned 11 valid rejections but hit classification/time failures. This led to paced calls, explicit minimal thinking, a larger bounded output allowance, bounded request timeouts, a circuit breaker and a separate positive/negative classifier check. See the validation ledger for the final release results.
+1. **Complete QR/quiet-health rollout verification.** Gemini's positive/negative check passed, and automatic collection published seven items with no manual approvals. The QR-enabled release and health-only deployment suppression have local tests; final Linux/live evidence is recorded in the validation ledger.
 2. **Finish automated archive backfill.** Discovery now inventories every dated archive link rather than filtering headlines. A live empty-feed/no-override test found 230 candidates and populated events and MAE stories over resumable passes. A broad roundup containing a later engineering credential exposed an overly permissive offline rule; automatic affiliation approvals now require primary story context. Deferred candidates resume without human review. Eight slots are a cap, not an instruction to include weak matches.
 3. **Connect social sources when authorized access exists.** Official CEAS Facebook, Instagram and LinkedIn links are confirmed. The user has no admin access, so direct collection remains disconnected and is reported in health. See [access investigation](mae-news-social-access.md). No paid bridge or anonymous login-page scraping is enabled.
 4. **Resolve departmental bulletin access before claiming coverage.** The tested MAE bulletin listing and old launch-event URL returned HTTP 404. Search-indexed copies are insufficient for live publication. No working bulletin adapter is claimed.
@@ -30,7 +30,7 @@ The news slide now uses flat editorial rows, visible source/date metadata and so
 
 ## Acceptance evidence
 
-The earlier coverage release passed 24 Python regressions and Chromium checks. Expanded automation now passes 35 Python tests plus Chromium checks at both resolutions, including quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry and independent collector freshness. The dependency audit found no known runtime vulnerabilities. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
+The earlier coverage release passed 24 Python regressions and Chromium checks. Expanded automation now passes 38 Python tests plus Chromium checks at both resolutions, including independent QR decoding, vendor integrity, publication guards, quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry and collector/publication health. The dependency audit found no known runtime or test dependency vulnerabilities. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
 
 The live archive audit successfully parsed 13 listing pages, including pagination. Before the additional manual reviews, it found 23 held candidates rather than the original six; many were unrelated scholarships, other departments, or expired invitations. This demonstrates the coverage gap; it is not a claim that 23 stories should be published.
 

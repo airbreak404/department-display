@@ -201,6 +201,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
               "items": len(items), "classifierStatus": report["classifierStatus"],
               "automaticRules": relevance.VERSION, "sources": report["sources"],
               "inventory": len(urls), "deferred": report["deferred"],
+              "feedSha256": hashlib.sha256((json.dumps(output, ensure_ascii=False, indent=2) + "\n").encode()).hexdigest(),
               "socialCoverage": report["socialCoverage"]}
     if not dry_run:
         state["decisions"] = {k: v for k, v in state["decisions"].items()

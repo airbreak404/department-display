@@ -1,4 +1,4 @@
-"""Validate and move the two permitted ingestion outputs across the job boundary."""
+"""Validate and move three permitted ingestion outputs across the job boundary."""
 import argparse
 from datetime import datetime, timezone
 from pathlib import Path

@@ -1,4 +1,4 @@
-"""Validate the private decision cache and bounded, restartable work inventory."""
+"""Validate ingestion state and the bounded, restartable work inventory."""
 import re
 from network import FetchError
 from news import ARTICLE_PATH, EVENT_PATH, EVENT_PAGES, canonical, instant

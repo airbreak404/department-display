@@ -1,3 +1,7 @@
 -r requirements.in
 playwright>=1.50
 PyYAML>=6.0
+
+# Decode real rendered QR screenshots, independently of the encoder.
+Pillow==13.0.0
+zxing-cpp==3.1.1

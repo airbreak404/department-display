@@ -18,6 +18,10 @@ Discovery covers CEAS news/homepage/events, MAE homepage, latest WMU news and al
 
 Events require matching structured metadata with a zoned start or the tested Custer adapter with explicit year and matching weekday/date. They enter within 60 days and expire at their start. `publishedDate` is null and `eventStartsAt` supplies the displayed Eastern date/time; retrieval time is never used as publication time. At most two events precede general news in the eight-item feed. `data/news-health.json` tracks collector age independently of content age, without private decisions or credentials.
 
+Read current health from [the raw repository record](https://raw.githubusercontent.com/airbreak404/department-display/master/data/news-health.json), rather than a previous Pages deployment. Its expected feed hash is checked against the public display feed. Collector state/health changes alone skip Pages deployment, preventing unnecessary browser restart signals from the existing host sync. Both publication age and actual public feed bytes are monitored. This repository is public; state is excluded from Pages but is not confidential storage.
+
+Every displayed item has its own locally generated QR code opening that exact source URL. Future social posts use their original post URLs when connected. Black/white 224px symbols include quiet borders; generation is cached and has no QR-service request or paid dependency. Department wayfinding uses the same local encoder. The MIT-licensed vendor build is hash-pinned and independently decoded in Chromium screenshot tests at both screen sizes. Phone scanning under actual lighting and distance remains part of physical review.
+
 Direct Instagram, LinkedIn and Facebook collection is **not connected**. The official accounts are confirmed but the user has no admin access. See [social access](mae-news-social-access.md). Do not bypass controls, purchase RSS bridges or claim unverified social ingestion. ScholarWorks lists archival 2016-2020 newsletters and remains unsuitable for current news.
 
 ## Manual verification and corrections
