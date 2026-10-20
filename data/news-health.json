@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-20T17:14:13Z",
+  "status": "partial",
+  "items": 7,
+  "classifierStatus": "call_budget_exhausted",
+  "automaticRules": "rules-2",
+  "sources": [
+    {
+      "source": "https://wmich.edu/engineer/news",
+      "status": "ok",
+      "links": 37
+    },
+    {
+      "source": "https://wmich.edu/mechanical-aerospace",
+      "status": "ok",
+      "links": 3
+    },
+    {
+      "source": "https://wmich.edu/engineer",
+      "status": "ok",
+      "links": 10
+    },
+    {
+      "source": "https://wmich.edu/engineer/events",
+      "status": "ok",
+      "links": 4
+    },
+    {
+      "source": "https://wmich.edu/engineer/custerseries",
+      "status": "ok",
+      "links": 1
+    },
+    {
+      "source": "https://wmich.edu/news/latest",
+      "status": "ok",
+      "links": 24
+    },
+    {
+      "source": "https://wmich.edu/news/2026/10",
+      "status": "ok",
+      "links": 23
+    },
+    {
+      "source": "https://wmich.edu/news/2026/09",
+      "status": "ok",
+      "links": 30
+    },
+    {
+      "source": "https://wmich.edu/news/2026/08",
+      "status": "ok",
+      "links": 17
+    },
+    {
+      "source": "https://wmich.edu/news/2026/07",
+      "status": "ok",
+      "links": 17
+    },
+    {
+      "source": "https://wmich.edu/news/2026/06",
+      "status": "ok",
+      "links": 30
+    },
+    {
+      "source": "https://wmich.edu/news/2026/05",
+      "status": "ok",
+      "links": 26
+    },
+    {
+      "source": "https://wmich.edu/news/2026/04",
+      "status": "ok",
+      "links": 30
+    },
+    {
+      "source": "https://wmich.edu/news/2026/09?page=1",
+      "status": "ok",
+      "links": 26
+    },
+    {
+      "source": "https://wmich.edu/news/2026/06?page=1",
+      "status": "ok",
+      "links": 15
+    },
+    {
+      "source": "https://wmich.edu/news/2026/04?page=1",
+      "status": "ok",
+      "links": 14
+    }
+  ],
+  "inventory": 233,
+  "deferred": 153,
+  "socialCoverage": "not_connected: no authorized account access"
+}

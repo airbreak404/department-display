@@ -1,23 +1,34 @@
 {
   "schemaVersion": 1,
-  "contentUpdatedAt": "2026-10-20T16:43:07Z",
+  "contentUpdatedAt": "2026-10-20T17:14:13Z",
   "items": [
     {
-      "id": "28cdff47e9466ef4a9a62720",
-      "title": "Custer Speaker Series events announced for fall 2026",
-      "url": "https://wmich.edu/engineer/news/2026/09/custer-series-fall-2026",
-      "publishedDate": "2026-09-22",
-      "summary": "In November, the next talk will be by Jason Tedrow, B.S.E.'97, president and CEO of InProduction. On Wednesday, Nov. 4, at 1 p.m. in the Parkview Room (D-132), Tedrow will present, “From the Shop Floor to the C-suite: An Engineer's Path to the Corner Office.”",
+      "id": "d96c2096dfed45a6faf60ad0",
+      "title": "Custer Speaker Series: Jason Tedrow, B.S.E.'97",
+      "url": "https://wmich.edu/engineer/custerseries",
+      "publishedDate": null,
+      "summary": "Wednesday, Nov. 4 1 p.m., Parkview Room (D-132), Floyd Hall. \"From the Shop Floor to the C-suite: An Engineer's Path to the Corner Office\"",
       "source": "WMU College of Engineering and Applied Sciences",
+      "eventStartsAt": "2026-11-04T18:00:00Z",
       "expiresAt": "2026-11-04T18:00:00Z"
+    },
+    {
+      "id": "e6dd2a6dc09c87c0ed6fada9",
+      "title": "Senior Engineering Design Conference",
+      "url": "https://wmich.edu/engineer/events/senior-engineering-design",
+      "publishedDate": null,
+      "summary": "The Senior Engineering Design Conference at Western Michigan University’s College of Engineering and Applied Sciences showcases the work of students from all disciplines. It is an opportunity for students to share fresh perspectives and develop new systems in collaboration with industry partners.",
+      "source": "WMU College of Engineering and Applied Sciences",
+      "eventStartsAt": "2026-12-08T13:00:00Z",
+      "expiresAt": "2026-12-08T13:00:00Z"
     },
     {
       "id": "8ae2952a756a5daa0421f603",
       "title": "From Engineer to Entrepreneur: How Talal Arshad turned global ambitions into a thriving local business",
       "url": "https://wmich.edu/international/news/2026/08/aerospace-alumni-arshad",
       "publishedDate": "2026-08-17",
-      "summary": "Arshad first came to Kalamazoo from Pakistan to pursue a degree in aerospace engineering at Western Michigan University.",
-      "source": "WMU International Student and Scholar Services",
+      "summary": "KALAMAZOO, Mich.—For Bronco alumnus Talal Arshad, community and coffee go hand in hand. Arshad first came to Kalamazoo from Pakistan to pursue a degree in aerospace engineering at Western Michigan University.",
+      "source": "WMU News",
       "expiresAt": "2027-02-13T00:00:00Z"
     },
     {
@@ -25,8 +36,8 @@
       "title": "Multihyphenate alumna Kelly Burris is a highflyer",
       "url": "https://wmich.edu/magazine/news/2026/06/alumna-trustee-kelly-burris-profile",
       "publishedDate": "2026-06-26",
-      "summary": "The Western alumna, BS ’88, and recently elected vice chair of the University’s Board of Trustees, has been an aerospace engineer, a licensed pilot and an intellectual property attorney.",
-      "source": "WMU W Magazine",
+      "summary": "“So much of where my professional career is today started at Western Michigan University,” Burris says. “That’s where I studied aeronautical engineering while being a student-athlete, learned to fly, received hands-on career training through internships before graduation, and began to understand…",
+      "source": "WMU News",
       "expiresAt": "2026-12-23T00:00:00Z"
     },
     {
@@ -34,7 +45,7 @@
       "title": "Western set to compete with top U.S. universities in the EcoCAR Innovation Challenge",
       "url": "https://wmich.edu/engineer/news/2026/06/ecocar-innovation-challenge-gm",
       "publishedDate": "2026-06-22",
-      "summary": "KALAMAZOO, Mich.—Western Michigan University is taking the wheel as one of only 20 universities nationwide selected for the highly competitive EcoCAR Innovation Challenge.",
+      "summary": "KALAMAZOO, Mich.—Western Michigan University is taking the wheel as one of only 20 universities nationwide selected for the highly competitive EcoCAR Innovation Challenge. Hosted by the U.S. Department of Energy and Argonne National Laboratory, this multiyear competition tasks students with…",
       "source": "WMU College of Engineering and Applied Sciences",
       "expiresAt": "2026-12-19T00:00:00Z"
     },
@@ -43,7 +54,7 @@
       "title": "Lemmer named John O. Hallquist Endowed Professor in Mechanical and Aerospace Engineering",
       "url": "https://wmich.edu/engineer/news/2026/06/kristina-lemmer-hallquist-endowed-professor",
       "publishedDate": "2026-06-15",
-      "summary": "KALAMAZOO, Mich.— Dr. Kristina M. Lemmer, a leading researcher in plasma and electric propulsion for spacecraft, has been named a John O. Hallquist Endowed Professor in Mechanical and Aerospace Engineering at Western Michigan University.",
+      "summary": "KALAMAZOO, Mich.— Dr. Kristina M. Lemmer, a leading researcher in plasma and electric propulsion for spacecraft, has been named a John O. Hallquist Endowed Professor in Mechanical and Aerospace Engineering at Western Michigan University. The award recognizes her exceptional professional…",
       "source": "WMU College of Engineering and Applied Sciences",
       "expiresAt": "2026-12-12T00:00:00Z"
     },
@@ -52,7 +63,7 @@
       "title": "All systems go: Aerospace engineering student launches work into space",
       "url": "https://wmich.edu/news/news/2026/05/aerospace-engineering-spacex-payload-launch-tom-scott",
       "publishedDate": "2026-05-05",
-      "summary": "The aerospace engineering master’s student followed the glowing arch of the SpaceX Falcon 9 rocket on March 30 as it carried Transporter-16—with his payload, the Western Aerospace Thin-Sat, on board—into the ionosphere.",
+      "summary": "The aerospace engineering master’s student followed the glowing arch of the SpaceX Falcon 9 rocket on March 30 as it carried Transporter-16—with his payload, the Western Aerospace Thin-Sat, on board—into the ionosphere. Scott’s research now rests in low Earth orbit, where no Bronco satellite has…",
       "source": "WMU News",
       "expiresAt": "2026-11-01T00:00:00Z"
     }
