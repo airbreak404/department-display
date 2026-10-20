@@ -9,8 +9,11 @@
   function itemValid(item, now) {
     if (!item || typeof item !== 'object' || Array.isArray(item)) return false;
     const bounds = { id: 64, title: 180, url: 2048, publishedDate: 10, summary: 300, source: 80, expiresAt: 30 };
+    const event = Object.hasOwn(item, 'eventStartsAt');
+    if (event) bounds.eventStartsAt = 30;
     if (Object.keys(item).length !== Object.keys(bounds).length) return false;
     for (const [key, limit] of Object.entries(bounds)) {
+      if (event && key === 'publishedDate' && item[key] === null) continue;
       if (typeof item[key] !== 'string' || !item[key].trim() || [...item[key]].length > limit || /[\x00-\x1f\x7f<>]/.test(item[key])) return false;
     }
     try {
@@ -20,8 +23,9 @@
     const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
     const publication = Date.parse(item.publishedDate + 'T00:00:00Z');
     const expiry = Date.parse(item.expiresAt);
-    return /^[a-f0-9]{24}$/.test(item.id) && dateString(item.publishedDate) && item.publishedDate <= today &&
-      utc(item.expiresAt) && expiry > now.getTime() && expiry > publication && expiry <= publication + 181 * 86400000;
+    return /^[a-f0-9]{24}$/.test(item.id) && utc(item.expiresAt) && expiry > now.getTime() && (event ?
+      item.publishedDate === null && utc(item.eventStartsAt) && item.expiresAt === item.eventStartsAt && expiry <= now.getTime() + 60 * 86400000 :
+      dateString(item.publishedDate) && item.publishedDate <= today && expiry > publication && expiry <= publication + 181 * 86400000);
   }
   function validate(feed, now = new Date()) {
     if (!feed || feed.schemaVersion !== 1 || !Array.isArray(feed.items) || feed.items.length > 8 ||
@@ -40,7 +44,8 @@
     const news = validate(feed, now);
     const pages = [];
     for (let i = 0; i < news.items.length; i += 3) {
-      const items = news.items.slice(i, i + 3);
+      const items = news.items.slice(i, i + 3).map(item => ({ ...item,
+        title: editorialText(item.title), summary: editorialText(item.summary), source: editorialText(item.source) }));
       pages.push({ id: 'mae-news-' + items.map(item => item.id).join('-'), type: 'mae-news',
         duration: 25000, newsItems: items, page: pages.length + 1, pages: Math.ceil(news.items.length / 3) });
     }
@@ -74,5 +79,16 @@
     return dateString(value) ? new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' })
       .format(new Date(value + 'T12:00:00Z')) : '';
   }
-  window.MaeNews = { empty, validate, compose, fetchJson, formatDate };
+  function editorialText(value) {
+    // Presentation only: retain the source's original copy in the feed.
+    return value.replace(/^KALAMAZOO,\s*Mich\.\s*[\u2014\u2013-]\s*/i, '')
+      .replace(/\s*[\u2014\u2013]\s*/g, ', ').replace(/,\s*,/g, ',').trim();
+  }
+  function itemDate(item) {
+    if (!item.eventStartsAt) return formatDate(item.publishedDate);
+    return new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York',
+      month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
+      .format(new Date(item.eventStartsAt));
+  }
+  window.MaeNews = { empty, validate, compose, fetchJson, formatDate, editorialText, itemDate };
 })();

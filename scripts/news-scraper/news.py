@@ -11,7 +11,13 @@ from bs4 import BeautifulSoup
 from network import FetchError, safe_url
 
 UTC = timezone.utc
-SOURCES = ("https://wmich.edu/engineer/news", "https://wmich.edu/mechanical-aerospace")
+SOURCES = ("https://wmich.edu/engineer/news", "https://wmich.edu/mechanical-aerospace",
+           "https://wmich.edu/engineer", "https://wmich.edu/engineer/events",
+           "https://wmich.edu/engineer/custerseries")
+EVENT_PATH = re.compile(r"^/engineer/events/[a-z0-9-]+/?$")
+EVENT_PAGES = frozenset({"https://wmich.edu/engineer/custerseries",
+    "https://wmich.edu/engineering-senior-design", "https://wmich.edu/ieeem/innovationexpo",
+    "https://wmich.edu/engineer/resources/career-accelerator"})
 ARTICLE_PATH = re.compile(r"^/(?:[a-z][a-z0-9-]*/)?news/\d{4}/\d{2}/[^/]+/?$")
 # Future project presentations are not themselves invitations to a dated event.
 EVENT = re.compile(r"\b(?:will (?:host|hold|honor)|upcoming|register|registration|deadline|join us|takes? place|scheduled|invites?|welcomes?|to host)\b", re.I)
@@ -72,16 +78,30 @@ def discovery(document, base):
     area = soup.select_one("main") or soup
     links = set()
     recognized = 0
-    broad = urlsplit(base).path.startswith("/news/")
+    if base == "https://wmich.edu/engineer/events":
+        targets = set()
+        for anchor in area.select('a[href]'):
+            try:
+                target = canonical(urljoin(base, anchor['href']))
+                if target in EVENT_PAGES or EVENT_PATH.fullmatch(urlsplit(target).path):
+                    targets.add(target)
+            except (FetchError, ValueError):
+                continue
+        if not targets:
+            raise ValueError("event_listing_parser_failure")
+        return sorted(targets)
+    if base == "https://wmich.edu/engineer/custerseries":
+        if not area.select_one('.accordion-item h4'):
+            raise ValueError("series_parser_failure")
+        return [base]
     for anchor in area.select("a[href]"):
         try:
             url = canonical(urljoin(base, anchor["href"]))
-            if ARTICLE_PATH.fullmatch(urlsplit(url).path):
+            if ARTICLE_PATH.fullmatch(urlsplit(url).path) or EVENT_PATH.fullmatch(urlsplit(url).path) or url in EVENT_PAGES:
                 recognized += 1
-                row = anchor.find_parent("div", class_="views-row")
-                context = row.get_text(" ", strip=True) if row else anchor.get_text(" ", strip=True)
-                if not broad or DISCOVERY_HINT.search(context):
-                    links.add(url)
+                # Monthly archives are the coverage backstop. Keep every article;
+                # bounded persistent inventory prevents headline-keyword blind spots.
+                links.add(url)
         except (ValueError, FetchError):
             continue
     if not recognized:
@@ -143,7 +163,11 @@ def extract(document, url, now):
     paragraphs = [p for p in paragraphs if p and not p.startswith("For more WMU news")]
     if not paragraphs:
         raise ValueError("article_body_missing")
-    summary = text(paragraphs[0], 300)
+    # Prefer a self-contained source paragraph that explains the MAE connection,
+    # rather than a one-line scene-setting opener in a profile or roundup.
+    from relevance import DIRECT, TEAMS
+    focus = next((p for p in paragraphs if DIRECT.search(p) or TEAMS.search(p)), paragraphs[0])
+    summary = text(focus, 300)
     content = "\n".join(paragraphs)[:12000]
     expiry = datetime.combine(published + timedelta(days=180), time.min, UTC)
     result = {"id": identity(url), "title": title, "url": canonical(url),
@@ -168,22 +192,32 @@ def validate_item(item, now, allow_expired=False):
         raise ValueError("item_type")
     bounds = {"id": 64, "title": 180, "url": 2048, "publishedDate": 10,
               "summary": 300, "source": 80, "expiresAt": 30}
+    event = "eventStartsAt" in item
+    if event:
+        bounds["eventStartsAt"] = 30
     if set(item) != set(bounds):
         raise ValueError("item_fields")
     for field, limit in bounds.items():
         value = item[field]
+        if event and field == "publishedDate" and value is None:
+            continue
         if not isinstance(value, str) or not value.strip() or len(value) > limit:
             raise ValueError("item_bounds")
         if re.search(r"[\x00-\x1f\x7f<>]", value):
             raise ValueError("item_markup")
     if not re.fullmatch(r"[a-f0-9]{24}", item["id"]) or item["id"] != identity(item["url"]):
         raise ValueError("item_identity")
-    published = date.fromisoformat(item["publishedDate"])
     expiry = instant(item["expiresAt"])
-    if (published > now.astimezone(ZoneInfo("America/New_York")).date() or
+    if event:
+        start = instant(item["eventStartsAt"])
+        if item["publishedDate"] is not None or expiry != start or start > now + timedelta(days=60):
+            raise ValueError("event_dates")
+    else:
+        published = date.fromisoformat(item["publishedDate"])
+        if (published > now.astimezone(ZoneInfo("America/New_York")).date() or
             expiry <= datetime.combine(published, time.min, UTC) or
             expiry > datetime.combine(published + timedelta(days=181), time.min, UTC)):
-        raise ValueError("item_dates")
+            raise ValueError("item_dates")
     if not allow_expired and expiry <= now:
         raise ValueError("expired")
     return dict(item)
@@ -216,9 +250,13 @@ def merge(existing, approved, blocked, now):
         except (ValueError, TypeError, KeyError):
             continue
     chosen, headlines = [], set()
-    for item in sorted(by_id.values(), key=lambda x: (-date.fromisoformat(x["publishedDate"]).toordinal(), x["id"])):
+    def order(value):
+        return (0, value["eventStartsAt"], value["id"]) if "eventStartsAt" in value else (1, -date.fromisoformat(value["publishedDate"]).toordinal(), value["id"])
+    events = 0
+    for item in sorted(by_id.values(), key=order):
         key = (urlsplit(item["url"]).hostname, re.sub(r"\W+", " ", item["title"].casefold()).strip())
-        if key not in headlines:
+        if key not in headlines and ("eventStartsAt" not in item or events < 2):
             chosen.append(item)
             headlines.add(key)
+            events += int("eventStartsAt" in item)
     return chosen[:8]

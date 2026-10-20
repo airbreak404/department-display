@@ -62,9 +62,9 @@ class FeedTests(unittest.TestCase):
     def test_broad_discovery_uses_teaser_and_all_publishers(self):
         listing = '<main><div class="views-row"><h2><a href="/international/news/2026/08/alumnus">A local success story</a></h2><p>Aerospace engineering alumnus at WMU.</p></div></main>'
         self.assertEqual(discovery(listing, 'https://wmich.edu/news/2026/08'), ['https://wmich.edu/international/news/2026/08/alumnus'])
-        # Recognized but unrelated news is a healthy listing with no candidates.
+        # Headline keywords are not a coverage gate; classification rejects unrelated stories.
         unrelated = listing.replace('Aerospace engineering alumnus at WMU.', 'Music recital.')
-        self.assertEqual(discovery(unrelated, 'https://wmich.edu/news/2026/08'), [])
+        self.assertEqual(discovery(unrelated, 'https://wmich.edu/news/2026/08'), discovery(listing, 'https://wmich.edu/news/2026/08'))
 
     def test_pagination_is_bounded_to_same_listing(self):
         document = '<nav class="pager"><a rel="next" href="?page=1">Next</a></nav>'
@@ -201,7 +201,7 @@ class FeedTests(unittest.TestCase):
             report, _ = run(root, client=Http(), classifier=judge, now=NOW)
             self.assertEqual(report['held'], 0)
             self.assertEqual(report['manualApproved'], 1)
-            self.assertFalse(report['automationReady'])
+            self.assertTrue(report['automationReady'])
             self.assertEqual(report['status'], 'degraded')
             self.assertEqual(judge.calls, 0)
 

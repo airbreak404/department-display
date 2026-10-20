@@ -127,15 +127,12 @@ class SlideshowEngine {
   templateMaeNews(slide) {
     const items = slide.newsItems || [];
     return `<div class="slide-inner news-inner">
-      <div class="badge-pill">DEPARTMENT NEWS</div>
-      <div class="news-heading-row"><h1>MAE News &amp; Highlights</h1><span class="news-page">${slide.page} / ${slide.pages}</span></div>
-      <div class="news-grid news-count-${items.length}">${items.map((item, i) => `
-        <article class="news-card ${i === 0 ? 'news-primary' : ''}">
-          <div class="news-source">${item.source}</div>
-          <h2>${item.title}</h2>
-          <div class="news-date">${window.MaeNews.formatDate(item.publishedDate)}</div>
-          <p>${item.summary}</p>
-          <div class="news-attribution">Source: wmich.edu</div>
+      <div class="news-heading-row"><h1>News &amp; Opportunities</h1>${slide.pages > 1 ? `<span class="news-page">${slide.page} / ${slide.pages}</span>` : ''}</div>
+      <div class="news-grid news-count-${items.length}">${items.map(item => `
+        <article class="news-card">
+          <div class="news-meta"><div class="news-source">${item.source}</div>
+            <div class="news-date">${window.MaeNews.itemDate(item)}</div></div>
+          <div class="news-story"><h2>${item.title}</h2><p>${item.summary}</p></div>
         </article>`).join('')}</div>
     </div>`;
   }

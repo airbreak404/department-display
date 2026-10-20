@@ -1,13 +1,17 @@
 name: MAE News Scraper
 on:
   schedule:
-    - cron: '17 8 * * 1'
+    - cron: '17 2,8,14,20 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
         description: Inspect candidates without committing or deploying
         type: boolean
         default: true
+      classifier_check:
+        description: Test Gemini against two official articles only; never publish
+        type: boolean
+        default: false
 permissions: {}
 concurrency:
   group: mae-news-writer
@@ -38,15 +42,18 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.5-flash-lite' }}
           DRY_RUN: ${{ inputs.dry_run }}
+          CLASSIFIER_CHECK: ${{ inputs.classifier_check }}
         run: |
-          if [ "$DRY_RUN" = "true" ]; then
+          if [ "$CLASSIFIER_CHECK" = "true" ]; then
+            python scripts/news-scraper/check_classifier.py
+          elif [ "$DRY_RUN" = "true" ]; then
             python scripts/news-scraper/main.py --dry-run
           else
             python scripts/news-scraper/main.py
           fi
-      - if: inputs.dry_run != true
+      - if: inputs.dry_run != true && inputs.classifier_check != true
         run: python scripts/news-scraper/publish.py prepare
-      - if: inputs.dry_run != true
+      - if: inputs.dry_run != true && inputs.classifier_check != true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: approved-news
@@ -69,7 +76,7 @@ jobs:
           retention-days: 30
   publish:
     needs: scrape
-    if: inputs.dry_run != true
+    if: inputs.dry_run != true && inputs.classifier_check != true
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -98,9 +105,9 @@ jobs:
         run: |
           git config user.name mae-news-bot
           git config user.email mae-news-bot@users.noreply.github.com
-          git add -- data/news.json scripts/news-scraper/state.json
+          git add -- data/news.json data/news-health.json scripts/news-scraper/state.json
           if ! git diff --cached --quiet; then
-            test -z "$(git diff --cached --name-only | grep -vE '^(data/news.json|scripts/news-scraper/state.json)$')"
+            test -z "$(git diff --cached --name-only | grep -vE '^(data/news(-health)?.json|scripts/news-scraper/state.json)$')"
             git commit -m 'chore: update validated MAE news'
             git push origin HEAD:master
           fi

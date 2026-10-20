@@ -74,6 +74,11 @@ def run():
               const dup={...f,items:[f.items[0],f.items[0]]};
               if(MaeNews.validate(dup).items.length!==1) throw Error('duplicate ids');
               if(MaeNews.formatDate('2026-10-05')!=='Oct 5, 2026') throw Error('date shift');
+              const raw='KALAMAZOO, Mich.\u2014WMU researchers tested a design\u2014then shared results.';
+              if(MaeNews.editorialText(raw)!=='WMU researchers tested a design, then shared results.') throw Error('editorial punctuation');
+              const dated={...f.items[0],publishedDate:null,eventStartsAt:f.items[0].expiresAt};
+              if(MaeNews.validate({...f,items:[dated]}).items.length!==1) throw Error('verified event rejected');
+              if(!MaeNews.itemDate(dated).match(/EST|EDT/)) throw Error('event zone missing');
               try { MaeNews.validate({...f,schemaVersion:2}); throw Error('schema accepted'); }
               catch(e) { if(e.message==='schema accepted') throw e; }
               return true;

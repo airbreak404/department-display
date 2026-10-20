@@ -14,15 +14,23 @@ The initial release delivered the display, deployment, expiry, and refresh mecha
 
 ## Still unfinished
 
-1. **Enable and verify Gemini classification.** Add repository Actions secret `GEMINI_API_KEY`, verify model/free-tier access, then prove an actual model-approved/rejected run. Until then, new uncertain candidates remain held and the visible feed relies on reviewed approvals.
-2. **Review newly discovered candidates.** Broader discovery can find more applicable stories and more unrelated campus news. Review held results; do not assume every match belongs on an MAE display. Event invitations need verified dates and conservative expiry.
-3. **Integrate optional social sources if desired.** Instagram, LinkedIn, and Facebook adapters/feeds were deferred and are not integrated. They require approved, reliable access; they were not quietly scraped.
-4. **Resolve departmental bulletin access before claiming coverage.** The tested MAE bulletin listing and old launch-event URL returned HTTP 404 during this audit. Search-indexed copies are not sufficient for automated live publication. No working bulletin adapter is claimed.
-5. **Finish performance acceptance.** The collector is running, but the 24-hour trend and human-visible smoothness still need review. Content expansion must be included in that assessment.
+1. **Complete release verification for expanded automation.** The owner saved the GitHub Gemini secret. Live run [39461275630](https://github.com/airbreak404/department-display/actions/runs/39461275630) returned 11 valid rejections but hit classification/time failures. This led to paced calls, explicit minimal thinking, a larger bounded output allowance, shorter request timeouts, a circuit breaker and a separate positive/negative classifier check. See the validation ledger for the final release results.
+2. **Finish automated archive backfill.** Discovery now inventories every dated archive link rather than filtering headlines. A live empty-feed/no-override test found 230 candidates and populated events and MAE stories over resumable passes. A broad roundup containing a later engineering credential exposed an overly permissive offline rule; automatic affiliation approvals now require primary story context. Deferred candidates resume without human review. Eight slots are a cap, not an instruction to include weak matches.
+3. **Connect social sources when authorized access exists.** Official CEAS Facebook, Instagram and LinkedIn links are confirmed. The user has no admin access, so direct collection remains disconnected and is reported in health. See [access investigation](mae-news-social-access.md). No paid bridge or anonymous login-page scraping is enabled.
+4. **Resolve departmental bulletin access before claiming coverage.** The tested MAE bulletin listing and old launch-event URL returned HTTP 404. Search-indexed copies are insufficient for live publication. No working bulletin adapter is claimed.
+5. **Finish physical performance acceptance.** The 24-hour trend and human-visible smoothness remain pending. Content expansion and the editorial layout must be included. Green CI does not establish smoothness.
+
+## Expanded automatic systems
+
+The scope is MAE stories plus engineering opportunities open to MAE students, with no paid services and no routine manual curation. The previously seeded approvals have been cleared; the overrides file remains an optional emergency correction mechanism.
+
+Collection runs four times daily. Narrow source-backed rules publish explicit MAE affiliations/teams and inclusive CEAS opportunities, while optional Gemini handles ambiguous relevance. Verified structured events and the Custer schedule adapter publish automatically and expire at their start. Unknown dates are skipped. Persistent inventory, decision caching, bounded retries/backoff, all-output validation, isolated publishing, public health and a separate stale-collector check support recovery. GitHub/Google/platform outages remain possible; no failure-proof guarantee is claimed.
+
+The news slide now uses flat editorial rows, visible source/date metadata and source excerpts. Display-only cleanup removes datelines and em/en dashes; original source copy is retained in the feed. There are no generated summaries or decorative news badges.
 
 ## Acceptance evidence
 
-Local checks after coverage fixes: 24 Python regressions passed and real Chromium regression checks passed. The four-item intermediate feed was rendered locally and its deployment passed Linux CI. The expanded feed contains six different stories across two three-card pages. Deployment and final live display results are recorded in `mae-news-validation.md`.
+The earlier coverage release passed 24 Python regressions and Chromium checks. Expanded automation now passes 35 Python tests plus Chromium checks at both resolutions, including quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry and independent collector freshness. The dependency audit found no known runtime vulnerabilities. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
 
 The live archive audit successfully parsed 13 listing pages, including pagination. Before the additional manual reviews, it found 23 held candidates rather than the original six; many were unrelated scholarships, other departments, or expired invitations. This demonstrates the coverage gap; it is not a claim that 23 stories should be published.
 
