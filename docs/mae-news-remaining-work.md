@@ -8,7 +8,7 @@ The initial release delivered the display, deployment, expiry, and refresh mecha
 - Expanded dated article URL recognition to other official WMU departments. The aerospace alumnus story under International Student and Scholar Services was previously excluded by the URL pattern.
 - Fixed a false event hold: the EcoCAR article described students presenting vehicles at the end of a multiyear program, not an invitation requiring a short event deadline.
 - Added separate manual-approval counts and a degraded automation status/warning when AI credentials are missing. A green deployment is not an operational AI feed.
-- Verified four items for publication: Custer's upcoming November 4 talk, aerospace alumnus Talal Arshad, the MAE-led EcoCAR program, and the Lemmer appointment. These are source-reviewed manual approvals.
+- Verified six items for publication: Custer's upcoming November 4 talk, aerospace alumnus Talal Arshad, aerospace alumna Kelly Burris, the MAE-led EcoCAR program, the Lemmer appointment, and the WALI/Western Aerospace Thin-Sat story. These are source-reviewed manual approvals.
 - The Custer invitation expires at its verified November 4, 1 p.m. Eastern start (18:00 UTC), because the source does not supply an end. The excerpt names only the upcoming talk, rather than promoting October events that have already happened.
 - Preserved the 180-day age policy. Old NASA/team stories were not relabeled as current merely to fill all eight slots.
 
@@ -22,7 +22,9 @@ The initial release delivered the display, deployment, expiry, and refresh mecha
 
 ## Acceptance evidence
 
-Local checks after coverage fixes: 24 Python regressions passed, real Chromium regression checks passed, and both actual four-item news pages were rendered locally. The first page contains three different stories; the second retains the Lemmer story. Deployment and final live display results are recorded in `mae-news-validation.md`.
+Local checks after coverage fixes: 24 Python regressions passed and real Chromium regression checks passed. The four-item intermediate feed was rendered locally and its deployment passed Linux CI. The expanded feed contains six different stories across two three-card pages. Deployment and final live display results are recorded in `mae-news-validation.md`.
+
+The live archive audit successfully parsed 13 listing pages, including pagination. Before the additional manual reviews, it found 23 held candidates rather than the original six; many were unrelated scholarships, other departments, or expired invitations. This demonstrates the coverage gap; it is not a claim that 23 stories should be published.
 
 Official reviewed sources:
 
@@ -31,3 +33,5 @@ Official reviewed sources:
 - [Custer fall series, September 22](https://wmich.edu/engineer/news/2026/09/custer-series-fall-2026)
 - [Custer current speaker details](https://wmich.edu/engineer/custerseries)
 - [Lemmer appointment, June 15](https://wmich.edu/engineer/news/2026/06/kristina-lemmer-hallquist-endowed-professor)
+- [WALI satellite, May 5](https://wmich.edu/news/news/2026/05/aerospace-engineering-spacex-payload-launch-tom-scott)
+- [Kelly Burris aerospace alumna profile, June 26](https://wmich.edu/magazine/news/2026/06/alumna-trustee-kelly-burris-profile)

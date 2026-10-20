@@ -1,6 +1,6 @@
 # MAE news validation ledger
 
-Current result: deployed and visible on both real displays; 19 Python regressions and Chromium checks pass; real news-only polling verified without document/browser reload. Remaining: configure a Gemini key and verify live AI classification; complete and review the running 24-hour soak.
+Current result: initial deployment and news-only refresh verified; coverage follow-up expands the reviewed feed from one item to six. 24 Python regressions and Chromium checks pass. Automatic classification is **not operational** until a Gemini key is configured and verified. Optional social/bulletin integrations and final soak acceptance remain unfinished. See `mae-news-remaining-work.md` for the full inventory.
 
 ## 2026-10-20 implementation checks
 
@@ -62,3 +62,14 @@ See later entries below for evidence gathered after this checkpoint. Do not infe
 - Live screenshots of the news page were visually checked on each display; synthetic one-, two-, and three-card layouts were also visually checked at both target sizes. Evidence and the final read-only probe are retained locally under `scratch/kiosk/` and `test-results/`.
 - Repository secrets were checked and `GEMINI_API_KEY` remains absent. Live AI classification is intentionally unverified and held fail-closed. The functioning visible seed is a source-verified manual approval, not an AI approval.
 - The 24-hour collector continues in the background under PID 14080. It started October 20 at 11:59:40 EDT and should finish around October 21 noon EDT. Inspect `scratch/soak/status.json` and `samples.jsonl` afterward; collection success alone does not establish visual smoothness. Do not mark soak acceptance complete until reviewed.
+
+## Coverage follow-up prompted by the one-story result
+
+- Confirmed the user's observation: the feed contained exactly one manually approved story; Gemini had never classified a live candidate. Repository key still absent.
+- Found two independent coverage defects: discovery read only two landing pages and excluded official non-CEAS departmental URL patterns; event detection treated a multiyear project's future technical presentations as a dated invitation.
+- Expanded discovery and pagination, corrected that event false positive, and added degraded automation status, explicit warnings, review URLs/dates/reasons, and separate manual-approval counts.
+- A live dry-run parsed 13 listing pages successfully, spanning April–October archives and pagination. It found 23 held candidates before manual review expansion. The run was dry and began with the original single manual approval, so its one-item candidate output was not used to replace the expanded feed.
+- Source-reviewed Custer's November 4 invitation, Arshad's aerospace degrees, Burris' aerospace career and WMU aeronautical engineering education, the MAE-led EcoCAR program, and WALI's Thin-Sat payload. Together with Lemmer, these form six unexpired items. Unrelated department-only stories were not added.
+- The Custer source supplies a November 4 start but no end; the invitation expires conservatively at the verified start, 18:00 UTC. It does not promote the already-past October talks. WALI's May 5 article retains its actual publication date and expires November 1 under the original age policy.
+- 24 Python regressions and Chromium checks passed; the intermediate four-item feed was visually rendered on two pages and [passed Linux CI and deployment](https://github.com/airbreak404/department-display/actions/runs/39459548543).
+- Soak collector remains running with zero collection failures at the latest checkpoint. Its initial observations include the one-item feed; the expanded content must be considered in final performance acceptance rather than treating earlier samples as validation of every later change.

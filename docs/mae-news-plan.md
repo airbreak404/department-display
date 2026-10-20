@@ -2,7 +2,7 @@
 
 Reviewed October 20, 2026 against repository baseline `aa5aa01`. This specification supersedes the original Desktop plan. Implementation details and operational commands are in [operations](mae-news-operations.md); actual results and remaining gates are in [validation](mae-news-validation.md).
 
-Coverage follow-up: see [remaining work](mae-news-remaining-work.md). Discovery now also covers WMU latest news and monthly archives for the retention window, including pagination and other official departmental news publishers. Manual event invitations may expire at a verified start when an end is unavailable. AI unavailability is reported as degraded automation, and the feed now includes four source-reviewed items rather than a single seed. Social and currently inaccessible bulletin feeds remain unfinished optional coverage.
+Coverage follow-up: see [remaining work](mae-news-remaining-work.md). Discovery now also covers WMU latest news and monthly archives for the retention window, including pagination and other official departmental news publishers. Manual event invitations may expire at a verified start when an end is unavailable. AI unavailability is reported as degraded automation, and the feed now includes six source-reviewed items rather than a single seed. Social and currently inaccessible bulletin feeds remain unfinished optional coverage.
 
 ## Goal and selected defaults
 
