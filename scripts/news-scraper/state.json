@@ -432,6 +432,485 @@
         "method": "rules-2"
       },
       "expiresAt": "2027-03-18T00:00:00Z"
+    },
+    "39351124e1be94134c042480": {
+      "hash": "657255911459d0686a7d4e4c96226a8236abf2be373c05a3aaa10573d0832510",
+      "decision": {
+        "id": "39351124e1be94134c042480",
+        "relevant": false,
+        "reason": "The article is about university-wide staff award recipients and does not focus on the Mechanical and Aerospace Engineering department."
+      },
+      "expiresAt": "2027-03-28T00:00:00Z"
+    },
+    "be74318d3a784ac972f2384b": {
+      "hash": "0690efc544ebc14d6f2bd0cac40e25c0e25145e82f02a8b26bf19c3434de4104",
+      "decision": {
+        "id": "be74318d3a784ac972f2384b",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-03-08T00:00:00Z"
+    },
+    "d8c7be6ed774c8a76b32e1e9": {
+      "hash": "36b7881e27c13ab58c8438b26226a546f29c8e0d175d9647cd967af92a456ddb",
+      "decision": {
+        "id": "d8c7be6ed774c8a76b32e1e9",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-03-22T00:00:00Z"
+    },
+    "5896141d7a98fd169eda68f9": {
+      "hash": "42d407f5a23257361de753f6e3427217176b8a0163c3a1717091d59c6480d023",
+      "decision": {
+        "id": "5896141d7a98fd169eda68f9",
+        "relevant": false,
+        "reason": "Article discusses general university study abroad scholarships without specific focus on MAE programs or students."
+      },
+      "expiresAt": "2027-03-07T00:00:00Z"
+    },
+    "0bc4d448a2a453c646c4fecb": {
+      "hash": "f79e1d3e2a5eb5f8583123d0ba27ec3956f2ed0cd639068e56f17ad09995380d",
+      "decision": {
+        "id": "0bc4d448a2a453c646c4fecb",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-03-07T00:00:00Z"
+    },
+    "ff437e700f8cffdedd62357c": {
+      "hash": "03df52420683cd51733c791421c0e5fb525bf7de75e9f4f1c68e52c72bfd4a98",
+      "decision": {
+        "id": "ff437e700f8cffdedd62357c",
+        "relevant": false,
+        "reason": "The article is about a fine arts graduate from the Gwen Frostic School of Art and has no connection to MAE."
+      },
+      "expiresAt": "2027-02-10T00:00:00Z"
+    },
+    "6dbcb5fe2379f9fcf8ad807f": {
+      "hash": "9bb1d707bf25ba0243a80d588568e2f6aab2ecf78b39617824c008669b9c0b75",
+      "decision": {
+        "id": "6dbcb5fe2379f9fcf8ad807f",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-31T00:00:00Z"
+    },
+    "883b5957ecc3f777d49a2f5d": {
+      "hash": "3a8337174ceb8afbae3a320c9edf3b3d81adf4f0d0006df1449c4b602fd11c2c",
+      "decision": {
+        "id": "883b5957ecc3f777d49a2f5d",
+        "relevant": false,
+        "reason": "The article focuses on an interior architecture and design major, which is outside WMU's Mechanical and Aerospace Engineering department."
+      },
+      "expiresAt": "2027-02-14T00:00:00Z"
+    },
+    "c0c03f269b6cba913dd024e5": {
+      "hash": "9aec13970bbe6f28ed71debfd5f88810588e7a57e7d2d3fb93c0cb49542051cd",
+      "decision": {
+        "id": "c0c03f269b6cba913dd024e5",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-02-14T00:00:00Z"
+    },
+    "9ee5caa7685b0af263d55d7a": {
+      "hash": "359e1e07e1ebdcc7f383d4aee4ca0b3aab1a81f18f6aab553cf1918c4bfe3e5f",
+      "decision": {
+        "id": "9ee5caa7685b0af263d55d7a",
+        "relevant": false,
+        "reason": "The article is about a history professor earning a Fulbright award for early American law research. It has no connection to WMU's Mechanical and Aerospace Engineering department."
+      },
+      "expiresAt": "2027-02-21T00:00:00Z"
+    },
+    "5ec8d1c9a4d735198f03a3ba": {
+      "hash": "0f1afab59af18730af2cbea57ea1c8cae4da49e12cafadaa036ad85bff6a38f9",
+      "decision": {
+        "id": "5ec8d1c9a4d735198f03a3ba",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-02-09T00:00:00Z"
+    },
+    "4d3adebd1533305141069403": {
+      "hash": "849085ab3c6f1755752379cb52e8be30652175ed801ea35b05553f38c4cee1e3",
+      "decision": {
+        "id": "4d3adebd1533305141069403",
+        "relevant": false,
+        "reason": "Article discusses a general transfer partnership between WMU and Kellogg Community College, not specific to the MAE department."
+      },
+      "expiresAt": "2027-02-08T00:00:00Z"
+    },
+    "24ccd4bd31130793b080db16": {
+      "hash": "f47a9872e93ea8084007d87e717f92faded97aa90815a31f110581fd99e81483",
+      "decision": {
+        "id": "24ccd4bd31130793b080db16",
+        "relevant": false,
+        "reason": "The article is about a public administration student completing a nonprofit internship, unrelated to MAE."
+      },
+      "expiresAt": "2027-02-03T00:00:00Z"
+    },
+    "5e80f7d4309c06759d5af832": {
+      "hash": "b2bd48b3727b2e9dd4d4b7f5cb5f32a2aecbefe293c95ec40dd1e230c5789c68",
+      "decision": {
+        "id": "5e80f7d4309c06759d5af832",
+        "relevant": false,
+        "reason": "The article discusses general student internships in community outreach for event management and communication majors, with no mention of MAE students, faculty, or programs."
+      },
+      "expiresAt": "2027-02-03T00:00:00Z"
+    },
+    "6ecf082f409b8e91481f05e4": {
+      "hash": "464f71de66a344efb37c0dfd84fad240c450a3c4e370637486e2b4ccf7c41f14",
+      "decision": {
+        "id": "6ecf082f409b8e91481f05e4",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-02-13T00:00:00Z"
+    },
+    "9a315a992e783dbefb3f9a5b": {
+      "hash": "0d389db4753591b4ccf042d3b806d447e2cb3c48ae21cc323b42ce19d9447c01",
+      "decision": {
+        "id": "9a315a992e783dbefb3f9a5b",
+        "relevant": false,
+        "reason": "The article focuses on WMU's College of Aviation and an aviation flight science graduate, not the Mechanical and Aerospace Engineering department."
+      },
+      "expiresAt": "2027-01-06T00:00:00Z"
+    },
+    "4db6d268d64293027c234819": {
+      "hash": "c8f132ea0b37ef3c28b3da59a8871175e50217baba4303cf2599ed42aba1b897",
+      "decision": {
+        "id": "4db6d268d64293027c234819",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-06T00:00:00Z"
+    },
+    "405671635920069c9dc51275": {
+      "hash": "ad41b21c065dc64ba1d674b301f2920bfa02c3abfca3c1cbf0bb407f0ef24b2c",
+      "decision": {
+        "id": "405671635920069c9dc51275",
+        "relevant": false,
+        "reason": "The professor is from the Department of Chemical and Paper Engineering, not Mechanical and Aerospace Engineering."
+      },
+      "expiresAt": "2027-01-11T00:00:00Z"
+    },
+    "26ed01c632e58c5014112950": {
+      "hash": "5da4b624e8315453cbfc9e59b41f7be1a88ba2b2fa45042f5bc07b621eea0780",
+      "decision": {
+        "id": "26ed01c632e58c5014112950",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-09T00:00:00Z"
+    },
+    "5262144b93b5c0ea0bf4a13f": {
+      "hash": "405c752d6820da7b517e5f470c9aad13fee1fa2e2e0eb606814fabea87eafa15",
+      "decision": {
+        "id": "5262144b93b5c0ea0bf4a13f",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-02T00:00:00Z"
+    },
+    "438f1b00ce77a985a360ac22": {
+      "hash": "5414cca9de061fa8fa7904633455f3f2c9b396f97af3fa943da3a6da1e795b9c",
+      "decision": {
+        "id": "438f1b00ce77a985a360ac22",
+        "relevant": false,
+        "reason": "The article discusses an ESL alumna and her career at Denso, but does not mention WMU's Mechanical and Aerospace Engineering department or its programs."
+      },
+      "expiresAt": "2027-01-10T00:00:00Z"
+    },
+    "fdd8ae90b97893aa2498a5bd": {
+      "hash": "15e586f4b47551912c41e0aa71edfa010a95b9df0c1da727f6d26cc63daacdd5",
+      "decision": {
+        "id": "fdd8ae90b97893aa2498a5bd",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-28T00:00:00Z"
+    },
+    "925d6aee897231082ff73d1c": {
+      "hash": "6576a31c9a76fa1c0187de6a3c33ec7fe8e746f96e21a0ffa4b1941e568be692",
+      "decision": {
+        "id": "925d6aee897231082ff73d1c",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-17T00:00:00Z"
+    },
+    "f3f59f723644bf7cfeaf869d": {
+      "hash": "ff8ccaf2a41faf6552f2072bf41689a90d40004e9749a7bfd545ef9f102791cc",
+      "decision": {
+        "id": "f3f59f723644bf7cfeaf869d",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-03T00:00:00Z"
+    },
+    "8031e12155787e233f71aa74": {
+      "hash": "d8de0cec86cb02311ad07ae1b479b9d2bc5005c241f9061d3a100aaa0943e9eb",
+      "decision": {
+        "id": "8031e12155787e233f71aa74",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-02T00:00:00Z"
+    },
+    "53f77b7fbb3424d19f44ebe5": {
+      "hash": "648ccf74dfe1df285ac75e3651b04366f53e6b5be2cda94cc4ea7214017914e2",
+      "decision": {
+        "id": "53f77b7fbb3424d19f44ebe5",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-05T00:00:00Z"
+    },
+    "605eae82f174b673137f0bde": {
+      "hash": "63912a685f4c92cfaf51c9f2340726cc9893104c18fe0af68de287860e4a8967",
+      "decision": {
+        "id": "605eae82f174b673137f0bde",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2027-01-16T00:00:00Z"
+    },
+    "9419306d2b5cff90df6c3986": {
+      "hash": "fe57ff86b73bb013481a8a1cb40725c62e2c553072e3229f721a9d981f302910",
+      "decision": {
+        "id": "9419306d2b5cff90df6c3986",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-13T00:00:00Z"
+    },
+    "b2cf7cfc48244af1ef29711e": {
+      "hash": "6a155a01fa574fd048ac7be5a5eaef511b982af25d62677d1a06030280b35f44",
+      "decision": {
+        "id": "b2cf7cfc48244af1ef29711e",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-13T00:00:00Z"
+    },
+    "e5c9c0042558e4b2b7f43ad1": {
+      "hash": "fccc6c310527d124a3be088e43754cf6ede9cf77137e5a216d91aef0cb4e6e7e",
+      "decision": {
+        "id": "e5c9c0042558e4b2b7f43ad1",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-05T00:00:00Z"
+    },
+    "c16dfa6fdfffea062b594271": {
+      "hash": "17726705adaabae9ed8584efae7cffd1ad0f0533e8b006bbb2ba9cfec1ed5e76",
+      "decision": {
+        "id": "c16dfa6fdfffea062b594271",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-01T00:00:00Z"
+    },
+    "9ac04676b22b7a45e78dc067": {
+      "hash": "bfa7d3560acdb846441570f9499efb694f4af0a9ed5e45a7ba16a697fc53175f",
+      "decision": {
+        "id": "9ac04676b22b7a45e78dc067",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-12T00:00:00Z"
+    },
+    "a8ca29a4b5bb6cc19ef70865": {
+      "hash": "1b24defa8e1bb2e3f8db86630393042522f354446291d81d8df067d71d6891f3",
+      "decision": {
+        "id": "a8ca29a4b5bb6cc19ef70865",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-11-29T00:00:00Z"
+    },
+    "6d72b7a1bf051c9420734995": {
+      "hash": "a37235378611212eefdb5af70f8409255d506cc76e4c26decb9d930791d77bd5",
+      "decision": {
+        "id": "6d72b7a1bf051c9420734995",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-05T00:00:00Z"
+    },
+    "7396cb35e5f826768b741125": {
+      "hash": "0b3793b97dd671c9680616151569f6a1f6281d7cb26b290eb5a962b5b5256ab5",
+      "decision": {
+        "id": "7396cb35e5f826768b741125",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-19T00:00:00Z"
+    },
+    "2a8fab2ec05f1971a54d7902": {
+      "hash": "5d258a0415dc43d0ec2475bce371271401469f11edc273430683e8b720ae14e6",
+      "decision": {
+        "id": "2a8fab2ec05f1971a54d7902",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-05T00:00:00Z"
+    },
+    "763560deff2e2e450f8cb586": {
+      "hash": "46d695ed25d5317ba707f98bc776aea5cfa45ec38f2d5f61d517e3f338c0a19c",
+      "decision": {
+        "id": "763560deff2e2e450f8cb586",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-23T00:00:00Z"
+    },
+    "e05b850d9de8980ff9226136": {
+      "hash": "beecfde100770e854dc8f1b0f1c9cb37a4c2d72d2a719a8fa303f5c64bfa203c",
+      "decision": {
+        "id": "e05b850d9de8980ff9226136",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-14T00:00:00Z"
+    },
+    "3055d01819e10ef62c5b2e25": {
+      "hash": "21b30e79bbc9a0aa243e0fa76854e5c536e72baa9e46f956ba374f3a1f51bc89",
+      "decision": {
+        "id": "3055d01819e10ef62c5b2e25",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-14T00:00:00Z"
+    },
+    "5062c28a4097d0def5d9d729": {
+      "hash": "249063b64f6ae66955b6f0c2adbc2096405491d37d93b0b7950083274465f254",
+      "decision": {
+        "id": "5062c28a4097d0def5d9d729",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-14T00:00:00Z"
+    },
+    "f2cba16e829b3613c4712206": {
+      "hash": "6c4c10d9ca3f4438ca88ad56ed27ede4b88161104a2b794da7dcf9494b6b2acb",
+      "decision": {
+        "id": "f2cba16e829b3613c4712206",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-14T00:00:00Z"
+    },
+    "fe7a7e2f09f9e0900ea651be": {
+      "hash": "69eaa84784def0d783ee1f404de2ff3243a52d373fb2e476f55a1b22a3979c06",
+      "decision": {
+        "id": "fe7a7e2f09f9e0900ea651be",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-14T00:00:00Z"
+    },
+    "0df9ebfef2f97bc9b4780503": {
+      "hash": "1d2aa69c1b9d4c591c8ea1d88d841a3d973d3e1de5efde9f092004a3c6bccc40",
+      "decision": {
+        "id": "0df9ebfef2f97bc9b4780503",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-21T00:00:00Z"
+    },
+    "ec449f56f885c2a2b9742e83": {
+      "hash": "98e0729035dd673fb4ff84e71171df3ee972a866422bf99c1ad9de2cfbfce77d",
+      "decision": {
+        "id": "ec449f56f885c2a2b9742e83",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-14T00:00:00Z"
+    },
+    "a3657aff4a3f82add9dd35a2": {
+      "hash": "e57a20062a21cc9657639972ba05ffc20ec9b6d2a8feb11b39356984a91a4b00",
+      "decision": {
+        "id": "a3657aff4a3f82add9dd35a2",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-23T00:00:00Z"
+    },
+    "df59712f34b408701a362d7b": {
+      "hash": "dae6e6df5b6785bad700264e06cb1aa85b3b557ef173d0fd665d761a308a1ada",
+      "decision": {
+        "id": "df59712f34b408701a362d7b",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-22T00:00:00Z"
+    },
+    "5d612c339753a20fcd7a385b": {
+      "hash": "a69193d99386b55544fc6ac98d17351296af205f85cec2e846e1cd462cf08c8a",
+      "decision": {
+        "id": "5d612c339753a20fcd7a385b",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-12-22T00:00:00Z"
+    },
+    "a2e94b0f83fb315afafbd67e": {
+      "hash": "f2dcefdcff5dfd26924b37c52ccfe8fd50826b13d5b2a6e37d30d9a98bd71b72",
+      "decision": {
+        "id": "a2e94b0f83fb315afafbd67e",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-11-28T00:00:00Z"
+    },
+    "880b60fb3ccbc17523ae8e2e": {
+      "hash": "4fcc67cdce338fbba70a7400424dce4377a67970b7f1c4b830cf3381ca7956bb",
+      "decision": {
+        "id": "880b60fb3ccbc17523ae8e2e",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-2"
+      },
+      "expiresAt": "2026-11-28T00:00:00Z"
     }
   },
   "inventory": {
@@ -441,8 +920,8 @@
       "failures": 0
     },
     "https://wmich.edu/alumni/news/2026/06/kyle-keiser-bmb-award": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/alumni/news/2026/10/alum-ali-yoder-greatest-resource": {
@@ -451,8 +930,8 @@
       "failures": 0
     },
     "https://wmich.edu/art/news/2026/08/rachel-stickney-book-arts-alumni": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/arts-sciences/news/2026/04/cas-fsaa-2026": {
@@ -466,13 +945,13 @@
       "failures": 0
     },
     "https://wmich.edu/arts-sciences/news/2026/06/laiyin-zhu-hurricane-rainfall-landslide-risk-increasing-climate-change": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/arts-sciences/news/2026/06/vietnam-war-music": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-abel-cnn": {
@@ -581,19 +1060,19 @@
       "failures": 0
     },
     "https://wmich.edu/aviation/news/2026/06/nye": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/aviation/news/2026/07/zynda": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/aviation/news/2026/08/ard": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/aviation/news/2026/09/bailey": {
       "lastAttempt": "2026-10-20T17:14:13Z",
@@ -681,49 +1160,49 @@
       "failures": 0
     },
     "https://wmich.edu/business/news/2026/06/food-supply-chain-bot-loop-research": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/business/news/2026/06/jeannine-shafer-retirement": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/business/news/2026/06/jennifer-bott-marketing-chair": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/business/news/2026/06/sales-education-foundation-recognition": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/business/news/2026/06/service-learning-spring-2026-0": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/business/news/2026/07/food-industry-tour": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/business/news/2026/07/food-marketing-ai-tool": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/business/news/2026/07/princeton-review-mba": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/business/news/2026/08/business-alumni-awards-2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/business/news/2026/09/alex-little-awesome-scholarship-2026": {
       "lastAttempt": "2026-10-20T17:14:13Z",
@@ -761,13 +1240,13 @@
       "failures": 0
     },
     "https://wmich.edu/dance/news/2026/08/wmu-dance-faculty-tyreis-hunte-hip-hop": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/designinstitute/news/2026/08/interior-design-smithgroup-internship": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/education/news/2026/04/wmu-moda-2026-pursuit-happiness-fashion-show": {
@@ -806,18 +1285,18 @@
       "failures": 0
     },
     "https://wmich.edu/education/news/2026/06/viloshinee-murugan-book-series-mother-quiet-defiance": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/education/news/2026/08/education-student-amy-coughenour-zoetis-instructional-design-practicum": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/education/news/2026/08/wmu-alumnus-aamir-hasan-english-liberation-book": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/education/news/2026/09/college-education-human-development-awards-alumni-annual-2026": {
@@ -886,8 +1365,8 @@
       "failures": 0
     },
     "https://wmich.edu/engineer/news/2026/07/professor-breakthrough-technology": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/engineer/news/2026/09/custer-series-fall-2026": {
@@ -921,9 +1400,9 @@
       "failures": 0
     },
     "https://wmich.edu/facilitiespdc/news/2026/06/preserving-history-oaklands-residence": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/finearts/news/2026/05/rebecca-brienan-associate-dean": {
       "lastAttempt": "1970-01-01T00:00:00Z",
@@ -956,8 +1435,8 @@
       "failures": 0
     },
     "https://wmich.edu/global/news/2026/08/fulbright-sally-hadden": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/healthcenter/news/2026/09/partners-prevent-seasonal-influenza": {
@@ -991,44 +1470,44 @@
       "failures": 0
     },
     "https://wmich.edu/hhs/news/2026/06/day-oxford": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/hhs/news/2026/06/meaderscholarsprogram": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/hhs/news/2026/06/southwestmichiganvisionresourcefair": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/hhs/news/2026/06/workshop": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/hhs/news/2026/07/chhs50": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/hhs/news/2026/07/hasty": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/hhs/news/2026/07/new-childrens-book-celebrates-michigans-therapy-dogs": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/hhs/news/2026/08/wmu-bronson-school-nursing-welcomes-brad-phillips-director": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/hhs/news/2026/09/chhs-comes-together-namiwalks": {
       "lastAttempt": "2026-10-20T17:14:13Z",
@@ -1061,23 +1540,23 @@
       "failures": 0
     },
     "https://wmich.edu/international/news/2026/06/international-li-nasir": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/international/news/2026/07/amber-li-welcome": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/international/news/2026/07/english-center-ichikawa": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/international/news/2026/07/mida-alsharmani-international-development": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/international/news/2026/08/aerospace-alumni-arshad": {
@@ -1111,8 +1590,8 @@
       "failures": 0
     },
     "https://wmich.edu/library/news/2026/07/julie-hayward-retirement": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/library/news/2026/09/student-exhibit-fall-2026": {
@@ -1121,8 +1600,8 @@
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/accounting-major-league-success-david-dombrowski-alumni-profile": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/alumna-trustee-kelly-burris-profile": {
@@ -1131,73 +1610,73 @@
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/alumni-classnotes-summer-2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/bronco-advocate-chief-russ-kavalhuna": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/broncos-building-futures-empowering-futures-gift-five-years": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/broncos-lead-internship-kalamazoo-loaves-fishes-grace-mulock": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/broncos-on-beat-cold-case-program-grads-michigan-state-police-careers": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/doctoral-duet-millard-southern-wynton-marsalis-jazz-dissertation": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/late-scholar-timothy-light-leaves-lasting-impact": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/memoriam-summer-2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/magazine/news/2026/06/print-summer-2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/regional-giants-sleeping-giant-capital-russ-kavalhuna": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/students-file-record-number-patent-applications": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/western-remembers-vp-emeritus-robert-beam": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/magazine/news/2026/06/why-i-give-wmu-athletics-donors-broncos-succeed": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/medievalpublications/news/2026/08/2026-summerrecap": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/medievalpublications/news/2026/09/harmonies-recs": {
@@ -1341,43 +1820,43 @@
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/cannes-film-festival-internship-sean-knowles-laney-roberts": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/cold-case-program-national-benchmark-international-homicide-investigators": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/faculty-tenure-promotions-june-2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/graduate-success-aviation-operations-management-raymond-miller": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/graduate-success-dance-exercise-science-shaniya-tate": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/graduate-success-finance-grant-slukynsky-wmu-hockey-los-angeles-kings": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/jazz-program-2026-downbeat-national-awards": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/make-wish-wmu-nursing-student-tuition-support": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/06/nearly-1000-degrees-earned-wmu-prepares-celebrate-june-27-granduation": {
@@ -1401,38 +1880,38 @@
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/07/valley-oaks-residence-hall-ribbon-cutting-celebration": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/news/news/2026/07/wmu-female-aviators-top-10-finish-air-race-classic-2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/08/bronco-arrival-fall-welcome-2026-campus-ready": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/news/news/2026/08/bronco-bash-2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/news/news/2026/08/bronco-bound-guarantee-expands-kellogg-community-college": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/08/broncos-lead-internship-big-brothers-big-sisters-mackenzie-flood": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/08/broncos-lead-internship-edison-neighborhood-association-summer-2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/09/aiden-lambert-multimedia-arts-technology-internship-rock-roll-hall-fame": {
@@ -1486,18 +1965,18 @@
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/09/make-difference-annual-award-2026-recipients-recognized": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/09/valley-oaks-system-update": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/news/news/2026/09/wmu-board-meets-sept-10": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/news/news/2026/10/2026-wmu-united-way-campaign-launch": {
@@ -1536,29 +2015,29 @@
       "failures": 0
     },
     "https://wmich.edu/precollege/news/2026/07/gulcsummercamps": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/precollege/news/2026/09/nagcawards": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/studentengagement/news/2026/09/familyweekend2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/studentengagement/news/2026/09/homecoming2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/studentengagement/news/2026/09/tailgate2026": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
-      "failures": 0
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T19:29:31Z",
+      "failures": 1
     },
     "https://wmich.edu/studentengagement/news/2026/10/fall-streets-spring-2026": {
       "lastAttempt": "2026-10-20T17:14:13Z",
@@ -1571,23 +2050,23 @@
       "failures": 0
     },
     "https://wmich.edu/study-abroad/news/2026/07/student-athlete-benson": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/study-abroad/news/2026/08/faculty-leaders": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/study-abroad/news/2026/09/gilman-scholarship": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/study-abroad/news/2026/09/india-christ-university-anniversary": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     },
     "https://wmich.edu/study-abroad/news/2026/10/first-year-dominican-republic": {
@@ -1596,8 +2075,8 @@
       "failures": 0
     },
     "https://wmich.edu/theatre/news/2026/07/wmu-alumna-aniya-thompson-off-broadway-debut-heathers": {
-      "lastAttempt": "1970-01-01T00:00:00Z",
-      "retryAfter": "1970-01-01T00:00:00Z",
+      "lastAttempt": "2026-10-20T17:29:31Z",
+      "retryAfter": "2026-10-20T23:29:31Z",
       "failures": 0
     }
   }

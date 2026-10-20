@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-20T17:14:13Z",
+  "checkedAt": "2026-10-20T17:29:31Z",
   "status": "partial",
   "items": 7,
   "classifierStatus": "call_budget_exhausted",
@@ -88,6 +88,7 @@
     }
   ],
   "inventory": 233,
-  "deferred": 153,
+  "deferred": 73,
+  "feedSha256": "04603711ad140ed0c77cb197d4d1f2a2383ae0d2ef6a9a70b2fd2b3d5668409b",
   "socialCoverage": "not_connected: no authorized account access"
 }
