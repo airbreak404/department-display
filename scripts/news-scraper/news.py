@@ -20,6 +20,7 @@ def text(value, limit=None):
     value = BeautifulSoup(str(value), "html.parser").get_text(" ", strip=True)
     value = re.sub(r"[\x00-\x1f\x7f]", " ", html.unescape(value))
     value = re.sub(r"\s+", " ", value).strip()
+    value = re.sub(r"\s+([,.;:!?])", r"\1", value)
     if limit and len(value) > limit:
         value = value[:limit - 1].rsplit(" ", 1)[0] + "…"
     return value
@@ -112,7 +113,8 @@ def extract(document, url, now):
     expiry = datetime.combine(published + timedelta(days=180), time.min, UTC)
     result = {"id": identity(url), "title": title, "url": canonical(url),
               "publishedDate": published.isoformat(), "summary": summary,
-              "source": "WMU College of Engineering and Applied Sciences", "expiresAt": stamp(expiry)}
+              "source": "WMU News" if urlsplit(url).path.startswith("/news/") else
+                        "WMU College of Engineering and Applied Sciences", "expiresAt": stamp(expiry)}
     return result, content, bool(EVENT.search(title + " " + content))
 
 

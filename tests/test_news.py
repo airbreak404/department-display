@@ -58,6 +58,12 @@ class FeedTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 extract(value, URL, NOW)
 
+    def test_actual_publisher_and_inline_spacing(self):
+        markup = ARTICLE.replace("researchers tested", "<strong>researchers</strong>, tested")
+        value, content, _ = extract(markup, "https://wmich.edu/news/news/2026/10/research", NOW)
+        self.assertEqual(value["source"], "WMU News")
+        self.assertIn("researchers, tested", content)
+
     def test_event_held(self):
         self.assertTrue(extract(ARTICLE.replace("tested a", "will host a"), URL, NOW)[2])
 
