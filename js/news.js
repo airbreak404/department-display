@@ -82,6 +82,8 @@
   function editorialText(value) {
     // Presentation only: retain the source's original copy in the feed.
     return value.replace(/^KALAMAZOO,\s*Mich\.\s*[\u2014\u2013-]\s*/i, '')
+      .replace(/(\d)\s*[\u2014\u2013]\s*(\d)/g, '$1 to $2')
+      .replace(/([.!?])\s*[\u2014\u2013]\s*/g, '$1 ')
       .replace(/\s*[\u2014\u2013]\s*/g, ', ').replace(/,\s*,/g, ',').trim();
   }
   function itemDate(item) {

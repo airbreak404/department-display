@@ -45,7 +45,7 @@ class Classifier:
             return
         try:
             from google import genai
-            self.client = genai.Client(api_key=key, http_options={"timeout": 15000, "retry_options": {"attempts": 1}})
+            self.client = genai.Client(api_key=key, http_options={"timeout": 45000, "retry_options": {"attempts": 1}})
             self.client.models.get(model=MODEL)
         except Exception:
             self.error = "model_preflight_failed"
@@ -78,6 +78,11 @@ class Classifier:
                 return result
             except Exception as exc:
                 category = "invalid_response" if isinstance(exc, (ValueError, TypeError)) else "request_failed"
+                if type(exc).__name__ in {"ReadTimeout", "ConnectTimeout", "TimeoutException", "TimeoutError"}:
+                    category = "timeout"
+                code = getattr(exc, "code", None)
+                if type(code) is int and 100 <= code <= 599:
+                    category = "api_http_" + str(code)
                 self.failures[category] = self.failures.get(category, 0) + 1
                 # Auth/quota/model failures stop this run; never log API exception bodies.
                 if getattr(exc, "code", None) in (400, 401, 403, 404, 429):

@@ -76,6 +76,7 @@ def run():
               if(MaeNews.formatDate('2026-10-05')!=='Oct 5, 2026') throw Error('date shift');
               const raw='KALAMAZOO, Mich.\u2014WMU researchers tested a design\u2014then shared results.';
               if(MaeNews.editorialText(raw)!=='WMU researchers tested a design, then shared results.') throw Error('editorial punctuation');
+              if(MaeNews.editorialText('2025\u20132026.\u2014Next story')!=='2025 to 2026. Next story') throw Error('range meaning changed');
               const dated={...f.items[0],publishedDate:null,eventStartsAt:f.items[0].expiresAt};
               if(MaeNews.validate({...f,items:[dated]}).items.length!==1) throw Error('verified event rejected');
               if(!MaeNews.itemDate(dated).match(/EST|EDT/)) throw Error('event zone missing');
