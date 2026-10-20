@@ -25,3 +25,13 @@
 - 24-hour performance/recovery soak. A short smoke test cannot establish this.
 
 See later entries below for evidence gathered after this checkpoint. Do not infer completion from this preliminary ledger.
+
+## Disabled rollout verified
+
+- [Linux CI and first explicit deployment](https://github.com/airbreak404/department-display/actions/runs/39452227838) passed all regression checks and public-feed hash verification.
+- Pages mode verified changed from `legacy` to `workflow`.
+- Both live browser pages loaded `MaeNews`, retained the original 20 slides, showed `newsEnabled=false`, and continued cycling unpaused. Browser viewport sizes remained 2560×1440 and 2048×1152.
+- Existing sync requested a soft reload but the first immediate probe still observed old code. The explicit supported `mae-display reload` command loaded new code on both pages; host services and browser flags were unchanged.
+- Pre-change frame median/p95 was approximately 83.3/83.5 ms; with news disabled after implementation, median was approximately 66.7 ms and p95 83.5 ms on the sampled slides. These are short samples, not proof of sustained smoothness.
+- Local live ingestion validated both primary sources, held six new AI/event candidates, and produced one manually verified unexpired seed with zero Gemini requests.
+- Additional checks cover missing-key fail-closed behavior, strict UTC timestamps, and offline cold startup.

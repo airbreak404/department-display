@@ -121,7 +121,7 @@ def stamp(value):
 
 
 def instant(value):
-    if not isinstance(value, str) or not value.endswith("Z"):
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z", value):
         raise ValueError("utc_timestamp_required")
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 

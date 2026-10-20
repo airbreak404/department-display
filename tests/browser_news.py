@@ -114,6 +114,13 @@ def run():
               s.nextSlide(); return s.slides.length>old && !s.pendingData;
             }""", feed(2))
             assert not errors, errors
+            offline = browser.new_page(viewport={"width": 2048, "height": 1152})
+            offline.route("**/data/*.json?*", lambda r: r.abort())
+            offline.route("https://**", lambda r: r.abort())
+            offline.goto(f"http://127.0.0.1:{server.server_port}/?pause=1")
+            offline.wait_for_function("() => window.appSlideshow && appSlideshow.slides.length > 0")
+            assert offline.evaluate("!appSlideshow.slides.some(s=>s.type==='mae-news')"), 'Offline startup fabricated news'
+            offline.close()
             browser.close()
             print("Chromium news regression checks passed; screenshots in test-results/.")
     finally:

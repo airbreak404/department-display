@@ -107,5 +107,7 @@ class Client:
         if not parser.can_fetch(AGENT, url):
             raise FetchError("robots_disallowed")
         delay = parser.crawl_delay(AGENT) or parser.crawl_delay("*") or 1
-        self.sleep(min(max(delay, 1), 60))
+        if delay > 60:
+            raise FetchError("crawl_delay_exceeds_budget")
+        self.sleep(max(delay, 1))
         return self._get(url)

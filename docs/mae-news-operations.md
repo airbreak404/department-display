@@ -61,6 +61,8 @@ Before rollout retain baseline screenshots and host status. Deploy with news dis
 
 The final release gate is a 24-hour comparison with the pre-change baseline: no repeatable new freezing/choppiness, accumulating timers/memory, attributable graphical recovery events, or uncaught JavaScript errors. Screenshots and green workflows do not establish physical display quality or soak completion. Record outstanding gates in `docs/mae-news-validation.md`.
 
+`scripts/news-scraper/soak.py --hours 24` collects bounded, read-only browser/host evidence every five minutes into ignored `scratch/soak/`. It uses existing SSH credentials and a loopback-only CDP tunnel; it never changes host/browser settings. Inspect `status.json` and `samples.jsonl` after completion. Collection success is not visual-smoothness acceptance. `kiosk_probe.py --frames --capture` provides short frame samples and screenshots over the same tunnel; `--show-news` selects a news slide for rollout inspection without changing pause/fullscreen settings.
+
 ## Dependency maintenance
 
 Runtime and test requirements are hash-locked; actions are pinned by full commit SHA. Re-resolve on Python 3.12 with pip-tools, then test on Linux CI and audit before committing. Free-tier availability, model support, source layouts, and GitHub policies can change: verify them during maintenance rather than silently swapping models or adding paid services.

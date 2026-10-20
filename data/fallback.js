@@ -8,7 +8,7 @@ window.DEFAULT_SLIDES_DATA = {
       "lon": -85.6433
     },
     "enableKenBurns": false,
-    "newsEnabled": false
+    "newsEnabled": true
   },
   "slides": [
     {
