@@ -2,6 +2,9 @@ name: Validate and publish site
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - 'docs/**'
+      - 'README.md'
   pull_request:
   workflow_dispatch:
 permissions: {}

@@ -35,3 +35,16 @@ See later entries below for evidence gathered after this checkpoint. Do not infe
 - Pre-change frame median/p95 was approximately 83.3/83.5 ms; with news disabled after implementation, median was approximately 66.7 ms and p95 83.5 ms on the sampled slides. These are short samples, not proof of sustained smoothness.
 - Local live ingestion validated both primary sources, held six new AI/event candidates, and produced one manually verified unexpired seed with zero Gemini requests.
 - Additional checks cover missing-key fail-closed behavior, strict UTC timestamps, and offline cold startup.
+
+## Enabled release and GitHub ingestion verified
+
+- [Enabled-release Linux checks and deployment](https://github.com/airbreak404/department-display/actions/runs/39452983356) succeeded.
+- [First GitHub-hosted ingestion, publication, and explicit deployment](https://github.com/airbreak404/department-display/actions/runs/39453032780) succeeded. Both listings parsed; six candidates held; zero AI approvals and zero API calls; one manually approved story retained. Identical content produced `contentChanged=false` and no new data commit.
+- Public feed returned the verified seed; manual override and classification-state paths returned HTTP 404. They were not packaged into Pages.
+- Real kiosk pages at both display sizes reported 21 slides, `newsEnabled=true`, one news page, and unpaused cycling. Captured and visually inspected the real rendered news page on each browser. Both layouts contained the correct headline, June 15 publication date, source excerpt, and attribution without overflow.
+- Remote physical-window screenshots were captured at 11:59:31/32 EDT. CDP screenshots are also retained under local `scratch/kiosk/`.
+- News-page short samples: median ~66.7 ms and p95 ~83.5 ms; no material degradation relative to the short disabled sample. This does not establish sustained smoothness.
+- Service remained active with `NRestarts=0`. The existing sync timer's SIGHUP restarted Chrome groups during rollout (PID 65345 afterward); service uptime alone does not prove the browser did not restart. This pre-existing deployment behavior was left unchanged.
+- 18 Python tests and real Chromium regressions passed locally and in Linux CI.
+- A hidden 24-hour collector started at 11:59:40 EDT (local PID 14080), sampling every five minutes. First enabled sample succeeded with zero collection failures. Evidence: local `scratch/soak/status.json` and `samples.jsonl`. Soak acceptance remains pending.
+- A genuine live news-only refresh without document/browser reload is being checked separately; Chromium regression coverage already passes. Do not infer this gate from the initial deployment reload.
