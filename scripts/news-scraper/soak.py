@@ -48,6 +48,7 @@ def assess(pages, previous, host, expected_version, minimum_news=1):
             if prior["timeOrigin"] != page.get("timeOrigin"):
                 add("browser_reloaded")
             elif (isinstance(prior.get("advanceCount"), int) and isinstance(page.get("advanceCount"), int)
+                  and page.get("observedAtMs", 0) - prior.get("observedAtMs", 0) > max(90000, (page.get("currentDuration") or 0) * 2)
                   and page["advanceCount"] <= prior["advanceCount"]):
                 add("slide_progress_not_advanced")
         if page.get("paused") is not False: add("paused_or_uninitialized")

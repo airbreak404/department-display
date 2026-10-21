@@ -31,7 +31,7 @@ The news slide now uses flat editorial rows, visible source/date metadata and so
 
 ## Acceptance evidence
 
-Expanded automation passes **52 Python tests** plus Chromium checks at both resolutions, including independent QR decoding, vendor integrity, publication guards, quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry, retained items on parser drift, affiliation counterexamples, persistent unresolved work, health retry/error categories and monitor failure detection. The real-feed QR gate requires exactly one successfully decoded code for every expected item. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
+Expanded automation passes **53 Python tests** plus Chromium checks at both resolutions, including independent QR decoding, vendor integrity, publication guards, quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry, retained items on parser drift, affiliation counterexamples, persistent unresolved work, health retry/error categories and monitor failure detection. The real-feed QR gate requires exactly one successfully decoded code for every expected item. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
 
 Official reviewed sources:
 

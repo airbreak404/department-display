@@ -188,5 +188,15 @@ class ReviewFixTests(unittest.TestCase):
             with self.assertRaises(FileExistsError): output_directory(str(target))
             with self.assertRaises(ValueError): output_directory(str(Path(d) / 'outside'))
 
+    def test_soak_does_not_call_a_short_final_interval_a_stall(self):
+        host = 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa\nActiveState=active\nActiveEnterTimestamp=Today\n'
+        pages = self.pages()
+        for page in pages: page['observedAtMs'] = 10000
+        previous = dict(assess(pages, {}, host, 'test'), pages=copy.deepcopy(pages))
+        for page in pages: page['observedAtMs'] = 12000
+        self.assertEqual(assess(pages, previous, host, 'test')['issues'], [])
+        for page in pages: page['observedAtMs'] = 200000
+        self.assertIn('2560:slide_progress_not_advanced', assess(pages, previous, host, 'test')['issues'])
+
 
 if __name__ == '__main__': unittest.main()
