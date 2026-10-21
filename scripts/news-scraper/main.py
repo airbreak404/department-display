@@ -92,6 +92,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
         return report, 1
     judge = classifier or Classifier()
     report["model"] = MODEL
+    policy = hashlib.sha256(json.dumps([MODEL, PROMPT_VERSION, relevance.VERSION]).encode()).hexdigest()
     approved = []
     removed = set()
     # Restartable work: new candidates first, then oldest attempts; displayed stories
@@ -102,12 +103,15 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
     def priority(url):
         match = re.search(r"/(\d{4})/(\d{2})/", url)
         month = int(match[1]) * 12 + int(match[2]) if match else 0
-        previous = state["inventory"].get(url, {}).get("lastAttempt", "")
+        entry = state["inventory"].get(url, {})
+        previous = entry.get("lastAttempt", "")
+        needs_review = entry.get("outcome") == "held" or entry.get("policy") != policy
         important = url in existing_urls or EVENT_PATH.fullmatch(urlsplit(url).path) or url in EVENT_PAGES
-        return (not important, bool(previous), previous, -month, url)
+        return (not important, bool(previous), not needs_review, previous, -month, url)
     def due(url):
         previous = state["inventory"].get(url)
-        return previous is None or instant(previous["retryAfter"]) <= now
+        return (previous is None or instant(previous["retryAfter"]) <= now or
+                previous.get("policy") != policy and previous.get("failures", 0) == 0)
     urls = {u for u in urls if not (m := re.search(r"/(\d{4})/(\d{2})/", u)) or
             (int(m[1]), int(m[2])) >= ((now - timedelta(days=180)).year, (now - timedelta(days=180)).month)}
     report["inventoryTruncated"] = max(0, len(urls) - 1200)
@@ -126,7 +130,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
             continue
         report["attempted"] += 1
         previous = state["inventory"].get(url, {})
-        state["inventory"][url] = {"lastAttempt": stamp(now), "retryAfter": stamp(now + timedelta(hours=24 if url in existing_urls else 6)), "failures": 0}
+        entry = state["inventory"][url] = {"lastAttempt": stamp(now), "retryAfter": stamp(now + timedelta(hours=24 if url in existing_urls else 6)), "failures": 0, "policy": policy}
         try:
             document = http.get(url)
             if ARTICLE_PATH.fullmatch(urlsplit(url).path):
@@ -138,24 +142,30 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
             validate_item(item, now)
         except (FetchError, ValueError) as exc:
             expected_skip = str(exc) in {"expired", "single_structured_event_required", "event_outside_upcoming_window", "no_upcoming_verified_events", "event_cancelled_or_rescheduled"}
-            if isinstance(exc, FetchError) or not expected_skip or url in existing_urls and str(exc) == "single_structured_event_required":
+            if url in existing_urls and str(exc) == "single_structured_event_required":
+                expected_skip = False
+            if isinstance(exc, FetchError) or not expected_skip:
                 report["articleFailures"] += 1
             failures = min(previous.get("failures", 0) + 1, 10)
             state["inventory"][url].update({"failures": failures,
-                "retryAfter": stamp(now + timedelta(hours=min(2 ** failures, 168)))})
+                "retryAfter": stamp(now + timedelta(hours=min(2 ** failures, 168))),
+                "outcome": "skipped" if expected_skip else "failed"})
             if isinstance(exc, FetchError) and exc.kind == "not_found":
                 blocked.add(candidate_id)
                 removed.add(candidate_id)
-            if "event" in str(exc) or "series" in str(exc):
-                blocked.add(candidate_id)  # A known cancelled/past event must not be retained.
+            if str(exc) in {"event_outside_upcoming_window", "no_upcoming_verified_events", "event_cancelled_or_rescheduled", "expired"}:
+                blocked.add(candidate_id)
+                removed.add(candidate_id)  # Verified removal also dominates manual approval.
             report["candidates"].append({"id": candidate_id, "url": url, "status": str(exc)})
             continue
         report["parsed"] += 1
         if candidate_id in manual_ids:
+            entry["outcome"] = "approved"
             report["candidates"].append({"id": candidate_id, "url": url, "title": item["title"],
                                          "publishedDate": item["publishedDate"], "status": "manual_approved"})
             continue
-        fingerprint = hashlib.sha256(json.dumps([item, body, MODEL, PROMPT_VERSION, relevance.VERSION], sort_keys=True).encode()).hexdigest()
+        # Cosmetic excerpt changes must not spend the model budget again.
+        fingerprint = hashlib.sha256(json.dumps([item["id"], item["title"], body, policy], sort_keys=True).encode()).hexdigest()
         cached = state["decisions"].get(candidate_id, {})
         decision = cached.get("decision") if cached.get("hash") == fingerprint else None
         if decision is None:
@@ -177,6 +187,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
             blocked.add(candidate_id)
             report["rejected"] += 1
             status = "rejected"
+        entry["outcome"] = status
         report["candidates"].append({"id": candidate_id, "url": url, "title": item["title"],
                                      "publishedDate": item["publishedDate"], "status": status,
                                      "reason": (judge.error or ("call_budget_exhausted" if judge.calls >= MAX_CALLS else "no_decision")) if decision is None else decision["reason"]})
@@ -187,12 +198,25 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
               "items": items}
     validate_feed(output, now)
     report["deferred"] = sum(due(u) for u in urls if identity(u) not in blocked and u not in blocked)
+    work = {"pendingClassification": 0, "pendingRetrieval": 0, "unreviewed": 0}
+    for url in urls:
+        if identity(url) in blocked or url in blocked:
+            continue
+        entry = state["inventory"].get(url, {})
+        outcome = entry.get("outcome")
+        if outcome == "failed":
+            work["pendingRetrieval"] += 1
+        elif not outcome or outcome != "skipped" and entry.get("policy") != policy:
+            work["unreviewed"] += 1
+        elif outcome == "held":
+            work["pendingClassification"] += 1
+    report.update(work)
     automation_ready = not report.get("budgetExceeded", False) and not report["inventoryTruncated"]
     classifier_status = judge.error or ("call_budget_exhausted" if judge.calls >= MAX_CALLS and report["held"] else "available")
     parser_degraded = report["articleFailures"] >= 3 and report["articleFailures"] * 4 >= report["attempted"]
     report.update({"status": "degraded" if not automation_ready else
                             "degraded" if judge.error else
-                            "partial" if parser_degraded or classifier_status == "call_budget_exhausted" or report["deferred"] else
+                            "partial" if parser_degraded or classifier_status == "call_budget_exhausted" or report["deferred"] or any(work.values()) or len(items) < 3 else
                             "ok" if all(s["status"] == "ok" for s in report["sources"]) else "partial",
                    "classifierStatus": classifier_status, "items": len(items),
                    "automationReady": automation_ready,
@@ -210,6 +234,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
               "items": len(items), "classifierStatus": report["classifierStatus"],
               "automaticRules": relevance.VERSION, "sources": report["sources"],
               "inventory": len(urls), "deferred": report["deferred"],
+              **work,
               "attempted": report["attempted"], "parsed": report["parsed"], "articleFailures": report["articleFailures"],
               "feedSha256": hashlib.sha256((json.dumps(output, ensure_ascii=False, indent=2) + "\n").encode()).hexdigest(),
               "socialCoverage": report["socialCoverage"]}

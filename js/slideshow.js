@@ -10,6 +10,8 @@ class SlideshowEngine {
     this.slides = data.slides || [];
     this.currentIndex = 0;
     this.isPaused = false;
+    this.advanceCount = 0;
+    this.lastAdvanceAt = performance.now();
     this.testMode = false;
     this.container = document.getElementById('slidesViewport');
     this.progressBar = document.getElementById('progressBarFill');
@@ -88,6 +90,41 @@ class SlideshowEngine {
       slideEl.id = `slide-${idx}`;
       slideEl.innerHTML = this.buildSlideHtml(slide);
       this.container.appendChild(slideEl);
+    });
+    this.fitNewsExcerpts();
+    if (document.fonts) document.fonts.ready.then(() => this.fitNewsExcerpts());
+  }
+
+  fitNewsExcerpts() {
+    this.container.querySelectorAll('.news-story p').forEach(p => {
+      const full = p.dataset.fullExcerpt || p.textContent;
+      p.dataset.fullExcerpt = full;
+      const style = getComputedStyle(p);
+      const lines = parseInt(style.webkitLineClamp, 10);
+      if (!Number.isFinite(lines) || !p.clientWidth) return;
+      const row = p.closest('.news-card'), rowStyle = getComputedStyle(row);
+      const room = row.clientHeight - parseFloat(rowStyle.paddingTop) - parseFloat(rowStyle.paddingBottom)
+        - p.previousElementSibling.offsetHeight - parseFloat(getComputedStyle(p.parentElement).rowGap);
+      const height = Math.min(lines, Math.max(1, Math.floor(room / parseFloat(style.lineHeight)))) * parseFloat(style.lineHeight) + 1;
+      const previous = p.style.webkitLineClamp;
+      p.style.webkitLineClamp = 'unset';
+      const fits = value => { p.textContent = value; return p.scrollHeight <= height; };
+      const sentences = window.Intl.Segmenter ? [...new Intl.Segmenter('en', { granularity: 'sentence' }).segment(full)]
+          .map(s => full.slice(0, s.index + s.segment.length).trim())
+          .filter(s => /[.!?][\u201d\u2019"']?$/.test(s) &&
+            !/\b(?:Dr|Mr|Mrs|Ms|Prof|St|Mich|[A-Z])\.$/.test(s) && !/(?:\b[A-Z]\.){2,}$/.test(s)).reverse() : [];
+      if (/…$/.test(full) || !fits(full)) {
+        if (!sentences.some(value => fits(value))) {
+          const words = full.split(/\s+/);
+          let lo = 0, hi = words.length;
+          while (lo < hi) {
+            const mid = Math.ceil((lo + hi) / 2);
+            if (fits(words.slice(0, mid).join(' ') + '…')) lo = mid; else hi = mid - 1;
+          }
+          fits(words.slice(0, lo).join(' ').replace(/[,…]+$/, '') + '…');
+        }
+      }
+      p.style.webkitLineClamp = previous;
     });
   }
 
@@ -642,6 +679,8 @@ class SlideshowEngine {
     const nextSlideEl = document.getElementById(`slide-${this.currentIndex}`);
     if (nextSlideEl) {
       nextSlideEl.classList.add('active');
+      this.advanceCount++;
+      this.lastAdvanceAt = performance.now();
     }
 
     const currentSlideData = this.slides[this.currentIndex];

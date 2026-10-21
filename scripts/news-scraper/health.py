@@ -5,6 +5,7 @@ import hashlib
 import re
 import time
 from urllib.request import urlopen
+from urllib.error import HTTPError
 
 from network import safe_url
 from news import instant
@@ -13,13 +14,16 @@ from news import instant
 def validate(value):
     fields = {"schemaVersion", "checkedAt", "status", "items", "classifierStatus", "automaticRules", "sources", "inventory", "deferred", "socialCoverage"}
     if (not isinstance(value, dict) or not fields <= set(value) or
-            set(value) - fields - {"feedSha256", "attempted", "parsed", "articleFailures"} or
+            set(value) - fields - {"feedSha256", "attempted", "parsed", "articleFailures", "pendingClassification", "pendingRetrieval", "unreviewed"} or
             value["schemaVersion"] != 1 or value["status"] not in {"ok", "partial", "degraded"} or
             type(value["items"]) is not int or not 0 <= value["items"] <= 8 or
             any(type(value[k]) is not int or not 0 <= value[k] <= 1200 for k in ("inventory", "deferred")) or
             not isinstance(value["sources"], list) or len(value["sources"]) > 30):
         raise ValueError("health_schema")
     instant(value["checkedAt"])
+    for key in ("pendingClassification", "pendingRetrieval", "unreviewed"):
+        if key in value and (type(value[key]) is not int or not 0 <= value[key] <= value["inventory"]):
+            raise ValueError("health_work_counts")
     for key in ("attempted", "parsed", "articleFailures"):
         if key in value and (type(value[key]) is not int or not 0 <= value[key] <= 80):
             raise ValueError("health_intake_counts")
@@ -57,27 +61,62 @@ def check(value, now):
     return value
 
 
-if __name__ == "__main__":
+class HealthFailure(Exception):
+    """Only a bounded category may reach an Actions log, never exception bodies."""
+
+
+def fetch_bytes(url, limit):
+    with urlopen(url + "?t=" + str(time.time_ns()), timeout=20) as response:
+        raw = response.read(limit + 1)
+    if len(raw) > limit:
+        raise ValueError("response_size")
+    return raw
+
+
+def monitor(fetch=fetch_bytes, sleep=time.sleep, now=None):
+    stage = "health_fetch"
     try:
-        # Raw repository health is current even when unchanged display content
-        # intentionally skips Pages deployment and its pre-existing reload signal.
-        with urlopen("https://raw.githubusercontent.com/airbreak404/department-display/master/data/news-health.json?t=" + str(time.time_ns()), timeout=20) as response:
-            raw = response.read(32769)
-        if len(raw) > 32768:
-            raise ValueError("health_size")
-        value = check(json.loads(raw), datetime.now(timezone.utc))
+        raw = None
         for attempt in range(3):
             try:
-                with urlopen("https://airbreak404.github.io/department-display/data/news.json?t=" + str(time.time_ns()), timeout=20) as response:
-                    verify_deployment(value, response.read(65537))
+                raw = fetch("https://raw.githubusercontent.com/airbreak404/department-display/master/data/news-health.json", 32768)
                 break
+            except OSError as exc:
+                if isinstance(exc, HTTPError) and exc.code not in {429, 500, 502, 503, 504} or attempt == 2:
+                    raise
+                sleep(2 ** attempt)
+        stage = "health_validation"
+        value = check(json.loads(raw), now or datetime.now(timezone.utc))
+        stage = "public_feed"
+        for attempt in range(3):
+            try:
+                verify_deployment(value, fetch("https://airbreak404.github.io/department-display/data/news.json", 65536))
+                return value
             except (OSError, ValueError):
                 if attempt == 2:
                     raise
-                time.sleep(10)
-        if value["status"] != "ok" or value["items"] < 3:
+                sleep(10)
+    except Exception as exc:
+        if isinstance(exc, HTTPError):
+            category = "http_" + str(exc.code) if type(exc.code) is int and 100 <= exc.code <= 599 else "http_error"
+        elif isinstance(exc, json.JSONDecodeError):
+            category = "invalid_json"
+        elif isinstance(exc, ValueError):
+            known = {"collector_stale_or_future", "no_healthy_sources", "article_intake_outage", "public_feed_mismatch", "response_size"}
+            category = str(exc) if str(exc) in known else "invalid_schema"
+        elif isinstance(exc, OSError):
+            category = "network_error"
+        else:
+            category = "unexpected_error"
+        raise HealthFailure(stage + ":" + category) from None
+
+
+if __name__ == "__main__":
+    try:
+        value = monitor()
+        if value["status"] != "ok" or value["items"] < 3 or any(value.get(k, 0) for k in ("pendingClassification", "pendingRetrieval", "unreviewed")):
             print("::warning title=News coverage needs attention::Collector ran, but coverage is reduced. Inspect news diagnostics.")
         print("Collector freshness and public feed hash verified; " + str(value["items"]) + " feed items.")
-    except Exception:
-        print("::error title=News health failed::Collector health is unavailable, stale, invalid, or its public feed was not deployed. Inspect the MAE News Scraper workflow.")
+    except HealthFailure as exc:
+        print("::error title=News health failed::" + str(exc) + ". Inspect the MAE News Scraper workflow.")
         raise SystemExit(1)

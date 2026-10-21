@@ -61,13 +61,16 @@
     data.slides = (data.slides || []).filter(s => s.type !== 'mae-news');
     if (data.config && data.config.newsEnabled === false) return data;
     const news = validate(feed, now);
+    // Keep the base presentation running on encoder failure, but never display
+    // an inaccessible news row with a missing QR. Publication tests require all.
+    const available = news.items.map(item => ({ ...item, qrDataUrl: qrImage(item.url) }))
+      .filter(item => item.qrDataUrl);
     const pages = [];
-    for (let i = 0; i < news.items.length; i += 3) {
-      const items = news.items.slice(i, i + 3).map(item => ({ ...item,
-        qrDataUrl: qrImage(item.url),
+    for (let i = 0; i < available.length; i += 3) {
+      const items = available.slice(i, i + 3).map(item => ({ ...item,
         title: editorialText(item.title), summary: editorialText(item.summary), source: editorialText(item.source) }));
       pages.push({ id: 'mae-news-' + items.map(item => item.id).join('-'), type: 'mae-news',
-        duration: 25000, newsItems: items, page: pages.length + 1, pages: Math.ceil(news.items.length / 3) });
+        duration: 25000, newsItems: items, page: pages.length + 1, pages: Math.ceil(available.length / 3) });
     }
     const at = data.slides.findIndex(s => s.type === 'wayfinding');
     data.slides.splice(at < 0 ? data.slides.length : at, 0, ...pages);

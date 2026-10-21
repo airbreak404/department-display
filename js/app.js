@@ -4,6 +4,10 @@
 
 (function () {
   'use strict';
+  // Bounded counters for unattended observation. Never retain exception bodies.
+  const diagnostics = window.MaeDiagnostics = { errors: 0, unhandledRejections: 0 };
+  window.addEventListener('error', () => { diagnostics.errors = Math.min(1000000, diagnostics.errors + 1); });
+  window.addEventListener('unhandledrejection', () => { diagnostics.unhandledRejections = Math.min(1000000, diagnostics.unhandledRejections + 1); });
 
   // Update Live Formatted Clock
   function initClock() {

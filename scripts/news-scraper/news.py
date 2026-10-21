@@ -19,9 +19,11 @@ EVENT_PAGES = frozenset({"https://wmich.edu/engineer/custerseries",
     "https://wmich.edu/engineering-senior-design", "https://wmich.edu/ieeem/innovationexpo",
     "https://wmich.edu/engineer/resources/career-accelerator"})
 ARTICLE_PATH = re.compile(r"^/(?:[a-z][a-z0-9-]*/)?news/\d{4}/\d{2}/[^/]+/?$")
-# Future project presentations are not themselves invitations to a dated event.
-EVENT = re.compile(r"\b(?:will (?:host|hold|honor)|upcoming|register|registration|deadline|join us|takes? place|scheduled|invites?|welcomes?|to host)\b", re.I)
+# Generic words such as 'welcomes' and 'registration' also occur in ordinary
+# reporting. Only explicit invitations/future hosting make news date-sensitive.
+EVENT = re.compile(r"\b(?:will (?:host|hold|honor)|join us|invites? (?:you|students|the public|the community)|to host)\b", re.I)
 EVENT_TITLE = re.compile(r"\b(?:events?|speaker series|seminar|workshop|ceremony|career fair|conference)\b", re.I)
+ANNOUNCEMENT = re.compile(r"\b(?:upcoming|announced|announces|register now|registration opens|scheduled for)\b", re.I)
 DISCOVERY_HINT = re.compile(r"\b(?:engineer\w*|mechanical|aerospace|propulsion|robot\w*|sunseeker|ecocar|bronco racing|baja|aiaa|wali|lemmer|gustafson|fajardo|scholarship\w*|career fair\w*|research opportunit\w*)\b", re.I)
 
 
@@ -59,6 +61,21 @@ def text(value, limit=None):
     if limit and len(value) > limit:
         value = value[:limit - 1].rsplit(" ", 1)[0] + "…"
     return value
+
+
+def excerpt(value, limit=300):
+    """Prefer complete source sentences, without rewriting or splitting a word."""
+    value = text(value)
+    if len(value) <= limit:
+        return value
+    ends = []
+    for match in re.finditer(r'''[.!?][\u201d\u2019"']?(?=\s|$)''', value):
+        prefix = value[:match.end()]
+        if re.search(r"\b(?:Dr|Mr|Mrs|Ms|Prof|St|Mich|[A-Z])\.$", prefix) or re.search(r"(?:\b[A-Z]\.){2,}$", prefix):
+            continue
+        if match.end() <= limit:
+            ends.append(match.end())
+    return value[:ends[-1]].strip() if ends else text(value, limit)
 
 
 def canonical(url):
@@ -167,14 +184,18 @@ def extract(document, url, now):
     # rather than a one-line scene-setting opener in a profile or roundup.
     from relevance import DIRECT, TEAMS
     focus = next((p for p in paragraphs if DIRECT.search(p) or TEAMS.search(p)), paragraphs[0])
-    summary = text(focus, 300)
+    summary = excerpt(focus)
     content = "\n".join(paragraphs)[:12000]
     expiry = datetime.combine(published + timedelta(days=180), time.min, UTC)
     result = {"id": identity(url), "title": title, "url": canonical(url),
               "publishedDate": published.isoformat(), "summary": summary,
               "source": "WMU College of Engineering and Applied Sciences" if urlsplit(url).path.startswith("/engineer/") else
                         "WMU News", "expiresAt": stamp(expiry)}
-    return result, content, bool(EVENT.search(title + " " + content) or EVENT_TITLE.search(title))
+    # Structured event metadata is authoritative even without invitation copy.
+    from events import structured
+    invitation = bool(list(structured(soup)) or EVENT.search(title + "\n" + "\n".join(paragraphs[:3])) or
+                      EVENT_TITLE.search(title) and ANNOUNCEMENT.search(title + "\n" + paragraphs[0]))
+    return result, content, invitation
 
 
 def stamp(value):

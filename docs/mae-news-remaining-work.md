@@ -15,8 +15,8 @@ The initial release delivered the display, deployment, expiry, and refresh mecha
 ## Verification status
 
 1. **Mandatory QR validation & quiet health:** Verified. Run 39468623260 passed the mandatory candidate QR decoding gate in CI before publication. Both real kiosk displays independently decode all 7 active items across resolutions.
-2. **Automated archive backfill:** Completed. All 233 inventoried archive candidates were evaluated over bounded passes, leaving 0 deferred. An 8th incidental aviation candidate was audited, blocked in overrides, and offline rules were hardened to `rules-3`.
-3. **Physical performance acceptance (in progress):** The 24-hour stability collector continues running in the background (PID 14080) with zero collection errors across 25+ samples. Scheduled for final smoothness review upon completion on Oct 21 ~12:00 EDT.
+2. **Automatic coverage remains partial.** The original 233-URL inventory was fetched over bounded passes, but the final pass still held four classifications. A later run held 22 after reaching the model budget. Zero immediately due deferrals did not mean all decisions were complete. October 21 hardening adds persistent pending-classification, pending-retrieval and unreviewed-policy counts; those counts must be checked before claiming inventory completion. Changed policies recheck prior successful candidates immediately while respecting failure backoff. The known Aviation false positive remains blocked; `rules-4` requires affirmative affiliations and sends ambiguous cases to Gemini.
+3. **Physical performance acceptance remains pending.** The original mixed-release monitor recorded seven collection failures overnight, not seven proven application outages. It cannot establish 24 hours of the final release. The replacement monitor records release identity, progression, browser errors, expected news, host boot identity and service restarts in a fresh evidence directory. Collection success never establishes physical smoothness. See the latest validation entry for deployment and observation evidence.
 4. **Access-dependent sources (explicit gaps):**
    - Official CEAS Facebook, Instagram, and LinkedIn accounts are documented, but direct ingestion is disconnected due to lack of account administrative credentials. See [access investigation](mae-news-social-access.md).
    - Department bulletin links returned HTTP 404; ScholarWorks newsletters are archival through 2020. No live bulletin adapter is claimed.
@@ -31,7 +31,7 @@ The news slide now uses flat editorial rows, visible source/date metadata and so
 
 ## Acceptance evidence
 
-Expanded automation passes **39 Python tests** plus Chromium checks at both resolutions, including independent QR decoding, vendor integrity, publication guards, quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry and collector/publication health. The dependency audit found no known runtime or test dependency vulnerabilities. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
+Expanded automation passes **52 Python tests** plus Chromium checks at both resolutions, including independent QR decoding, vendor integrity, publication guards, quota/circuit-breaker behavior, offline publication, cache recovery, event cancellation/zones/expiry, retained items on parser drift, affiliation counterexamples, persistent unresolved work, health retry/error categories and monitor failure detection. The real-feed QR gate requires exactly one successfully decoded code for every expected item. Final deployed counts and kiosk evidence are recorded in `mae-news-validation.md`.
 
 Official reviewed sources:
 

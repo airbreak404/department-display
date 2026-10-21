@@ -1971,7 +1971,7 @@ body.idle-cursor * {
 .news-date { color: #bbb4ab; font: 24px/1.35 var(--font-primary); }
 .news-story { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .news-card h2 { font-size: 40px; line-height: 1.18; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
-.news-card p { font-size: 28px; line-height: 1.35; color: #d8d3cd; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.news-card p { font-size: 28px; line-height: 1.35; color: #d8d3cd; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 .news-count-1 { grid-template-rows: minmax(0, 1fr); }
 .news-count-1 .news-card { align-content: start; padding-top: 60px; }
 .news-count-1 h2 { font-size: 58px; -webkit-line-clamp: 4; }

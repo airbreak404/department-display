@@ -34,9 +34,14 @@ def validate(value):
             raise ValueError("state_destination") from None
         if (not (ARTICLE_PATH.fullmatch(urlsplit(url).path) or EVENT_PATH.fullmatch(urlsplit(url).path) or
                  url in EVENT_PAGES) or not isinstance(entry, dict) or
-                set(entry) != {"lastAttempt", "retryAfter", "failures"} or
+                not {"lastAttempt", "retryAfter", "failures"} <= set(entry) or
+                set(entry) - {"lastAttempt", "retryAfter", "failures", "outcome", "policy"} or
                 type(entry["failures"]) is not int or not 0 <= entry["failures"] <= 10):
             raise ValueError("state_inventory")
+        if "outcome" in entry and entry["outcome"] not in {"held", "approved", "rejected", "skipped", "failed"}:
+            raise ValueError("state_outcome")
+        if "policy" in entry and (not isinstance(entry["policy"], str) or not re.fullmatch(r"[a-f0-9]{64}", entry["policy"])):
+            raise ValueError("state_policy")
         instant(entry["lastAttempt"])
         instant(entry["retryAfter"])
     return {**value, "inventory": value.get("inventory", {})}

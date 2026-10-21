@@ -119,15 +119,32 @@ def run():
                 for width, height in ((2048, 1152), (2560, 1440)):
                     page.set_viewport_size({'width': width, 'height': height})
                     page.wait_for_timeout(250)
-                    for qr, article in zip(page.locator('.slide.active .news-qr img').all(), chunk['items']):
+                    codes = page.locator('.slide.active .news-qr img').all()
+                    assert len(codes) == len(chunk['items']), 'A real candidate is missing its rendered QR'
+                    for qr, article in zip(codes, chunk['items'], strict=True):
                         decoded = zxingcpp.read_barcode(Image.open(BytesIO(qr.screenshot())))
                         assert decoded and decoded.text == article['url'], 'Real article/query QR destination changed'
                     page.screenshot(path=str(OUT / f'news-real-{start // 3 + 1}-{width}.png'))
+            # An encoder failure must hide inaccessible news without breaking base slides.
+            assert page.evaluate("""f => {
+              const encoder=window.qrcodegen; window.qrcodegen=undefined;
+              const base={config:{},slides:[{id:'base',type:'hero'}]};
+              const uncached={...f,items:[{...f.items[0],url:f.items[0].url+'?encoder-failure=1'}]};
+              try { return MaeNews.compose(base,uncached).slides.length===1; }
+              finally { window.qrcodegen=encoder; }
+            }""", feed(1))
             # Restore the synthetic title for the existing escaping assertion.
             page.evaluate("""f=>{const s=appSlideshow;s.queueData(MaeNews.compose({config:s.config,slides:s.slides},f));
               s.showSlide(s.slides.findIndex(x=>x.type==='mae-news'));}""", feed(3))
             # Source text is encoded exactly once, and each engine rebuild retains pause.
-            assert page.locator('.slide.active h2').first.inner_text().startswith('MAE research & engineering: "')
+            page.locator('.slide.active h2').first.wait_for(state='visible')
+            heading = page.locator('.slide.active h2').first.inner_text()
+            assert heading.startswith('MAE research & engineering: "'), heading
+            assert page.evaluate("""() => [...document.querySelectorAll('.news-story p')].every(p => {
+              const s=getComputedStyle(p);return p.scrollHeight<=parseFloat(s.lineHeight)*parseInt(s.webkitLineClamp,10)+2;
+            })"""), 'A news excerpt is still visually clipped'
+            assert page.evaluate(r"""() => [...document.querySelectorAll('.news-story p')].every(p =>
+              !/\b(?:Dr|Mr|Mrs|Ms|Prof|St|Mich|[A-Z])\.$/.test(p.textContent) && !/(?:\b[A-Z]\.){2,}$/.test(p.textContent))"""), 'An abbreviation was mistaken for a complete sentence'
             assert page.evaluate("appSlideshow.isPaused")
             current["feed"] = feed(1)
             page.evaluate("document.dispatchEvent(new Event('visibilitychange'))")

@@ -5,7 +5,7 @@ import re
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
-from news import canonical, identity, stamp, text
+from news import canonical, excerpt, identity, stamp, text
 
 EASTERN = ZoneInfo("America/New_York")
 CUSTER = "https://wmich.edu/engineer/custerseries"
@@ -38,7 +38,7 @@ def event_item(url, title, summary, start, now):
     if not now < start <= now + timedelta(days=60):
         raise ValueError("event_outside_upcoming_window")
     return {"id": identity(url), "title": text(title, 180), "url": canonical(url),
-            "publishedDate": None, "summary": text(summary, 300),
+            "publishedDate": None, "summary": excerpt(summary),
             "source": "WMU College of Engineering and Applied Sciences",
             "eventStartsAt": stamp(start), "expiresAt": stamp(start)}
 
