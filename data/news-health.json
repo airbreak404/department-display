@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-21T13:33:07Z",
-  "status": "partial",
-  "items": 7,
-  "classifierStatus": "call_budget_exhausted",
+  "checkedAt": "2026-10-21T13:53:58Z",
+  "status": "degraded",
+  "items": 8,
+  "classifierStatus": "available",
   "automaticRules": "rules-4",
   "sources": [
     {
@@ -88,13 +88,13 @@
     }
   ],
   "inventory": 234,
-  "deferred": 151,
-  "pendingClassification": 9,
-  "pendingRetrieval": 0,
-  "unreviewed": 154,
-  "attempted": 79,
-  "parsed": 77,
-  "articleFailures": 0,
-  "feedSha256": "f62b4fa2ac446be2e75a09d05fc6d1f62da1a66e1576971376962c7879da7407",
+  "deferred": 84,
+  "pendingClassification": 10,
+  "pendingRetrieval": 7,
+  "unreviewed": 87,
+  "attempted": 67,
+  "parsed": 32,
+  "articleFailures": 7,
+  "feedSha256": "eff77f08d0965692b7340964fd057405dfded5e1d28d4cac46f01170ebf18c1d",
   "socialCoverage": "not_connected: no authorized account access"
 }
