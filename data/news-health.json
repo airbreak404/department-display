@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-20T23:13:26Z",
+  "checkedAt": "2026-10-21T07:45:44Z",
   "status": "partial",
   "items": 7,
-  "classifierStatus": "available",
+  "classifierStatus": "call_budget_exhausted",
   "automaticRules": "rules-3",
   "sources": [
     {
@@ -88,10 +88,10 @@
     }
   ],
   "inventory": 234,
-  "deferred": 2,
+  "deferred": 148,
   "attempted": 80,
-  "parsed": 0,
-  "articleFailures": 8,
+  "parsed": 77,
+  "articleFailures": 1,
   "feedSha256": "329754cdbc815573df535d61302bf2592469d014fba21b6426f55a13ded7b082",
   "socialCoverage": "not_connected: no authorized account access"
 }
