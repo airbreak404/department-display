@@ -106,8 +106,9 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
         entry = state["inventory"].get(url, {})
         previous = entry.get("lastAttempt", "")
         needs_review = entry.get("outcome") == "held" or entry.get("policy") != policy
+        extraction_retry = entry.get('outcome')=='failed' and entry.get('extractionVersion')!=EXTRACTION_VERSION
         important = url in existing_urls or EVENT_PATH.fullmatch(urlsplit(url).path) or url in EVENT_PAGES
-        return (not important, bool(previous), not needs_review, previous, -month, url)
+        return (not important, not extraction_retry, bool(previous), not needs_review, previous, -month, url)
     def due(url):
         previous = state["inventory"].get(url)
         return (previous is None or instant(previous["retryAfter"]) <= now or
