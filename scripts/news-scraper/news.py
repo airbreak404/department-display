@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 from network import FetchError, safe_url
 
 UTC = timezone.utc
+EXTRACTION_VERSION = 'extract-2'
 SOURCES = ("https://wmich.edu/engineer/news", "https://wmich.edu/mechanical-aerospace",
            "https://wmich.edu/engineer", "https://wmich.edu/engineer/events",
            "https://wmich.edu/engineer/custerseries")
@@ -171,12 +172,19 @@ def extract(document, url, now):
             continue
     if published is None or published > now.astimezone(ZoneInfo("America/New_York")).date():
         raise ValueError("unverified_or_future_date")
-    body = article.select_one(".text-paragraph") or article.select_one(".field--name-body")
-    if not body:
+    bodies = article.select(".text-paragraph, .field--name-body")
+    bodies = [body for body in bodies if not any(parent in bodies for parent in body.parents)]
+    if not bodies:
         raise ValueError("article_body_missing")
-    for node in body.select("script, style, nav, aside, figcaption, .contact, .related-content"):
-        node.decompose()
-    paragraphs = [text(p.get_text(" ", strip=True)) for p in body.select("p")]
+    paragraphs = []
+    for body in bodies:
+        for node in body.select("script, style, nav, aside, figcaption, .contact, .related-content"):
+            node.decompose()
+        parts = body.select("p")
+        # Current WMU DXP pages also render source prose directly inside .dxp-text.
+        if not parts:
+            parts = body.select('.dxp-text')
+        paragraphs.extend(text(p.get_text(" ", strip=True)) for p in parts)
     paragraphs = [p for p in paragraphs if p and not p.startswith("For more WMU news")]
     if not paragraphs:
         raise ValueError("article_body_missing")

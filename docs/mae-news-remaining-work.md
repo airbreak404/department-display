@@ -44,3 +44,9 @@ Official reviewed sources:
 - [Lemmer appointment, June 15](https://wmich.edu/engineer/news/2026/06/kristina-lemmer-hallquist-endowed-professor)
 - [WALI satellite, May 5](https://wmich.edu/news/news/2026/05/aerospace-engineering-spacex-payload-launch-tom-scott)
 - [Kelly Burris aerospace alumna profile, June 26](https://wmich.edu/magazine/news/2026/06/alumna-trustee-kelly-burris-profile)
+
+## October 22 status correction
+
+Automatic collection/publication is running; latest reviewed run39790659194 reports8 items, pendingClassification0, pendingRetrieval8, unreviewed0, status partial. The eight outstanding outcomes were diagnosed: five WMU article body-layout failures are repaired and safely reprocessable; three source-metadata cases stay held. See mae-news-validation.md for precise limits. Optional social access is still blocked by absent authorized account access.
+
+The October21 final-release observation did not finish:22 samples,10 collection failures,2 observation failures and stale running=true. Preserve that evidence; it cannot satisfy24h acceptance. A new observation is required after final recovery/deployment tests, using the updated pinned offline-origin probe. Physical smoothness and elapsed24h/72h/seven-day gates remain open.

@@ -46,6 +46,19 @@ class Http:
 
 
 class FeedTests(unittest.TestCase):
+    def test_probe_accepts_only_pinned_public_or_offline_kiosk_pages(self):
+        from kiosk_probe import is_kiosk_page
+        for url in ('https://airbreak404.github.io/department-display/','http://127.0.0.1:8765/department-display/?mae_role=tv'):
+            self.assertTrue(is_kiosk_page({'type':'page','url':url}))
+        for url in ('http://evil.example/department-display/','http://127.0.0.1:8766/department-display/','https://airbreak404.github.io/department-display/other','https://airbreak404.github.io.evil.example/department-display/'):
+            self.assertFalse(is_kiosk_page({'type':'page','url':url}))
+
+    def test_dxp_article_reads_all_source_body_blocks(self):
+        document=ARTICLE.replace('<div class="text-paragraph"><p>', '<div class="text-paragraph"><figure>Photo</figure></div><div class="text-paragraph"><p>')
+        self.assertIn('Mechanical and aerospace',extract(document,URL,NOW)[1])
+        direct=ARTICLE.replace('<p>','<div class="dxp-text">').replace('</p>','</div>')
+        self.assertIn('Mechanical and aerospace',extract(direct,URL,NOW)[1])
+
     def setUp(self):
         # Keep pipeline failure fixtures independent of the live archive inventory.
         patcher = patch("main.source_urls", return_value=list(SOURCES))

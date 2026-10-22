@@ -103,14 +103,14 @@ def run(hours, output=None, interval=300, port=19223):
                     if tunnel:
                         tunnel.terminate()
                         tunnel.wait(timeout=10)
-                    tunnel = subprocess.Popen(["ssh", "-N", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10",
+                    tunnel = subprocess.Popen(["ssh", "-N", "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=yes", "-o", "ConnectTimeout=10",
                         "-o", "ExitOnForwardFailure=yes", "-o", "ServerAliveInterval=30", "-o", "ServerAliveCountMax=2",
                         "-L", f"127.0.0.1:{port}:127.0.0.1:9222", "mae-display"],
                         stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                         creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
                     time.sleep(3)
                 record["pages"] = probe(port=port)
-                result = subprocess.run(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "mae-display", HOST_COMMAND],
+                result = subprocess.run(["ssh", "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=yes", "-o", "ConnectTimeout=10", "mae-display", HOST_COMMAND],
                     capture_output=True, text=True, timeout=30,
                     creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
                 record.update({"host": result.stdout[:32768], "sshExit": result.returncode})

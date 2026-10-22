@@ -29,6 +29,7 @@ command.counter = 0
 
 
 EXPRESSION = """JSON.stringify({width:innerWidth,height:innerHeight,
+role:new URL(location.href).searchParams.get('mae_role'),
 paused:window.appSlideshow?.isPaused,index:window.appSlideshow?.currentIndex,
 slides:window.appSlideshow?.slides.length,news:!!window.MaeNews,
 newsEnabled:window.appSlideshow?.config.newsEnabled,
@@ -47,6 +48,17 @@ heap:performance.memory?.usedJSHeapSize,nodes:document.querySelectorAll('*').len
 visibility:document.visibilityState,fullscreen:!!document.fullscreenElement})"""
 
 
+def is_kiosk_page(page):
+    from urllib.parse import urlsplit
+    if page.get('type') != 'page':
+        return False
+    uri=urlsplit(page.get('url',''))
+    if uri.username or uri.password or uri.path.rstrip('/') not in ('/department-display','/department-display/index.html'):
+        return False
+    return ((uri.scheme=='https' and uri.netloc=='airbreak404.github.io') or
+            (uri.scheme=='http' and uri.netloc=='127.0.0.1:8765'))
+
+
 def probe(show_news=False, capture=False, frames=False, port=19222):
     if type(port) is not int or not 1024 <= port <= 65535:
         raise ValueError("invalid_loopback_port")
@@ -54,7 +66,7 @@ def probe(show_news=False, capture=False, frames=False, port=19222):
     response.raise_for_status()
     results = []
     for index, page in enumerate(response.json()):
-        if page.get("type") != "page" or not page["url"].startswith("https://airbreak404.github.io/department-display/"):
+        if not is_kiosk_page(page):
             continue
         # Never trust a CDP-reported network destination; pin it to this tunnel.
         from urllib.parse import urlsplit

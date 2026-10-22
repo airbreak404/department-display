@@ -1,1 +1,3 @@
 js/vendor/qrcodegen.js -text
+data/news.json text eol=lf
+data/news-health.json text eol=lf

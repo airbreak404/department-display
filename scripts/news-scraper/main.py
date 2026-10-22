@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 
 from classifier import Classifier, MAX_CALLS, MODEL, PROMPT_VERSION
 from network import Client, FetchError
-from news import ARTICLE_PATH, EVENT_PATH, EVENT_PAGES, source_urls, next_listing, discovery, extract, identity, instant, merge, stamp, validate_feed, validate_item
+from news import ARTICLE_PATH, EVENT_PATH, EVENT_PAGES, EXTRACTION_VERSION, source_urls, next_listing, discovery, extract, identity, instant, merge, stamp, validate_feed, validate_item
 from events import extract_event
 import relevance
 import state as cache
@@ -92,7 +92,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
         return report, 1
     judge = classifier or Classifier()
     report["model"] = MODEL
-    policy = hashlib.sha256(json.dumps([MODEL, PROMPT_VERSION, relevance.VERSION]).encode()).hexdigest()
+    policy = hashlib.sha256(json.dumps([MODEL, PROMPT_VERSION, relevance.VERSION, EXTRACTION_VERSION]).encode()).hexdigest()
     approved = []
     removed = set()
     # Restartable work: new candidates first, then oldest attempts; displayed stories
@@ -111,6 +111,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
     def due(url):
         previous = state["inventory"].get(url)
         return (previous is None or instant(previous["retryAfter"]) <= now or
+                previous.get('outcome')=='failed' and previous.get('extractionVersion')!=EXTRACTION_VERSION or
                 previous.get("policy") != policy and previous.get("failures", 0) == 0)
     urls = {u for u in urls if not (m := re.search(r"/(\d{4})/(\d{2})/", u)) or
             (int(m[1]), int(m[2])) >= ((now - timedelta(days=180)).year, (now - timedelta(days=180)).month)}
@@ -130,7 +131,7 @@ def run(root=ROOT, dry_run=False, client=None, classifier=None, now=None):
             continue
         report["attempted"] += 1
         previous = state["inventory"].get(url, {})
-        entry = state["inventory"][url] = {"lastAttempt": stamp(now), "retryAfter": stamp(now + timedelta(hours=24 if url in existing_urls else 6)), "failures": 0, "policy": policy}
+        entry = state["inventory"][url] = {"lastAttempt": stamp(now), "retryAfter": stamp(now + timedelta(hours=24 if url in existing_urls else 6)), "failures": 0, "policy": policy, "extractionVersion":EXTRACTION_VERSION}
         try:
             document = http.get(url)
             if ARTICLE_PATH.fullmatch(urlsplit(url).path):
