@@ -112,6 +112,16 @@ class AutomationTests(unittest.TestCase):
             self.assertTrue(report['cacheRecovered'])
             self.assertEqual(report['items'], 1)
 
+    def test_parser_upgrade_retries_failed_extraction_once_then_keeps_backoff(self):
+        with tempfile.TemporaryDirectory() as temp,patch('main.source_urls',return_value=['https://wmich.edu/engineer/news']):
+            root=Path(temp)
+            run(root,client=Http([URL]),classifier=Judge(),now=NOW)
+            with patch('main.EXTRACTION_VERSION','extract-3'):
+                report,_=run(root,client=Http([URL]),classifier=Judge(),now=NOW+timedelta(minutes=10))
+                self.assertEqual(len(report['candidates']),1)
+                later,_=run(root,client=Http(),classifier=Judge(),now=NOW+timedelta(minutes=20))
+                self.assertEqual(later['candidates'],[])
+
     def test_healthy_listings_cannot_hide_article_parser_outage(self):
         class BrokenArticles:
             def get(self, url):
