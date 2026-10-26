@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-26T07:53:04Z",
+  "checkedAt": "2026-10-26T15:15:36Z",
   "status": "partial",
   "items": 8,
   "classifierStatus": "available",
@@ -39,7 +39,7 @@
     {
       "source": "https://wmich.edu/news/2026/10",
       "status": "ok",
-      "links": 24
+      "links": 25
     },
     {
       "source": "https://wmich.edu/news/2026/09",
@@ -87,8 +87,8 @@
       "links": 14
     }
   ],
-  "inventory": 234,
-  "deferred": 101,
+  "inventory": 235,
+  "deferred": 102,
   "pendingClassification": 0,
   "pendingRetrieval": 3,
   "unreviewed": 0,
