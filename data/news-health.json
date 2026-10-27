@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-26T15:15:36Z",
+  "checkedAt": "2026-10-26T23:56:11Z",
   "status": "partial",
   "items": 8,
   "classifierStatus": "available",
@@ -19,7 +19,7 @@
     {
       "source": "https://wmich.edu/engineer",
       "status": "ok",
-      "links": 10
+      "links": 12
     },
     {
       "source": "https://wmich.edu/engineer/events",
@@ -39,7 +39,7 @@
     {
       "source": "https://wmich.edu/news/2026/10",
       "status": "ok",
-      "links": 25
+      "links": 27
     },
     {
       "source": "https://wmich.edu/news/2026/09",
@@ -87,14 +87,14 @@
       "links": 14
     }
   ],
-  "inventory": 235,
-  "deferred": 102,
+  "inventory": 239,
+  "deferred": 115,
   "pendingClassification": 0,
   "pendingRetrieval": 3,
   "unreviewed": 0,
   "attempted": 79,
-  "parsed": 77,
-  "articleFailures": 0,
+  "parsed": 68,
+  "articleFailures": 2,
   "feedSha256": "eff77f08d0965692b7340964fd057405dfded5e1d28d4cac46f01170ebf18c1d",
   "socialCoverage": "not_connected: no authorized account access"
 }
