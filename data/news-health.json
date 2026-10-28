@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-27T23:49:40Z",
+  "checkedAt": "2026-10-28T08:40:57Z",
   "status": "partial",
   "items": 8,
   "classifierStatus": "available",
@@ -67,11 +67,6 @@
       "links": 26
     },
     {
-      "source": "https://wmich.edu/news/2026/04",
-      "status": "ok",
-      "links": 30
-    },
-    {
       "source": "https://wmich.edu/news/2026/09?page=1",
       "status": "ok",
       "links": 26
@@ -80,20 +75,15 @@
       "source": "https://wmich.edu/news/2026/06?page=1",
       "status": "ok",
       "links": 15
-    },
-    {
-      "source": "https://wmich.edu/news/2026/04?page=1",
-      "status": "ok",
-      "links": 14
     }
   ],
-  "inventory": 240,
-  "deferred": 110,
+  "inventory": 196,
+  "deferred": 102,
   "pendingClassification": 0,
   "pendingRetrieval": 3,
   "unreviewed": 0,
-  "attempted": 79,
-  "parsed": 64,
+  "attempted": 80,
+  "parsed": 80,
   "articleFailures": 0,
   "feedSha256": "eff77f08d0965692b7340964fd057405dfded5e1d28d4cac46f01170ebf18c1d",
   "socialCoverage": "not_connected: no authorized account access"
