@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-01T18:58:43Z",
+  "checkedAt": "2026-11-01T23:39:50Z",
   "status": "partial",
   "items": 7,
   "classifierStatus": "available",
@@ -87,12 +87,12 @@
     }
   ],
   "inventory": 205,
-  "deferred": 104,
+  "deferred": 32,
   "pendingClassification": 0,
   "pendingRetrieval": 3,
   "unreviewed": 0,
   "attempted": 80,
-  "parsed": 79,
+  "parsed": 68,
   "articleFailures": 0,
   "feedSha256": "7b9fd926120709eaedd4a38531cc8d623dea4a4246f5bdef9946eb4b01f46fc5",
   "socialCoverage": "not_connected: no authorized account access"
