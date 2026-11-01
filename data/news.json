@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentUpdatedAt": "2026-10-21T13:53:58Z",
+  "contentUpdatedAt": "2026-11-01T09:22:00Z",
   "items": [
     {
       "id": "d96c2096dfed45a6faf60ad0",
@@ -66,15 +66,6 @@
       "summary": "Gallagher built an extensive testing model, so improvements to the code only enhance the tool. Recent aerospace engineering graduate student Rishav Mishra provided additional coding support for the updates.",
       "source": "WMU News",
       "expiresAt": "2026-11-17T00:00:00Z"
-    },
-    {
-      "id": "3f9842a45d12cc21ccc28bda",
-      "title": "All systems go: Aerospace engineering student launches work into space",
-      "url": "https://wmich.edu/news/news/2026/05/aerospace-engineering-spacex-payload-launch-tom-scott",
-      "publishedDate": "2026-05-05",
-      "summary": "The aerospace engineering master’s student followed the glowing arch of the SpaceX Falcon 9 rocket on March 30 as it carried Transporter-16—with his payload, the Western Aerospace Thin-Sat, on board—into the ionosphere.",
-      "source": "WMU News",
-      "expiresAt": "2026-11-01T00:00:00Z"
     }
   ]
 }
