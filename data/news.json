@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "contentUpdatedAt": "2026-11-01T09:22:00Z",
+  "contentUpdatedAt": "2026-11-02T22:48:53Z",
   "items": [
     {
       "id": "d96c2096dfed45a6faf60ad0",
@@ -21,6 +21,15 @@
       "source": "WMU College of Engineering and Applied Sciences",
       "eventStartsAt": "2026-12-08T13:00:00Z",
       "expiresAt": "2026-12-08T13:00:00Z"
+    },
+    {
+      "id": "0d669560d3452f841086d1b4",
+      "title": "WMU Sunseeker Solar Car Project speeds through a successful summer",
+      "url": "https://wmich.edu/engineer/news/2026/11/sunseeker-summer-2026",
+      "publishedDate": "2026-11-02",
+      "summary": "KALAMAZOO, Mich.—Students in a Western Michigan University registered student organization (RSO), Sunseeker Solar Car Project, returned to campus this fall semester with a spring in their step and success on their mind.",
+      "source": "WMU College of Engineering and Applied Sciences",
+      "expiresAt": "2027-05-01T00:00:00Z"
     },
     {
       "id": "8ae2952a756a5daa0421f603",
