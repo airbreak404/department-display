@@ -41,14 +41,14 @@
       "expiresAt": "2026-12-23T00:00:00Z"
     },
     "d96c2096dfed45a6faf60ad0": {
-      "hash": "b4288aa03d6002c4bd6de7e8b870d2d077ab41b1daacaa94d1facf7e52c4db33",
+      "hash": "a9d98f7c1c4deddff00e8c973d5057a9ce0abc9afc2d2fed8a5e1e8119d1308e",
       "decision": {
         "id": "d96c2096dfed45a6faf60ad0",
         "relevant": true,
         "reason": "Official CEAS opportunity with inclusive student/public audience",
         "method": "rules-4"
       },
-      "expiresAt": "2026-11-04T18:00:00Z"
+      "expiresAt": "2026-11-10T20:00:00Z"
     },
     "e6dd2a6dc09c87c0ed6fada9": {
       "hash": "2d678880a7763d80b5b17835b23c9be4ad81b6c8281ddc7eee53712bf36213bf",
@@ -1578,15 +1578,6 @@
       },
       "expiresAt": "2027-04-24T00:00:00Z"
     },
-    "58d01255d8ce678c676043a9": {
-      "hash": "4f7822721095abf86575ae7410515b0e9b6d60262bf927fdd38854113e150bf1",
-      "decision": {
-        "id": "58d01255d8ce678c676043a9",
-        "relevant": false,
-        "reason": "The article features an engineering alumnus speaker, but does not mention the Mechanical and Aerospace Engineering department specifically."
-      },
-      "expiresAt": "2026-11-04T18:00:00Z"
-    },
     "e24375a738833ee557911219": {
       "hash": "4f52473c3ce251f9d3542b911c54fb6d3df16658b07dfb57322a28217bf37e2c",
       "decision": {
@@ -1762,11 +1753,11 @@
       "expiresAt": "2027-05-02T00:00:00Z"
     },
     "c1bb27f2555525ee9da90338": {
-      "hash": "a94b39a8b1fbb6e0405889fd233cd0a85728e9d262a6352db43f3324091d90ea",
+      "hash": "a03376ebe631d0ccd16881595bd689de95caa44fa66660db82c9a06d09f3c61f",
       "decision": {
         "id": "c1bb27f2555525ee9da90338",
         "relevant": false,
-        "reason": "The article focuses on product design, architecture, and healthcare programs, not the Mechanical and Aerospace Engineering department."
+        "reason": "The article focuses on product design and health programs in an interdisciplinary symposium; WMU's MAE department is not mentioned."
       },
       "expiresAt": "2027-05-02T00:00:00Z"
     },
@@ -1778,6 +1769,16 @@
         "reason": "Article covers theatre design and technical production upgrades, not Mechanical and Aerospace Engineering."
       },
       "expiresAt": "2027-03-21T00:00:00Z"
+    },
+    "5f5f8baeb76b4738554103ef": {
+      "hash": "cab7de7c5e83cd449b0e3897c677019cf604f73ad907043829504f82e2c62260",
+      "decision": {
+        "id": "5f5f8baeb76b4738554103ef",
+        "relevant": false,
+        "reason": "No engineering affiliation or student opportunity evidence in source",
+        "method": "rules-4"
+      },
+      "expiresAt": "2027-05-03T00:00:00Z"
     }
   },
   "inventory": {
@@ -1790,16 +1791,16 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/alumni/news/2026/06/kyle-keiser-bmb-award": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/alumni/news/2026/10/alum-ali-yoder-greatest-resource": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -1814,112 +1815,112 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/06/laiyin-zhu-hurricane-rainfall-landslide-risk-increasing-climate-change": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/06/vietnam-war-music": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-abel-cnn": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-artemis": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-atkins-bellagio": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-completion-scholarship": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-economics-ai-tools": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-education-outreach": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-hollander-housing": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-howe-aipg": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-kuersten-mac-award": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-marseille-cultivate-269": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-medieval-collection": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/arts-sciences/news/2026/09/cas-magazine-multimedia-lab": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -1966,8 +1967,8 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/aviation/news/2026/06/nye": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2030,8 +2031,8 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/aviation/news/2026/11/shapiro": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2054,8 +2055,8 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/business/news/2026/05/foodmarketing-gmr-scholarships-2026": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2086,32 +2087,32 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/business/news/2026/06/food-supply-chain-bot-loop-research": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/business/news/2026/06/jeannine-shafer-retirement": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/business/news/2026/06/jennifer-bott-marketing-chair": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/business/news/2026/06/sales-education-foundation-recognition": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2190,8 +2191,8 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/business/news/2026/10/digital-marketing-student-bronco-bash": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2214,8 +2215,8 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/business/news/2026/11/student-athlete-natily-cripe-accolades-classroom-dance-floor": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2246,8 +2247,8 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/education/news/2026/05/alvarez-bilingual-spirit-excellence-award": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2262,25 +2263,25 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/education/news/2026/05/dagny-matcha-tea-fashion-moda-spring-runway-show-2026": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T11:40:13Z",
-      "failures": 1,
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T00:50:49Z",
+      "failures": 2,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "skipped"
     },
     "https://wmich.edu/education/news/2026/05/dhani-james-special-education-study-abroad-costa-rica": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/education/news/2026/05/meerschaert-teacher-year": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T11:40:13Z",
-      "failures": 1,
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T00:50:49Z",
+      "failures": 2,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "skipped"
@@ -2326,32 +2327,32 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/education/news/2026/09/college-education-human-development-awards-alumni-annual-2026": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/education/news/2026/09/dean-dinehart-governor-literacy-council": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/education/news/2026/09/sport-management-careers-athletics": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/education/news/2026/09/wmu-academy-management-partnership": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2398,56 +2399,56 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/education/news/2026/11/glinda-rawls-nbcc-clinical-supervision-counselor-education": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/engineer/custerseries": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-04T09:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T20:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "approved"
     },
     "https://wmich.edu/engineer/events/custer-series-jason-tedrow": {
-      "lastAttempt": "2026-11-04T09:25:41Z",
-      "retryAfter": "2026-11-04T15:25:41Z",
-      "failures": 0,
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-04T22:50:49Z",
+      "failures": 1,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
-      "outcome": "rejected"
+      "outcome": "skipped"
     },
     "https://wmich.edu/engineer/events/custer-series-justin-rittenhouse": {
-      "lastAttempt": "2026-11-04T09:25:41Z",
-      "retryAfter": "2026-11-04T15:25:41Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/engineer/events/senior-engineering-design": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-04T09:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T20:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "approved"
     },
     "https://wmich.edu/engineer/news/2026/06/ecocar-innovation-challenge-gm": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-04T09:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T20:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "approved"
     },
     "https://wmich.edu/engineer/news/2026/06/kristina-lemmer-hallquist-endowed-professor": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-04T09:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T20:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2486,8 +2487,8 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/engineer/news/2026/11/sunseeker-summer-2026": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-04T09:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T20:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2518,17 +2519,17 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/finearts/news/2026/05/rebecca-brienan-associate-dean": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T13:40:13Z",
-      "failures": 2,
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T04:50:49Z",
+      "failures": 3,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "skipped"
     },
     "https://wmich.edu/finearts/news/2026/05/venture-studio-pitch-event": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T17:40:13Z",
-      "failures": 3,
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T12:50:49Z",
+      "failures": 4,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "skipped"
@@ -2550,8 +2551,8 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/healthcenter/news/2026/09/partners-prevent-seasonal-influenza": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2598,16 +2599,16 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/hhs/news/2026/07/chhs50": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/hhs/news/2026/07/hasty": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2622,32 +2623,32 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/hhs/news/2026/08/wmu-bronson-school-nursing-welcomes-brad-phillips-director": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/hhs/news/2026/09/chhs-comes-together-namiwalks": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/hhs/news/2026/09/ihs-phd-alumnus-leads-jama-article-on-25-year-health-legacy-911": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/hhs/news/2026/09/join-fun-2026-white-cane-5k": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2664,6 +2665,14 @@
     "https://wmich.edu/hhs/news/2026/10/international-social-work-exchange-brings-global-perspectives-wmu-students": {
       "lastAttempt": "2026-11-04T09:25:41Z",
       "retryAfter": "2026-11-04T15:25:41Z",
+      "failures": 0,
+      "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
+      "extractionVersion": "extract-2",
+      "outcome": "rejected"
+    },
+    "https://wmich.edu/hhs/news/2026/11/wmu-speech-language-hearing-sciences-celebrates-90-years-impact": {
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2702,24 +2711,24 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/international/news/2026/07/english-center-ichikawa": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/international/news/2026/07/mida-alsharmani-international-development": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/international/news/2026/08/aerospace-alumni-arshad": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-04T09:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T20:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2742,32 +2751,32 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/it/news/2026/09/it-wmu-brings-merit-network-campus-talk-about-national-computing-resources-wmu": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/library/news/2026/05/wmu-built-tool-tackles-pdf-accessibility": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-04T09:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T20:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "approved"
     },
     "https://wmich.edu/library/news/2026/07/julie-hayward-retirement": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/library/news/2026/09/student-exhibit-fall-2026": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2782,8 +2791,8 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/magazine/news/2026/06/alumna-trustee-kelly-burris-profile": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-04T09:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T20:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2910,40 +2919,40 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/news/2026/09/fall-2026-distinguished-faculty-scholar-award-recipients": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/news/2026/09/fall-2026-distinguished-service-award-recipients": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/news/2026/09/fall-2026-distinguished-teaching-awards-announced": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/news/2026/09/fall-2026-emerging-scholar-award-evan-kutzler": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/news/2026/09/gilmore-theatre-complex-upgrades": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2966,8 +2975,8 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/news/news/2026/05/college-aviation-make-wish-flight-simulator-vail-fear": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -2982,16 +2991,16 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/news/news/2026/05/sky-broncos-fourth-place-2026-national-safecon-championship": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/news/news/2026/05/western-hosts-2026-alsame-youth-conference": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -3094,16 +3103,16 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/news/news/2026/07/valley-oaks-residence-hall-ribbon-cutting-celebration": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/news/news/2026/07/wmu-female-aviators-top-10-finish-air-race-classic-2026": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -3294,8 +3303,8 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/news/news/2026/10/new-vice-president-advancement-alexander-jones": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -3318,8 +3327,8 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/news/news/2026/10/wmu-aaup-renew-first-generation-student-scholarship-partnership": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -3334,8 +3343,8 @@
       "outcome": "failed"
     },
     "https://wmich.edu/news/news/2026/10/wmu-grand-rapids-community-college-bronco-bound-guarantee": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -3350,24 +3359,24 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/news/news/2026/11/cultivate-269-second-year": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/news/news/2026/11/universal-design-symposium-patricia-moore-visit": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/precollege/news/2026/07/gulcsummercamps": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -3406,24 +3415,24 @@
       "outcome": "skipped"
     },
     "https://wmich.edu/studentengagement/news/2026/10/fall-streets-spring-2026": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/study-abroad/news/2026/05/student-story-anniya-mcwhorter": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T13:40:13Z",
-      "failures": 2,
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T04:50:49Z",
+      "failures": 3,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "skipped"
     },
     "https://wmich.edu/study-abroad/news/2026/07/student-athlete-benson": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
@@ -3454,16 +3463,16 @@
       "outcome": "rejected"
     },
     "https://wmich.edu/study-abroad/news/2026/10/first-year-dominican-republic": {
-      "lastAttempt": "2026-11-03T20:31:07Z",
-      "retryAfter": "2026-11-04T02:31:07Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
       "outcome": "rejected"
     },
     "https://wmich.edu/theatre/news/2026/07/wmu-alumna-aniya-thompson-off-broadway-debut-heathers": {
-      "lastAttempt": "2026-11-03T09:40:13Z",
-      "retryAfter": "2026-11-03T15:40:13Z",
+      "lastAttempt": "2026-11-04T20:50:49Z",
+      "retryAfter": "2026-11-05T02:50:49Z",
       "failures": 0,
       "policy": "285d80f1479ff8912106cba46427f6437a87a93c8599a9c169f5804fefb5c6a5",
       "extractionVersion": "extract-2",
