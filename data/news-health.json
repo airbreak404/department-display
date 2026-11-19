@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-19T10:27:52Z",
+  "checkedAt": "2026-11-19T22:14:07Z",
   "status": "partial",
   "items": 6,
   "classifierStatus": "available",
@@ -88,7 +88,7 @@
     }
   ],
   "inventory": 236,
-  "deferred": 116,
+  "deferred": 120,
   "pendingClassification": 0,
   "pendingRetrieval": 3,
   "unreviewed": 0,
